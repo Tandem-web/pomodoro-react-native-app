@@ -3,10 +3,8 @@ import React from 'react';
 // import type {PropsWithChildren} from 'react';
 import {
   StyleSheet,
-  Text,
   View,
 } from 'react-native';
-import { FONT_FAMILY } from './src/config/customFont';
 
 
 // type SectionProps = PropsWithChildren<{
