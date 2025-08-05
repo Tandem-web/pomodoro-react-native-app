@@ -1,4 +1,5 @@
 
+import { NavigationContainer } from '@react-navigation/native';
 import React from 'react';
 // import type {PropsWithChildren} from 'react';
 import {
@@ -40,6 +41,9 @@ function App(): React.JSX.Element {
   return (
     <View style={styles.main}>
       <>
+        <NavigationContainer>
+          
+        </NavigationContainer>
       </>
     </View>
   );
@@ -48,6 +52,7 @@ function App(): React.JSX.Element {
 const styles = StyleSheet.create({
   main: {
     flex: 1,
+    backgroundColor: '#1E1E1E',
   },
 
 });
