@@ -17,8 +17,4 @@ function SessionScreen(): React.JSX.Element {
   );
 }
 
-const styles = StyleSheet.create({
-
-});
-
 export default SessionScreen;

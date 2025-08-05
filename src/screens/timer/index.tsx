@@ -1,25 +1,19 @@
 import React from 'react';
 import {
-  StyleSheet,
-  View,
-  Text,
-  StatusBar
+  StatusBar,
+  SafeAreaView,
 } from 'react-native';
 import { sceenStyle } from '../../shared/styles/screens';
+import PomodoroTimer from '../../features/pomodoro-timer';
 
 
 function TimerScreen(): React.JSX.Element {
   return (
-    <View style={sceenStyle.main}>
+    <SafeAreaView  style={[sceenStyle.main]}>
       <StatusBar barStyle="light-content"/>
-        <Text>Экран таймера</Text>
-    </View>
+      <PomodoroTimer/>
+    </SafeAreaView>
   );
 }
-
-const styles = StyleSheet.create({
-  
-
-});
 
 export default TimerScreen;
