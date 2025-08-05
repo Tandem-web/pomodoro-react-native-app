@@ -1,0 +1,69 @@
+{
+  "migIndex": 1,
+  "data": [
+    {
+      "path": "src/assets/fonts/AvenirNext-Bold.ttf",
+      "sha1": "c9a55027184e56afc9eede1c2cd21ad3c6217cbf"
+    },
+    {
+      "path": "src/assets/fonts/AvenirNext-BoldItalic.ttf",
+      "sha1": "cae1ecaaff3e379d1e1f8375f8660e9cf59dfe4f"
+    },
+    {
+      "path": "src/assets/fonts/AvenirNext-Demi.ttf",
+      "sha1": "a15428daf6c7711fa849ada35a487d2b751f8a05"
+    },
+    {
+      "path": "src/assets/fonts/AvenirNext-DemiItalic.ttf",
+      "sha1": "a7709cae03685f2dc369fbf545575bf96dcf07a4"
+    },
+    {
+      "path": "src/assets/fonts/AvenirNext-Heavy.ttf",
+      "sha1": "cb2207c84fe30daa71ee4f753b6f9bbfba33136c"
+    },
+    {
+      "path": "src/assets/fonts/AvenirNext-HeavyItalic.ttf",
+      "sha1": "d611cb6429cc68974b6c3f2f53837b7fff6ea1c4"
+    },
+    {
+      "path": "src/assets/fonts/AvenirNext-Italic.ttf",
+      "sha1": "ea1de717e9b78422cdb66d786bee15d462759fef"
+    },
+    {
+      "path": "src/assets/fonts/AvenirNext-Light.ttf",
+      "sha1": "f89d33fbb1f6db3fa3a5cd6ce60b4628453f2598"
+    },
+    {
+      "path": "src/assets/fonts/AvenirNext-LightItalic.ttf",
+      "sha1": "ea17823104d711d91097b85d45b182ead3f32832"
+    },
+    {
+      "path": "src/assets/fonts/AvenirNext-Medium.ttf",
+      "sha1": "0c8483b3dc6a252958b36658338954150714129d"
+    },
+    {
+      "path": "src/assets/fonts/AvenirNext-MediumItalic.ttf",
+      "sha1": "b4b01548736016f472f6267e187c9cd6df64453d"
+    },
+    {
+      "path": "src/assets/fonts/AvenirNext-Regular.ttf",
+      "sha1": "581bf3f11b1fd9ccc58bad25753bebe94e8a782a"
+    },
+    {
+      "path": "src/assets/fonts/AvenirNext-Thin.ttf",
+      "sha1": "a8424c9aa111861addf6f3ec2a1fa50be6ed0050"
+    },
+    {
+      "path": "src/assets/fonts/AvenirNext-ThinItalic.ttf",
+      "sha1": "e4a089dfef77488274e4942bb9f374fe5d659078"
+    },
+    {
+      "path": "src/assets/fonts/AvenirNext-UltraLight.ttf",
+      "sha1": "069f4a593ed7d98622b8492fac58cbf703cd0657"
+    },
+    {
+      "path": "src/assets/fonts/AvenirNext-UltraLightIt.ttf",
+      "sha1": "e4486669f8626a023153df87bd21d56ae33e742f"
+    }
+  ]
+}
