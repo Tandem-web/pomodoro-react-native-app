@@ -36,7 +36,9 @@ const ProgressRing: React.FC<ProgressRingProps> = (props) =>{
                     stroke={strokeColors[0]}
                     strokeWidth={strokeWidth[0]}
                 />
+
                 <Circle
+                    transform={`rotate(-90, ${width / 2}, ${width / 2})`}
                     cx={width/2}
                     cy={width/2}
                     r={R}
@@ -44,7 +46,7 @@ const ProgressRing: React.FC<ProgressRingProps> = (props) =>{
                     strokeWidth={strokeWidth[1]}
                     fill={colorPallete.AppBGColor}
                     strokeDasharray={CIRCLE_LENGTH}
-                    strokeDashoffset={CIRCLE_LENGTH*0.5}
+                    strokeDashoffset={CIRCLE_LENGTH * 0.5}
                 />
             </Svg>
         </View>
@@ -54,9 +56,6 @@ const ProgressRing: React.FC<ProgressRingProps> = (props) =>{
 const styles = StyleSheet.create({
     svgWrapper: {
         width: '100%',
-        // position: 'absolute',
-        // top: "50%",
-        // left: 0,
     }
 });
 export default ProgressRing;

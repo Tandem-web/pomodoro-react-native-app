@@ -33,15 +33,15 @@ const BottomTabsBar: React.FC<BottomTabsBarProps> = (props) => {
                     };
                     let icon;
                     if(route.name === 'Session'){
-                        icon = (<FontAwesome name="th-list" size={22} color={isFocused ? '#674CFF' : '#fff'} />);
+                        icon = (<FontAwesome name="th-list" size={22} color={isFocused ? '#4E4BEC' : '#fff'} />);
                     }
 
                     if(route.name === 'Timer'){
-                        icon = (<Ionicons name="timer" size={28} color={isFocused ? '#674CFF' : '#fff'} />);
+                        icon = (<Ionicons name="timer" size={28} color={isFocused ? '#4E4BEC' : '#fff'} />);
                     }
 
                     if(route.name === 'Settings'){
-                        icon = (<FontAwesome name="user" size={26} color={isFocused ? '#674CFF' : '#fff'} />);
+                        icon = (<FontAwesome name="user" size={26} color={isFocused ? '#4E4BEC' : '#fff'} />);
                     }
                     return (
                     <TouchableOpacity

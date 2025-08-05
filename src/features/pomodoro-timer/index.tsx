@@ -6,12 +6,13 @@ import {
 import ProgressRing from '../../widgets/timer/progress-ring';
 import { useSafeAreaFrame } from 'react-native-safe-area-context';
 import TimerText from '../../widgets/timer/timer-text';
+import TimerControls from './ui/timer-controls';
 
 
 function PomodoroTimer(): React.JSX.Element {
   const safeFrame = useSafeAreaFrame();
   return (
-    <>
+    <View style={styles.pomodoroContainer}>
         <View style={styles.timerContainer}>
             <ProgressRing
                 dimension={safeFrame}
@@ -20,20 +21,24 @@ function PomodoroTimer(): React.JSX.Element {
             />
             <TimerText/>
         </View>
-    </>
+        <TimerControls/>
+    </View>
 
   );
 }
 
 const styles = StyleSheet.create({
-  timerContainer: {
-    flex: 1,
-    width: '100%',
-    position: 'relative',
-    justifyContent: 'center',
-    alignItems: 'center',
-  }
-
+    pomodoroContainer: {
+        flex: 1,
+        justifyContent: 'center'
+    },
+    timerContainer: {
+        // flex: 1,
+        width: '100%',
+        position: 'relative',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
 });
 
 export default PomodoroTimer;
