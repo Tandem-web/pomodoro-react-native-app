@@ -5,18 +5,14 @@ import SessionScreen from '../../screens/sessions';
 import TimerScreen from '../../screens/timer';
 import TaskManagerScreen from '../../screens/tasks';
 import { TabParamList } from '../../@types/navigators';
-import { colorPallete } from '../../shared/styles/colorsPalete';
 import { FONT_FAMILY } from '../../shared/config/customFont';
-import { TouchableOpacity } from 'react-native';
-import Ionicons from '@react-native-vector-icons/ionicons';
-import { useNavigation } from '@react-navigation/native';
+import { Colors } from '../../shared/styles/colorsPalete';
 
 
 const Tab = createBottomTabNavigator<TabParamList>();
 
 
 function PomodoroBottomTabs() {
-  const navigation = useNavigation();
 
   return (
     <Tab.Navigator
@@ -26,9 +22,9 @@ function PomodoroBottomTabs() {
           headerTitleAlign: 'center',
           headerShadowVisible: false,
           headerStyle: {
-            backgroundColor: colorPallete.AppBGColor,
+            backgroundColor: Colors.background,
           },
-          headerTintColor: '#fff',
+          headerTintColor: Colors.white,
           headerTitleStyle: {
             fontFamily: FONT_FAMILY.AvenirNext_BOLD,
             fontSize: 18,
@@ -69,6 +65,6 @@ function PomodoroBottomTabs() {
         />
     </Tab.Navigator>
   );
-};
+}
 
 export default PomodoroBottomTabs;

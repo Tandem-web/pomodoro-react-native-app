@@ -1,8 +1,8 @@
-import React from "react";
-import {StyleSheet, View } from "react-native";
-import Svg, { Circle,  } from "react-native-svg";
-import { colorPallete } from "../../../shared/styles/colorsPalete";
-import { Rect } from "react-native-safe-area-context";
+import React from 'react';
+import {StyleSheet, View } from 'react-native';
+import Svg, { Circle,  } from 'react-native-svg';
+import { Colors } from '../../../shared/styles/colorsPalete';
+import { Rect } from 'react-native-safe-area-context';
 
 type ProgressRingProps = {
     dimension: Rect,
@@ -17,12 +17,12 @@ const ProgressRing: React.FC<ProgressRingProps> = (props) =>{
     const {
         dimension: {width},
         strokeColors,
-        strokeWidth = [30, 30]
+        strokeWidth = [30, 30],
     } = props;
 
 
     const R = ((width-strokeWidth[0]) / 2)*0.78;
-    const CIRCLE_LENGTH = 2*Math.PI * R;
+    const CIRCLE_LENGTH = 2 * Math.PI * R;
     return (
         <View style={styles.svgWrapper}>
             <Svg
@@ -44,7 +44,7 @@ const ProgressRing: React.FC<ProgressRingProps> = (props) =>{
                     r={R}
                     stroke={strokeColors[1]}
                     strokeWidth={strokeWidth[1]}
-                    fill={colorPallete.AppBGColor}
+                    fill={Colors.background}
                     strokeDasharray={CIRCLE_LENGTH}
                     strokeDashoffset={CIRCLE_LENGTH * 0.5}
                 />
@@ -56,6 +56,6 @@ const ProgressRing: React.FC<ProgressRingProps> = (props) =>{
 const styles = StyleSheet.create({
     svgWrapper: {
         width: '100%',
-    }
+    },
 });
 export default ProgressRing;

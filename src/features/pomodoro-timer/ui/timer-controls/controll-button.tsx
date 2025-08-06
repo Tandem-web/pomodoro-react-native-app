@@ -1,42 +1,44 @@
-import { Pressable, View, StyleSheet } from "react-native";
-import { colorPallete } from "../../../../shared/styles/colorsPalete";
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
+import { Colors } from '../../../../shared/styles/colorsPalete';
+import Ionicons from '@react-native-vector-icons/ionicons';
+import { TimerControllButtonType, TimerControllIconType } from '../../../../@types/timer-controlls';
 
-export const ControllButtonType = {
-    SideButton: 'side-button',
-    MainButton: 'main-button',
+const TimerControllsIcons = {
+    'start': (<Ionicons size={40}color={Colors.white} name="play"/>),
+    'pause': (<Ionicons size={40}color={Colors.white} name="pause"/>),
+    'stop': (<Ionicons size={30} color={Colors.primary} name="stop"/>),
+    'reload': (<Ionicons size={30} color={Colors.primary} name="reload"/>),
 } as const;
 
-export type ControllButtonType = (typeof ControllButtonType)[keyof typeof ControllButtonType];
-
-type ControllButtonProps = {
+interface ControllButtonProps{
     onPress?: () => void;
-    icon: React.JSX.Element;
-    type: ControllButtonType
+    type: TimerControllButtonType;
+    icon: TimerControllIconType;
 }
 
 const ControllButton: React.FC<ControllButtonProps> = (props) => {
-    const {onPress = null, type, icon} = props;
+    const {onPress = undefined, type, icon} = props;
 
     switch (type) {
-        case ControllButtonType.MainButton:
+        case TimerControllButtonType.MainButton:
             return(
                 <>
-                    <Pressable onPress={onPress}>
+                    <TouchableOpacity onPress={onPress}>
                         <View style={[styles.mainButton, styles.controlButton]}>
-                            {icon}
+                            {TimerControllsIcons[icon]}
                         </View>
-                    </Pressable>
+                    </TouchableOpacity>
                 </>
             );
 
-        case ControllButtonType.SideButton:
+        case TimerControllButtonType.SideButton:
             return(
                 <>
-                    <Pressable onPress={onPress}>
+                    <TouchableOpacity onPress={onPress}>
                         <View style={[styles.sideButton, styles.controlButton]}>
-                            {icon}
+                            {TimerControllsIcons[icon]}
                         </View>
-                    </Pressable>
+                    </TouchableOpacity>
                 </>
             );
     }
@@ -52,12 +54,12 @@ const styles = StyleSheet.create({
     mainButton: {
         height: 85,
         width: 85,
-        backgroundColor: '#4E4BEC',
+        backgroundColor: Colors.primary,
     },
     sideButton: {
         height: 65,
         width: 65,
-        backgroundColor: 'rgba(78, 75, 236, 0.45)',
+        backgroundColor: Colors.primary50,
     },
 });
 

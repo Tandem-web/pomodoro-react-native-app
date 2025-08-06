@@ -1,22 +1,25 @@
 import React from 'react';
 import {
   StyleSheet,
-  View
+  View,
 } from 'react-native';
 import ProgressRing from '../../widgets/timer/progress-ring';
 import { useSafeAreaFrame } from 'react-native-safe-area-context';
 import TimerText from '../../widgets/timer/timer-text';
 import TimerControls from './ui/timer-controls';
+import TaskCard from '../../widgets/task';
+import { Colors } from '../../shared/styles/colorsPalete';
 
 
 function PomodoroTimer(): React.JSX.Element {
   const safeFrame = useSafeAreaFrame();
   return (
     <View style={styles.pomodoroContainer}>
+        <TaskCard task={{}}/>
         <View style={styles.timerContainer}>
             <ProgressRing
                 dimension={safeFrame}
-                strokeColors={['#313152', '#4E4BEC']}
+                strokeColors={[Colors.surface, Colors.primary]}
                 strokeWidth={[70, 10]}
             />
             <TimerText/>
@@ -30,7 +33,7 @@ function PomodoroTimer(): React.JSX.Element {
 const styles = StyleSheet.create({
     pomodoroContainer: {
         flex: 1,
-        justifyContent: 'center'
+        justifyContent: 'center',
     },
     timerContainer: {
         // flex: 1,

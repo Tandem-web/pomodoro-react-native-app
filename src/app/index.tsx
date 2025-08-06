@@ -1,27 +1,28 @@
-
 import { NavigationContainer } from '@react-navigation/native';
 import React from 'react';
 import {
   StyleSheet,
+  View,
 } from 'react-native';
 import PomodoroBottomTabs from './navigators/Navigator';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
-import { colorPallete } from '../shared/styles/colorsPalete';
+import { Colors } from '../shared/styles/colorsPalete';
 
 function App(): React.JSX.Element {
   return (
-    <SafeAreaProvider style={styles.main}>
+    <View style={styles.main}>
+      <>
         <NavigationContainer>
           <PomodoroBottomTabs/>
         </NavigationContainer>
-    </SafeAreaProvider>
+      </>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   main: {
     flex: 1,
-    backgroundColor: colorPallete.AppBGColor,
+    backgroundColor: Colors.background,
   },
 
 });

@@ -1,16 +1,16 @@
-import { View, StyleSheet } from "react-native"
-import ControllButton, { ControllButtonType } from "./controll-button";
-import Ionicons from "@react-native-vector-icons/ionicons";
+import { View, StyleSheet } from 'react-native'
+import ControllButton from './controll-button';
+import { TimerControllButtonType, TimerControllIconType } from '../../../../@types/timer-controlls';
+
 
 const TimerControls = () => {
     const isPlay = true;
-    const stopPlayIcon = (isPlay ? <Ionicons size={40}color="#fff" name="pause"/> : <Ionicons size={40}color="#fff" name="play"/>);
 
     return (
         <View style={styles.controllContainer}>
-            <ControllButton type={ControllButtonType.SideButton} key="pomodoro-controll-1" icon={(<Ionicons size={30} color='#5e5bfcff' name="reload"/>)}/>
-            <ControllButton type={ControllButtonType.MainButton} key="pomodoro-controll-2" icon={stopPlayIcon}/>
-            <ControllButton type={ControllButtonType.SideButton} key="pomodoro-controll-3" icon={<Ionicons size={30} color='#5e5bfcff' name="stop"/>}/>
+            <ControllButton type={TimerControllButtonType.SideButton} key="pomodoro-controll-1" icon={TimerControllIconType.RELOAD}/>
+            <ControllButton type={TimerControllButtonType.MainButton} key="pomodoro-controll-2" icon={isPlay ? TimerControllIconType.PAUSE : TimerControllIconType.START}/>
+            <ControllButton type={TimerControllButtonType.SideButton} key="pomodoro-controll-3" icon={TimerControllIconType.STOP}/>
         </View>
     );
 };

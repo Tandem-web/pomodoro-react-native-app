@@ -2,9 +2,9 @@ import React, { PropsWithChildren } from 'react';
 import { BottomTabBarProps } from '@react-navigation/bottom-tabs';
 import { TouchableOpacity, View, StyleSheet} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { FontAwesome } from "@react-native-vector-icons/fontawesome";
+import { FontAwesome } from '@react-native-vector-icons/fontawesome';
 import Ionicons from '@react-native-vector-icons/ionicons';
-import { colorPallete } from '../../../shared/styles/colorsPalete';
+import { Colors } from '../../../shared/styles/colorsPalete';
 
 type BottomTabsBarProps = PropsWithChildren<BottomTabBarProps>
 
@@ -33,15 +33,15 @@ const BottomTabsBar: React.FC<BottomTabsBarProps> = (props) => {
                     };
                     let icon;
                     if(route.name === 'Session'){
-                        icon = (<FontAwesome name="th-list" size={22} color={isFocused ? '#4E4BEC' : '#fff'} />);
+                        icon = (<FontAwesome name="th-list" size={22} color={isFocused ? Colors.primary : Colors.white} />);
                     }
 
                     if(route.name === 'Timer'){
-                        icon = (<Ionicons name="timer" size={28} color={isFocused ? '#4E4BEC' : '#fff'} />);
+                        icon = (<Ionicons name="timer" size={28} color={isFocused ? Colors.primary : Colors.white} />);
                     }
 
                     if(route.name === 'Settings'){
-                        icon = (<FontAwesome name="user" size={26} color={isFocused ? '#4E4BEC' : '#fff'} />);
+                        icon = (<FontAwesome name="user" size={26} color={isFocused ? Colors.primary : Colors.white} />);
                     }
                     return (
                     <TouchableOpacity
@@ -64,13 +64,13 @@ const BottomTabsBar: React.FC<BottomTabsBarProps> = (props) => {
 
 const styles = StyleSheet.create({
     safeArea: {
-        backgroundColor: colorPallete.AppBGColor,
+        backgroundColor: Colors.background,
     },
     tabContainer: {
         flexDirection: 'row',
         height: 85,
-        backgroundColor: colorPallete.AppBGColor,
-        paddingHorizontal: 15
+        backgroundColor: Colors.background,
+        paddingHorizontal: 15,
     },
     tabButton: {
         flex: 1,

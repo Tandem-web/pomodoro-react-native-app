@@ -1,5 +1,6 @@
 import { View, Text, StyleSheet } from 'react-native';
 import { FONT_FAMILY } from '../../../shared/config/customFont';
+import { Colors } from '../../../shared/styles/colorsPalete';
 
 type TimerTextProps = {
 
@@ -23,7 +24,7 @@ const styles = StyleSheet.create({
     timerText: {
         fontFamily: FONT_FAMILY.AvenirNext_REGULAR,
         fontSize: 37,
-        color: '#fff',
+        color: Colors.white,
     },
 });
 export default TimerText;

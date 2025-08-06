@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  StyleSheet,
   View,
   Text,
   StatusBar
@@ -8,17 +7,13 @@ import {
 import { sceenStyle } from '../../shared/styles/screens';
 
 
-function TaskManagerScreen(): React.JSX.Element {
+function SessionScreen(): React.JSX.Element {
   return (
     <View style={sceenStyle.main}>
         <StatusBar barStyle="light-content"/>
-        <Text>Экран тасков</Text>
+        <Text>Экран сессий</Text>
     </View>
   );
 }
 
-const styles = StyleSheet.create({
-
-});
-
-export default TaskManagerScreen;
+export default SessionScreen;

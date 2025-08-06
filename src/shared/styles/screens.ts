@@ -1,12 +1,11 @@
 import {
   StyleSheet,
 } from 'react-native';
-import { colorPallete } from './colorsPalete';
+import { Colors } from './colorsPalete';
 
 export const sceenStyle = StyleSheet.create({
   main: {
     flex: 1,
-    backgroundColor: colorPallete.AppBGColor,
+    backgroundColor: Colors.background,
   },
-
 });
