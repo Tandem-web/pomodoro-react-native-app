@@ -14,14 +14,17 @@ function PomodoroTimer(): React.JSX.Element {
   return (
     <View style={styles.pomodoroContainer}>
         <TaskCard task={{}}/>
-        <View style={styles.timerContainer}>
-            <ProgressRing
-                strokeColors={[Colors.surface, Colors.primary]}
-                strokeWidth={[70, 10]}
-            />
-            <TimerText/>
+        <View style={{flex: 1, justifyContent: 'space-between'}}>
+          <View style={styles.timerContainer}>
+              <ProgressRing
+                  strokeColors={[Colors.surface, Colors.primary]}
+                  strokeWidth={[70, 10]}
+              />
+              <TimerText/>
+          </View>
+          <TimerControls/>
         </View>
-        <TimerControls/>
+
     </View>
 
   );
@@ -30,11 +33,11 @@ function PomodoroTimer(): React.JSX.Element {
 const styles = StyleSheet.create({
     pomodoroContainer: {
         flex: 1,
-        justifyContent: 'center',
+        justifyContent: 'space-beetwen',
         boxSizing: 'border-box',
     },
     timerContainer: {
-        // flex: 1,
+        flex: 1,
         width: '100%',
         position: 'relative',
         justifyContent: 'center',
