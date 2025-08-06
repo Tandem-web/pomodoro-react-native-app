@@ -1,9 +1,9 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import BottomTabsBar from './ui/BottomTab';
-import SessionScreen from '../../screens/sessions';
+import SessionScreen from '../../screens/your-tasks';
 import TimerScreen from '../../screens/timer';
-import TaskManagerScreen from '../../screens/tasks';
+import TaskManagerScreen from '../../screens/settings';
 import { TabParamList } from '../../@types/navigators';
 import { FONT_FAMILY } from '../../shared/config/customFont';
 import { Colors } from '../../shared/styles/colorsPalete';

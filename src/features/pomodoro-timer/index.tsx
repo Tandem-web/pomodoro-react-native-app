@@ -34,6 +34,7 @@ const styles = StyleSheet.create({
     pomodoroContainer: {
         flex: 1,
         justifyContent: 'center',
+        boxSizing: 'border-box',
     },
     timerContainer: {
         // flex: 1,

@@ -2,17 +2,18 @@ import React from 'react';
 import {
   View,
   Text,
-  StatusBar
+  StatusBar,
+  SafeAreaView
 } from 'react-native';
 import { sceenStyle } from '../../shared/styles/screens';
 
 
 function SessionScreen(): React.JSX.Element {
   return (
-    <View style={sceenStyle.main}>
+    <SafeAreaView  style={[sceenStyle.main]}>
         <StatusBar barStyle="light-content"/>
         <Text>Экран сессий</Text>
-    </View>
+    </SafeAreaView>
   );
 }
 

@@ -40,7 +40,6 @@ const TaskCard:React.FC<TaskCardProps> = (props) => {
 
 const styles = StyleSheet.create({
     cardWrap: {
-        marginHorizontal: 15,
         height: 60,
         borderRadius: 10,
         paddingHorizontal: 15,
