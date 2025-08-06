@@ -11,10 +11,10 @@ interface TaskCardProps {
     text?: string,
 }
 
-const TaskCard:React.FC<TaskCardProps> = (props) => {
+export const TaskCard:React.FC<TaskCardProps> = (props) => {
     const {
         task = null,
-        text = 'Тут должен был быть текст, но теперь его нет',
+        text = 'A text was supposed to be here',
     } = props;
 
     return (
@@ -37,6 +37,13 @@ const TaskCard:React.FC<TaskCardProps> = (props) => {
         </>
     );
 };
+
+export const TaskPlug = () => {
+    return(
+        <View style={styles.TaskPlug}></View>
+    )
+}
+
 
 const styles = StyleSheet.create({
     cardWrap: {
@@ -63,7 +70,12 @@ const styles = StyleSheet.create({
         fontSize: 15,
         textAlign: 'center',
         color: Colors.white,
-    }
+    },
+    TaskPlug: {
+        height: 60,
+        borderRadius: 10,
+        paddingHorizontal: 15,
+        paddingVertical: 10,
+        width: '100%',
+    },
 });
-
-export default TaskCard;

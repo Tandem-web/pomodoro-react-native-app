@@ -13,6 +13,7 @@ import AddNewTaskScreen from '../../screens/add-new-task';
 import { TouchableOpacity } from 'react-native';
 import Ionicons from '@react-native-vector-icons/ionicons';
 import { useNavigation } from '@react-navigation/native';
+import AllCompletedTaskScreen from '../../screens/all-completed-task';
 
 
 const Stack = createNativeStackNavigator<StackParamList>();
@@ -113,6 +114,17 @@ export default function PomodoroNavigation() {
               <Ionicons name="chevron-back" size={24} color="white" />
             </TouchableOpacity>
           ),
+        }}/>
+        <Stack.Screen 
+          name="AllCompleted"
+          component={AllCompletedTaskScreen} 
+          options={{
+            title: 'All completed task',
+            headerLeft: () => (
+              <TouchableOpacity onPress={() => navigation.goBack()} style={{ marginLeft: 15 }}>
+                <Ionicons name="chevron-back" size={24} color="white" />
+              </TouchableOpacity>
+            ),
         }}/>
     </Stack.Navigator>
   );

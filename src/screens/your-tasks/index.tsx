@@ -1,15 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   View,
-  Text,
   StatusBar,
-  SafeAreaView,
-  Button
+  StyleSheet,
 } from 'react-native';
 import { sceenStyle } from '../../shared/styles/screens';
-import { StackParamList } from '../../@types/navigators';
-import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import TasksListSection from '../../widgets/task-list';
+import DefaultButton from '../../widgets/button/DeafultButton';
 import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { StackParamList } from '../../@types/navigators';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 
 
@@ -17,24 +18,61 @@ type SessionScreenNavigationProp = NativeStackNavigationProp<StackParamList, 'Ta
 
 function SessionScreen(): React.JSX.Element {
   const navigation = useNavigation<SessionScreenNavigationProp>();
+  const [sectionSize, setSectionSize] = useState({ width: 0, height: 0 });
 
-  
   return (
-    <SafeAreaView  style={[sceenStyle.main]}>
-        <StatusBar barStyle="light-content"/>
-        <Text>Экран сессий</Text>
+    <>
+      <SafeAreaView edges={['top', 'bottom']} style={[sceenStyle.main]}>
+          <StatusBar barStyle="light-content"/>
+          <View style={styles.innerContainer}>
 
-        <Button
-          title="All Tasks"
-          onPress={() => navigation.navigate('AllTasks')}
-        />
-
-        <Button
-          title="Add New Task"
-          onPress={() => navigation.navigate('AddTask')}
-        />
-    </SafeAreaView>
+            <View
+              style={{flex: 1}}
+              onLayout={(event) => {
+                const {width, height } = event.nativeEvent.layout;
+                setSectionSize({ width, height });
+              }}
+            >
+              <TasksListSection
+                key={'section-1'}
+                title="All Task"
+                prefix="sub-task"
+                limit={Math.floor(sectionSize.height / 75)}
+                linkOption={{
+                  isShow: true,
+                  text: 'See All',
+                  onPress: () => navigation.navigate('AllTasks'),
+                }}
+              />
+            </View>
+            <TasksListSection
+              key={'section-2'}
+              title="Completed"
+              prefix="sub-completed-task"
+              tasks={[1, 2, 5, 6, 3]}
+              limit={1}
+              linkOption={{
+                isShow: true,
+                text: 'See All',
+                onPress: () => navigation.navigate('AllCompleted'),
+              }}
+            />
+            <DefaultButton 
+              text="Add new task"
+              icon={{name: 'plus', size: 16}}
+              onPress={() => navigation.navigate('AddTask')}
+            />
+          </View>
+      </SafeAreaView>
+    </>
   );
 }
+
+const styles = StyleSheet.create({
+  innerContainer: {
+    flex: 1,
+    gap: 30
+  },
+});
 
 export default SessionScreen;
