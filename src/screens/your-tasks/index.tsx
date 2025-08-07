@@ -22,7 +22,7 @@ function SessionScreen(): React.JSX.Element {
 
   return (
     <>
-      <SafeAreaView edges={['top', 'bottom']} style={[sceenStyle.main]}>
+      <SafeAreaView edges={['left', 'right']} style={[sceenStyle.main]}>
           <StatusBar barStyle="light-content"/>
           <View style={styles.innerContainer}>
 
