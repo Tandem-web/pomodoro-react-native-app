@@ -10,6 +10,7 @@ import ReanimatedSwipeable from 'react-native-gesture-handler/ReanimatedSwipeabl
 import Reanimated, { SharedValue, useAnimatedStyle } from 'react-native-reanimated';
 import { useRef } from 'react';
 import Ionicons from '@react-native-vector-icons/ionicons';
+import RightAction from './components/task-swipeable-righ-action';
 
 interface TaskCardProps {
     task?: Object;
@@ -23,34 +24,6 @@ export const TaskCard:React.FC<TaskCardProps> = (props) => {
         task = null,
         text = 'A text was supposed to be here',
     } = props;
-
-    const RightAction = (prog: SharedValue<number>, drag: SharedValue<number>) => {
-        const styleAnimation = useAnimatedStyle(() => {
-            console.log('showRightProgress:', prog.value);
-            console.log('appliedTranslation:', drag.value);
-            return {
-                transform: [{ translateX: drag.value + 110 }],
-            };
-        });
-
-        return (
-            <>
-                <Reanimated.View style={[styleAnimation, {flexDirection: 'row', width: 100, gap: 10}]}>
-                    <TouchableOpacity>
-                        <View style={styles.rightAction}>
-                            <Ionicons size={22} color={Colors.white} name='trash'/>
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity>
-                        <View style={styles.rightAction}>
-                            <Ionicons size={22} color={Colors.white} name='checkmark'/>
-                        </View>
-                    </TouchableOpacity>
-                </Reanimated.View>
-            </>
-
-        );
-    };
 
     return (
         <>

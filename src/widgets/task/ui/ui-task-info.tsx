@@ -1,5 +1,5 @@
-import { View, Text, StyleSheet } from "react-native";
-import { FONT_FAMILY } from "../../../shared/config/customFont";
+import { View, Text, StyleSheet } from 'react-native';
+import { FONT_FAMILY } from '../../../shared/config/customFont';
 
 interface TaskInfoProps {
 
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     mutedText: {
         fontFamily: FONT_FAMILY.AvenirNext_REGULAR,
         fontSize: 12,
-        color: '#B4B4B4'
+        color: '#B4B4B4',
     }
 
 })

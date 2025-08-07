@@ -47,14 +47,22 @@ const TaskCardColors = {
         'close': {
             borderColor: BaseColors.gray600,
             iconColor: BaseColors.gray600,
+            bgColor: 'rgba(107, 114, 128, 0.5)',
         },
         'play': {
             borderColor: AppColors.primary,
             iconColor: AppColors.primary,
+            bgColor: AppColors.primary50,
         },
         'delete': {
             borderColor: AppColors.danger,
             iconColor: AppColors.danger,
+            bgColor: 'rgba(187, 104, 126, 0.5)',
+        },
+        'complete': {
+            borderColor: AppColors.success,
+            iconColor: AppColors.success,
+            bgColor: 'rgba(51, 138, 104, 0.5)',
         },
     },
 };

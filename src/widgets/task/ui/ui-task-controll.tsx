@@ -11,7 +11,7 @@ const buttonIcons = {
 } as const;
 
 interface TaskCardControllProps {
-    type:  TaskButtonTypes;
+    type:  Exclude<TaskButtonTypes, 'complete'>;
     onPress?: () => void;
 }
 

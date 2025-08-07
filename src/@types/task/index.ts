@@ -2,6 +2,7 @@ export const TaskButton = {
     CLOSE: 'close',
     PLAY: 'play',
     DELETE: 'delete',
+    COMPLETE: 'complete',
 } as const;
 
 export type TaskButtonTypes = (typeof TaskButton)[keyof typeof TaskButton];
