@@ -1,13 +1,10 @@
-import { useNavigation } from "@react-navigation/native";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import { TouchableOpacity, View, Text, StyleSheet } from "react-native";
-import { StackParamList } from "../../@types/navigators";
-import { FONT_FAMILY } from "../../shared/config/customFont";
-import { Colors } from "../../shared/styles/colorsPalete";
-import { TaskCard, TaskPlug } from "../task";
+import { TouchableOpacity, View, Text, StyleSheet, ScrollView } from 'react-native';
+import { FONT_FAMILY } from '../../shared/config/customFont';
+import { Colors } from '../../shared/styles/colorsPalete';
+import { TaskCard, TaskPlug } from '../task';
 
 interface TasksListProps {
-    title: string,
+    title?: string,
     prefix: string,
     tasks?: number[],
     limit?: number,
@@ -16,14 +13,14 @@ interface TasksListProps {
         text: string,
         onPress?: () => void;
     },
+    paddBottom?: number,
     sectionStyles?: Object,
+    plugText?: string,
 };
-
-type SessionScreenNavigationProp = NativeStackNavigationProp<StackParamList, 'Tabs'>;
 
 const TasksListSection: React.FC<TasksListProps> = (props) => {
     const {
-        title,
+        title = null,
         prefix,
         tasks = [],
         limit = 1,
@@ -32,15 +29,22 @@ const TasksListSection: React.FC<TasksListProps> = (props) => {
             text: '',
             onPress: undefined,
         },
+        paddBottom = 0,
+        plugText = 'A text was supposed to be here',
     } = props;
 
 
     return (
         <View style={styles.section}>
             <View style={styles.sectionHeader}>
-                <Text style={styles.sectionName}>
-                    {title}
-                </Text>
+                {
+                    title !== null && (
+                        <Text style={styles.sectionName}>
+                            {title}
+                        </Text>
+                    )
+                }
+
                 {
                     linkOption.isShow === true && tasks.length !== 0 ? (
                     <TouchableOpacity onPress={linkOption.onPress}>
@@ -53,23 +57,29 @@ const TasksListSection: React.FC<TasksListProps> = (props) => {
                     )
                 }
             </View>
-            <View style={styles.sectionBody}>
+            <ScrollView contentContainerStyle={{paddingBottom: paddBottom, gap: 15}} showsVerticalScrollIndicator={false} style={styles.sectionBody}>
                 {
                     tasks.length === 0 ? (
                         new Array(limit).fill(null).map((_, index) => (
                             index === 0 ? (
-                                <TaskCard key={`${prefix}__${index}`} text="Your tasks will be displayed here"/>
+                                <TaskCard key={`${prefix}__${index}`} text={plugText}/>
                             ) : (
                                 <TaskPlug key={`${prefix}__plug__${index}`}/>
                             )
                         ))
                     ) : (
-                        tasks.slice(-Math.abs(limit)).map((_, index) => (
-                            <TaskCard key={`${prefix}__${index}`} task={{}}/>
-                        ))
+                        limit === -1 ? (
+                            tasks.map((_, index) => (
+                                <TaskCard key={`${prefix}__${index}`} task={{}}/>
+                            ))
+                        ) : (
+                            tasks.slice(-Math.abs(limit)).map((_, index) => (
+                                <TaskCard key={`${prefix}__${index}`} task={{}}/>
+                            ))
+                        )
                     )
                 }
-            </View>
+            </ScrollView>
         </View>
     );
 };
@@ -92,13 +102,14 @@ const styles = StyleSheet.create({
         color: Colors.white,
     },
     sectionBody: {
-        gap: 15,
+        flexGrow: 1,
+        // gap: 15,
     },
     urlToNested: {
         fontFamily: FONT_FAMILY.AvenirNext_MEDIUM,
         fontSize: 14,
         color: Colors.primary,
-    }
+    },
 
 })
 

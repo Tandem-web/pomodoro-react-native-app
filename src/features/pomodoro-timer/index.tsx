@@ -6,25 +6,23 @@ import {
 import ProgressRing from '../../widgets/timer/progress-ring';
 import TimerText from '../../widgets/timer/timer-text';
 import TimerControls from './ui/timer-controls';
-import { TaskCard } from '../../widgets/task';
 import { Colors } from '../../shared/styles/colorsPalete';
+import { TaskCard } from '../../widgets/task';
 
 
 function PomodoroTimer(): React.JSX.Element {
+  
   return (
     <View style={styles.pomodoroContainer}>
-        <TaskCard task={{}}/>
-        <View style={{flex: 1, justifyContent: 'space-between'}}>
-          <View style={styles.timerContainer}>
-              <ProgressRing
-                  strokeColors={[Colors.surface, Colors.primary]}
-                  strokeWidth={[70, 10]}
-              />
-              <TimerText/>
-          </View>
-          <TimerControls/>
+        <TaskCard/>
+        <View style={styles.timerContainer}>
+            <ProgressRing
+                strokeColors={[Colors.surface, Colors.primary]}
+                strokeWidth={[70, 10]}
+            />
+            <TimerText/>
         </View>
-
+        <TimerControls/>
     </View>
 
   );
@@ -33,7 +31,7 @@ function PomodoroTimer(): React.JSX.Element {
 const styles = StyleSheet.create({
     pomodoroContainer: {
         flex: 1,
-        justifyContent: 'space-beetwen',
+        justifyContent: 'center',
         boxSizing: 'border-box',
     },
     timerContainer: {

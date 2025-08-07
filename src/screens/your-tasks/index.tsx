@@ -43,19 +43,20 @@ function SessionScreen(): React.JSX.Element {
                   text: 'See All',
                   onPress: () => navigation.navigate('AllTasks'),
                 }}
+                plugText='All tasks are completed'
               />
             </View>
             <TasksListSection
               key={'section-2'}
               title="Completed"
               prefix="sub-completed-task"
-              tasks={[1, 2, 5, 6, 3]}
               limit={1}
               linkOption={{
                 isShow: true,
                 text: 'See All',
                 onPress: () => navigation.navigate('AllCompleted'),
               }}
+              plugText='Completed tasks will be here'
             />
             <DefaultButton 
               text="Add new task"
@@ -71,7 +72,7 @@ function SessionScreen(): React.JSX.Element {
 const styles = StyleSheet.create({
   innerContainer: {
     flex: 1,
-    gap: 30
+    gap: 25
   },
 });
 
