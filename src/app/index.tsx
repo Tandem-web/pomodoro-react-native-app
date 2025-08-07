@@ -6,15 +6,16 @@ import {
 } from 'react-native';
 import { Colors } from '../shared/styles/colorsPalete';
 import PomodoroNavigation from './navigators/Navigator';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 function App(): React.JSX.Element {
   return (
     <View style={styles.main}>
-      <>
+      <GestureHandlerRootView style={{flex: 1}}>
         <NavigationContainer>
           <PomodoroNavigation/>
         </NavigationContainer>
-      </>
+      </GestureHandlerRootView>
     </View>
   );
 }

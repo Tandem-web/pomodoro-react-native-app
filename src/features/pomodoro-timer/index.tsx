@@ -14,7 +14,7 @@ function PomodoroTimer(): React.JSX.Element {
   
   return (
     <View style={styles.pomodoroContainer}>
-        <TaskCard/>
+        <TaskCard task={{}}/>
         <View style={styles.timerContainer}>
             <ProgressRing
                 strokeColors={[Colors.surface, Colors.primary]}

@@ -8,6 +8,6 @@ export const sceenStyle = StyleSheet.create({
     flex: 1,
     backgroundColor: Colors.background,
     paddingHorizontal: 15,
-    boxSizing: 'border-box'
+    boxSizing: 'border-box',
   },
 });
