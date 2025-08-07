@@ -7,14 +7,18 @@ import { Colors } from '../../shared/styles/colorsPalete';
 import { FONT_FAMILY } from '../../shared/config/customFont';
 import { TaskButton, TaskPriority, TaskStatus } from '../../@types/task';
 import ReanimatedSwipeable from 'react-native-gesture-handler/ReanimatedSwipeable';
-import Reanimated, { SharedValue, useAnimatedStyle } from 'react-native-reanimated';
+
 import { useRef } from 'react';
-import Ionicons from '@react-native-vector-icons/ionicons';
-import RightAction from './components/task-swipeable-righ-action';
+import { TaskSwipeButtonProps } from './ui/ui-task-swipe-button';
+import RightAction from './components/task-swipe-righ-action';
 
 interface TaskCardProps {
     task?: Object;
     text?: string,
+    rightActionBlock: {
+        enabled: boolean,
+        buttons: TaskSwipeButtonProps[]
+    }
 }
 
 
@@ -23,6 +27,7 @@ export const TaskCard:React.FC<TaskCardProps> = (props) => {
     const {
         task = null,
         text = 'A text was supposed to be here',
+        rightActionBlock,
     } = props;
 
     return (
@@ -33,7 +38,7 @@ export const TaskCard:React.FC<TaskCardProps> = (props) => {
                 friction={2}
                 enableTrackpadTwoFingerGesture
                 rightThreshold={70}
-                renderRightActions={RightAction}
+                renderRightActions={RightAction(rightActionBlock.buttons)}
             >
                 <View style={styles.cardWrap}>
                     {

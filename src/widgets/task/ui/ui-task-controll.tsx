@@ -17,7 +17,7 @@ interface TaskCardControllProps {
 
 const TaskCardControll: React.FC<TaskCardControllProps> = (props) => {
     const {
-        onPress = undefined,
+        onPress = () => {},
         type,
     } = props;
     return (

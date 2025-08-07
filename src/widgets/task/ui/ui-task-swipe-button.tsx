@@ -9,7 +9,7 @@ const buttonIcons = {
 } as const;
 
 
-interface TaskSwipeButtonProps {
+export interface TaskSwipeButtonProps {
     type:  Exclude<TaskButtonTypes, 'close' | 'play'>;
     onPress?: () => void;
 }
@@ -17,13 +17,13 @@ interface TaskSwipeButtonProps {
 const TaskSwipeButton: React.FC<TaskSwipeButtonProps> = (props) => {
     const {
         type,
-        onPress = undefined,
+        onPress = () => {},
     } = props;
 
     return (
         <TouchableOpacity onPress={onPress}>
             <View style={[styles.rightAction, {
-                backgroundColor: Colors.TaskCardControll[type].borderColor
+                backgroundColor: Colors.TaskCardControll[type].borderColor,
             }]}>
                 {buttonIcons[type]}
             </View>
