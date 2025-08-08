@@ -1,44 +1,59 @@
-/* eslint-disable react/no-unstable-nested-components */
-import { View, StyleSheet, Text, TouchableOpacity} from 'react-native';
+import { View, StyleSheet, Text} from 'react-native';
 import TaskCardStatus from './ui/ui-task-status';
 import TaskCardInfo from './ui/ui-task-info';
 import TaskCardControll from './ui/ui-task-controll';
 import { Colors } from '../../shared/styles/colorsPalete';
 import { FONT_FAMILY } from '../../shared/config/customFont';
-import { TaskButton, TaskPriority, TaskStatus } from '../../@types/task';
-import ReanimatedSwipeable from 'react-native-gesture-handler/ReanimatedSwipeable';
-
-import { useRef } from 'react';
-import { TaskSwipeButtonProps } from './ui/ui-task-swipe-button';
+import { TaskButton, TaskPriority, TaskCardRightButton, TaskStatus } from '../../@types/task';
+import ReanimatedSwipeable, { SwipeableMethods} from 'react-native-gesture-handler/ReanimatedSwipeable';
+import { useCallback, useRef } from 'react';
 import RightAction from './components/task-swipe-righ-action';
+import { SharedValue } from 'react-native-reanimated';
 
+interface RightActionBlock{
+    enabled: boolean,
+    buttons: TaskCardRightButton[],
+}
 interface TaskCardProps {
     task?: Object;
     text?: string,
-    rightActionBlock: {
-        enabled: boolean,
-        buttons: TaskSwipeButtonProps[]
-    }
+    rightActionBlock?: RightActionBlock,
 }
-
-
 
 export const TaskCard:React.FC<TaskCardProps> = (props) => {
     const {
         task = null,
         text = 'A text was supposed to be here',
-        rightActionBlock,
+        rightActionBlock = {
+            enabled: false,
+            buttons: [],
+        },
     } = props;
+
+    const swipeableRef = useRef<SwipeableMethods>(null);
+
+    const renderRightActions = useCallback(
+        (progress: SharedValue<number>, dragX: SharedValue<number>) => (
+            <RightAction
+                swipeRef={swipeableRef}
+                buttons={rightActionBlock.buttons}
+                prog={progress}
+                drag={dragX}
+            />
+        ),
+        [rightActionBlock.buttons]
+    );
 
     return (
         <>
             <ReanimatedSwipeable
-                // enabled={false}
+                ref={swipeableRef}
+                enabled={rightActionBlock.enabled}
                 containerStyle={styles.swipeable}
                 friction={2}
                 enableTrackpadTwoFingerGesture
                 rightThreshold={70}
-                renderRightActions={RightAction(rightActionBlock.buttons)}
+                renderRightActions={renderRightActions}
             >
                 <View style={styles.cardWrap}>
                     {
@@ -101,7 +116,7 @@ const styles = StyleSheet.create({
         width: '100%',
     },
 
-    rightAction: { 
+    rightAction: {
         width: 40,
         height: 60,
         justifyContent: 'center',

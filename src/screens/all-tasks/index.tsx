@@ -1,14 +1,13 @@
-import React from 'react';
 import {
   StatusBar,
 } from 'react-native';
-import { sceenStyle } from '../../shared/styles/screens';
 import TasksListSection from '../../widgets/task-list';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { DefaultStyle } from '../../shared/styles/defaultStyles';
 
 function AllTasksScreen(): React.JSX.Element {
   return (
-    <SafeAreaView edges={['left', 'right', 'bottom']} style={[sceenStyle.main]}>
+    <SafeAreaView edges={['left', 'right', 'bottom']} style={[DefaultStyle.screen]}>
         <StatusBar barStyle="light-content"/>
         <TasksListSection
           key={'all-task-section-1'}

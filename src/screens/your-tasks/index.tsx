@@ -1,17 +1,17 @@
-import React, { useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 import {
   View,
   StatusBar,
   StyleSheet,
   LayoutChangeEvent,
 } from 'react-native';
-import { sceenStyle } from '../../shared/styles/screens';
 import TasksListSection from '../../widgets/task-list';
 import DefaultButton from '../../widgets/button/DeafultButton';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { StackParamList } from '../../@types/navigators';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { DefaultStyle } from '../../shared/styles/defaultStyles';
 
 
 
@@ -27,45 +27,45 @@ function SessionScreen(): React.JSX.Element {
   }, []);
   return (
     <>
-      <SafeAreaView edges={['left', 'right']} style={[sceenStyle.main]}>
-          <StatusBar barStyle="light-content"/>
-          <View style={styles.innerContainer}>
+      <SafeAreaView edges={['left', 'right']} style={[DefaultStyle.screen]}>
+            <StatusBar barStyle="light-content"/>
+            <View style={styles.innerContainer}>
 
-            <View
-              style={{flex: 1}}
-              onLayout={handleLayout}
-            >
+              <View
+                style={DefaultStyle.fullSpace}
+                onLayout={handleLayout}
+              >
+                <TasksListSection
+                  key={'section-1'}
+                  title="All Task"
+                  prefix="sub-task"
+                  limit={Math.floor(sectionSize.height / 75)}
+                  linkOption={{
+                    isShow: true,
+                    text: 'See All',
+                    onPress: () => navigation.navigate('AllTasks'),
+                  }}
+                  plugText="All tasks are completed"
+                />
+              </View>
               <TasksListSection
-                key={'section-1'}
-                title="All Task"
-                prefix="sub-task"
-                limit={Math.floor(sectionSize.height / 75)}
+                key={'section-2'}
+                title="Completed"
+                prefix="sub-completed-task"
+                limit={1}
                 linkOption={{
                   isShow: true,
                   text: 'See All',
-                  onPress: () => navigation.navigate('AllTasks'),
+                  onPress: () => navigation.navigate('AllCompleted'),
                 }}
-                plugText="All tasks are completed"
+                plugText="Completed tasks will be here"
+              />
+              <DefaultButton
+                text="Add new task"
+                icon={{name: 'plus', size: 16}}
+                onPress={() => navigation.navigate('AddTask')}
               />
             </View>
-            <TasksListSection
-              key={'section-2'}
-              title="Completed"
-              prefix="sub-completed-task"
-              limit={1}
-              linkOption={{
-                isShow: true,
-                text: 'See All',
-                onPress: () => navigation.navigate('AllCompleted'),
-              }}
-              plugText="Completed tasks will be here"
-            />
-            <DefaultButton
-              text="Add new task"
-              icon={{name: 'plus', size: 16}}
-              onPress={() => navigation.navigate('AddTask')}
-            />
-          </View>
       </SafeAreaView>
     </>
   );

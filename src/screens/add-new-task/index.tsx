@@ -1,15 +1,14 @@
-import React from 'react';
 import {
   Text,
   StatusBar,
   SafeAreaView,
 } from 'react-native';
-import { sceenStyle } from '../../shared/styles/screens';
+import { DefaultStyle } from '../../shared/styles/defaultStyles';
 
 
 function AddNewTaskScreen(): React.JSX.Element {
   return (
-    <SafeAreaView  style={[sceenStyle.main]}>
+    <SafeAreaView  style={[DefaultStyle.screen]}>
         <StatusBar barStyle="light-content"/>
         <Text>Экран создания новой задачи</Text>
     </SafeAreaView>

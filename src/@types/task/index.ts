@@ -23,3 +23,9 @@ export const TaskPriority = {
 } as const;
 
 export type TaskPriorityType = (typeof TaskPriority)[keyof typeof TaskPriority];
+
+
+export type TaskCardRightButton = {
+    type:  Exclude<TaskButtonTypes, 'close' | 'play'>;
+    onPress?: () => void;
+}
