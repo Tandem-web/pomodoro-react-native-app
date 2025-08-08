@@ -1,11 +1,16 @@
-import { View, Text, StyleSheet } from "react-native";
-import { FONT_FAMILY } from "../../../shared/config/customFont";
+import { View, Text, StyleSheet } from 'react-native';
+import { FONT_FAMILY } from '../../../shared/config/customFont';
+import { Colors } from '../../../shared/styles/colorsPalete';
 
-interface TaskInfoProps {
+// TODO TaskInfoProps interface
 
-}
+const TaskCardInfo: React.FC = () => {
 
-const TaskCardInfo: React.FC<TaskInfoProps> = () => {
+    const taskText = 'Бла-бла-бла',
+          intervalText = '1/4',
+          workTimeText = '0 minutes',
+          intervalTimeText = '25 min';
+
     return (
         <>
             <View style={styles.taskInfoContainer}>
@@ -14,16 +19,16 @@ const TaskCardInfo: React.FC<TaskInfoProps> = () => {
                         style={[styles.textFull, styles.defText]}
                         numberOfLines={1}
                         ellipsizeMode="tail"
-                    >Бла-бла-бла</Text>
-                    <Text style={[styles.defText]}>1/4</Text>
+                    >{taskText}</Text>
+                    <Text style={[styles.defText]}>{intervalText}</Text>
                 </View>
                 <View style={styles.taskInfoRow}>
                     <Text 
                         style={[styles.textFull, styles.mutedText]}
                         numberOfLines={1}
                         ellipsizeMode="tail"
-                    >0 minutes</Text>
-                    <Text style={[styles.mutedText]}>25 min</Text>
+                    >{workTimeText}</Text>
+                    <Text style={[styles.mutedText]}>{intervalTimeText}</Text>
                 </View>
             </View>
         </>
@@ -48,14 +53,14 @@ const styles = StyleSheet.create({
     defText: {
         fontFamily: FONT_FAMILY.AvenirNext_REGULAR,
         fontSize: 14,
-        color: '#F2F2F2',
+        color: Colors.white,
     },
     mutedText: {
         fontFamily: FONT_FAMILY.AvenirNext_REGULAR,
         fontSize: 12,
-        color: '#B4B4B4'
-    }
+        color: Colors.mutedWhite,
+    },
 
-})
+});
 
 export default TaskCardInfo;
