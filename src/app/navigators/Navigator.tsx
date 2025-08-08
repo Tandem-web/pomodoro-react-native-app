@@ -1,10 +1,17 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import BottomTabsBar from './ui/BottomTab';
+<<<<<<< HEAD
 import SessionScreen from '../../screens/your-tasks';
 import TimerScreen from '../../screens/timer';
 import TaskManagerScreen from '../../screens/settings';
 import { StackParamList, TabParamList } from '../../@types/navigators';
+=======
+import SessionScreen from '../../screens/statistic';
+import TimerScreen from '../../screens/timer';
+import TaskManagerScreen from '../../screens/settings';
+import { TabParamList } from '../../@types/navigators';
+>>>>>>> main
 import { FONT_FAMILY } from '../../shared/config/customFont';
 import { Colors } from '../../shared/styles/colorsPalete';
 import { createNativeStackNavigator, NativeStackNavigationProp } from '@react-navigation/native-stack';
