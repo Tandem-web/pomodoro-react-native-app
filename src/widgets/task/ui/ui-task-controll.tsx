@@ -11,7 +11,7 @@ const buttonIcons = {
 } as const;
 
 interface TaskCardControllProps {
-    type:  TaskButtonTypes;
+    type:  Exclude<TaskButtonTypes, 'complete'>;
     onPress?: () => void;
 }
 
@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         borderWidth: 2,
-    }
-})
+    },
+});
 
 export default TaskCardControll;

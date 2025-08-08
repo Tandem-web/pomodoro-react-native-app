@@ -5,7 +5,8 @@ export type TabParamList = {
 };
 
 export type StackParamList = {
-  Session: undefined;
-  Timer: undefined;
-  Settings: undefined;
+  Tabs: undefined;
+  AllTasks: undefined;
+  AddTask: undefined;
+  AllCompleted: undefined;
 };

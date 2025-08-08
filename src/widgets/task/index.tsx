@@ -4,43 +4,86 @@ import TaskCardInfo from './ui/ui-task-info';
 import TaskCardControll from './ui/ui-task-controll';
 import { Colors } from '../../shared/styles/colorsPalete';
 import { FONT_FAMILY } from '../../shared/config/customFont';
-import { TaskButton, TaskPriority, TaskStatus } from '../../@types/task';
+import { TaskButton, TaskPriority, TaskCardRightButton, TaskStatus } from '../../@types/task';
+import ReanimatedSwipeable, { SwipeableMethods} from 'react-native-gesture-handler/ReanimatedSwipeable';
+import { useCallback, useRef } from 'react';
+import RightAction from './components/task-swipe-righ-action';
+import { SharedValue } from 'react-native-reanimated';
 
+interface RightActionBlock{
+    enabled: boolean,
+    buttons: TaskCardRightButton[],
+}
 interface TaskCardProps {
     task?: Object;
     text?: string,
+    rightActionBlock?: RightActionBlock,
 }
 
-const TaskCard:React.FC<TaskCardProps> = (props) => {
+export const TaskCard:React.FC<TaskCardProps> = (props) => {
     const {
         task = null,
-        text = 'Тут должен был быть текст, но теперь его нет',
+        text = 'A text was supposed to be here',
+        rightActionBlock = {
+            enabled: false,
+            buttons: [],
+        },
     } = props;
+
+    const swipeableRef = useRef<SwipeableMethods>(null);
+
+    const renderRightActions = useCallback(
+        (progress: SharedValue<number>, dragX: SharedValue<number>) => (
+            <RightAction
+                swipeRef={swipeableRef}
+                buttons={rightActionBlock.buttons}
+                prog={progress}
+                drag={dragX}
+            />
+        ),
+        [rightActionBlock.buttons]
+    );
 
     return (
         <>
-            <View style={styles.cardWrap}>
-                {
-                   task === null ? (
-                    <View style={styles.nullTaskWrap}>
-                        <Text style={styles.nullTaskText}>{text}</Text>
-                    </View>
-                   ) : (
-                    <View style={styles.cardInfo}>
-                        <TaskCardStatus status={TaskStatus.UNCOMPLETE} priority={TaskPriority.MEDIUM_PRIORITY}/>
-                        <TaskCardInfo/>
-                        <TaskCardControll type={TaskButton.DELETE}/>
-                    </View>
-                   )
-                }
-            </View>
+            <ReanimatedSwipeable
+                ref={swipeableRef}
+                enabled={rightActionBlock.enabled}
+                containerStyle={styles.swipeable}
+                friction={2}
+                enableTrackpadTwoFingerGesture
+                rightThreshold={70}
+                renderRightActions={renderRightActions}
+            >
+                <View style={styles.cardWrap}>
+                    {
+                    task === null ? (
+                        <View style={styles.nullTaskWrap}>
+                            <Text style={styles.nullTaskText}>{text}</Text>
+                        </View>
+                    ) : (
+                        <View style={styles.cardInfo}>
+                            <TaskCardStatus status={TaskStatus.UNCOMPLETE} priority={TaskPriority.MEDIUM_PRIORITY}/>
+                            <TaskCardInfo/>
+                            <TaskCardControll type={TaskButton.DELETE}/>
+                        </View>
+                    )
+                    }
+                </View>
+            </ReanimatedSwipeable>
         </>
     );
 };
 
+export const TaskPlug = () => {
+    return(
+        <View style={styles.TaskPlug}/>
+    );
+};
+
+
 const styles = StyleSheet.create({
     cardWrap: {
-        marginHorizontal: 15,
         height: 60,
         borderRadius: 10,
         paddingHorizontal: 15,
@@ -64,7 +107,24 @@ const styles = StyleSheet.create({
         fontSize: 15,
         textAlign: 'center',
         color: Colors.white,
-    }
-});
+    },
+    TaskPlug: {
+        height: 60,
+        borderRadius: 10,
+        paddingHorizontal: 15,
+        paddingVertical: 10,
+        width: '100%',
+    },
 
-export default TaskCard;
+    rightAction: {
+        width: 40,
+        height: 60,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: Colors.success,
+        borderRadius: 5,
+    },
+    swipeable: {
+        overflow: 'visible',
+    },
+});

@@ -1,16 +1,14 @@
-import React from 'react';
 import {
-  StyleSheet,
   View,
   Text,
-  StatusBar
+  StatusBar,
 } from 'react-native';
-import { sceenStyle } from '../../shared/styles/screens';
+import { DefaultStyle } from '../../shared/styles/defaultStyles';
 
 
 function TaskManagerScreen(): React.JSX.Element {
   return (
-    <View style={sceenStyle.main}>
+    <View style={DefaultStyle.screen}>
         <StatusBar barStyle="light-content"/>
         <Text>Экран тасков</Text>
     </View>
