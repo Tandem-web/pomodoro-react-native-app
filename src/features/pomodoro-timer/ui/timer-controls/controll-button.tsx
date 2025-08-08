@@ -1,0 +1,67 @@
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
+import { Colors } from '../../../../shared/styles/colorsPalete';
+import Ionicons from '@react-native-vector-icons/ionicons';
+import { TimerControllButtonType, TimerControllIconType } from '../../../../@types/timer-controlls';
+
+const TimerControllsIcons = {
+    'start': (<Ionicons size={40}color={Colors.white} name="play"/>),
+    'pause': (<Ionicons size={40}color={Colors.white} name="pause"/>),
+    'stop': (<Ionicons size={30} color={Colors.primary} name="stop"/>),
+    'reload': (<Ionicons size={30} color={Colors.primary} name="reload"/>),
+} as const;
+
+interface ControllButtonProps{
+    onPress?: () => void;
+    type: TimerControllButtonType;
+    icon: TimerControllIconType;
+}
+
+const ControllButton: React.FC<ControllButtonProps> = (props) => {
+    const {onPress = undefined, type, icon} = props;
+
+    switch (type) {
+        case TimerControllButtonType.MainButton:
+            return(
+                <>
+                    <TouchableOpacity onPress={onPress}>
+                        <View style={[styles.mainButton, styles.controlButton]}>
+                            {TimerControllsIcons[icon]}
+                        </View>
+                    </TouchableOpacity>
+                </>
+            );
+
+        case TimerControllButtonType.SideButton:
+            return(
+                <>
+                    <TouchableOpacity onPress={onPress}>
+                        <View style={[styles.sideButton, styles.controlButton]}>
+                            {TimerControllsIcons[icon]}
+                        </View>
+                    </TouchableOpacity>
+                </>
+            );
+    }
+};
+
+
+const styles = StyleSheet.create({
+    controlButton: {
+        borderRadius: '100%',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    mainButton: {
+        height: 85,
+        width: 85,
+        backgroundColor: Colors.primary,
+    },
+    sideButton: {
+        height: 65,
+        width: 65,
+        backgroundColor: Colors.primary50,
+    },
+});
+
+
+export default ControllButton;
