@@ -1,6 +1,4 @@
-import { TouchableOpacity, View, Text, StyleSheet, ListRenderItem, FlatList } from 'react-native';
-import { FONT_FAMILY } from '../../shared/config/customFont';
-import { Colors } from '../../shared/styles/colorsPalete';
+import { StyleSheet, ListRenderItem, FlatList } from 'react-native';
 import { TaskCard, TaskPlug } from '../task';
 import { useCallback, useMemo } from 'react';
 
@@ -11,15 +9,9 @@ interface FlatListItem {
     isFirst: boolean,
 }
 interface TasksListProps {
-    title?: string,
     prefix: string,
     tasks?: {}[],
     limit?: number,
-    linkOption?: {
-        isShow: boolean,
-        text: string,
-        onPress?: () => void;
-    },
     paddBottom?: number,
     sectionStyles?: Object,
     plugText?: string,
@@ -27,15 +19,9 @@ interface TasksListProps {
 
 const TasksListSection: React.FC<TasksListProps> = (props) => {
     const {
-        title = null,
         prefix,
         tasks = [],
         limit = 1,
-        linkOption = {
-            isShow: false,
-            text: '',
-            onPress: undefined,
-        },
         paddBottom = 0,
         plugText = 'A text was supposed to be here',
     } = props;
@@ -80,71 +66,23 @@ const TasksListSection: React.FC<TasksListProps> = (props) => {
     }, [plugText]);
 
     return (
-        <View style={styles.section}>
-            <View style={styles.sectionHeader}>
-                {
-                    title !== null && (
-                        <Text style={styles.sectionName}>
-                            {title}
-                        </Text>
-                    )
-                }
-
-                {
-                    linkOption.isShow === true && tasks.length !== 0 ? (
-                    <TouchableOpacity onPress={linkOption.onPress}>
-                        <Text style={styles.urlToNested}>
-                            {linkOption.text}
-                        </Text>
-                    </TouchableOpacity>
-                    ) : (
-                        <></>
-                    )
-                }
-            </View>
-            <FlatList
-                data={listData}
-                renderItem={renderItem}
-                keyExtractor={(item:FlatListItem) => item.key}
-                contentContainerStyle={[
-                    {paddingBottom: paddBottom},
-                    styles.flatListContainerStyle,
-                ]}
-                showsVerticalScrollIndicator={false}
-            />
-        </View>
+        <FlatList
+            data={listData}
+            renderItem={renderItem}
+            keyExtractor={(item:FlatListItem) => item.key}
+            contentContainerStyle={[
+                {paddingBottom: paddBottom},
+                styles.flatListContainerStyle,
+            ]}
+            showsVerticalScrollIndicator={false}
+        />
     );
 };
 
 const styles = StyleSheet.create({
-    section: {
-        height: 'auto',
-        gap: 15,
-    },
-    sectionHeader: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        gap: 10,
-    },
-    sectionName: {
-        fontFamily: FONT_FAMILY.AvenirNext_BOLD,
-        fontSize: 16,
-        color: Colors.white,
-    },
-    sectionBody: {
-        flexGrow: 1,
-    },
-    urlToNested: {
-        fontFamily: FONT_FAMILY.AvenirNext_MEDIUM,
-        fontSize: 14,
-        color: Colors.primary,
-    },
-
     flatListContainerStyle: {
         gap: 15,
     },
-
 });
 
 export default TasksListSection;

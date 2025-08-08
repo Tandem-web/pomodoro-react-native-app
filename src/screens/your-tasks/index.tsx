@@ -12,6 +12,7 @@ import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { StackParamList } from '../../@types/navigators';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { DefaultStyle } from '../../shared/styles/defaultStyles';
+import Section from '../../widgets/section';
 
 
 
@@ -35,31 +36,38 @@ function SessionScreen(): React.JSX.Element {
                 style={DefaultStyle.fullSpace}
                 onLayout={handleLayout}
               >
-                <TasksListSection
+                <Section
                   key={'section-1'}
                   title="All Task"
-                  prefix="sub-task"
-                  limit={Math.floor(sectionSize.height / 75)}
                   linkOption={{
-                    isShow: true,
+                    isShow: false,
                     text: 'See All',
                     onPress: () => navigation.navigate('AllTasks'),
                   }}
-                  plugText="All tasks are completed"
-                />
+                >
+                  <TasksListSection
+                    prefix="sub-task"
+                    limit={Math.floor(sectionSize.height / 75)}
+                    plugText="All tasks are completed"
+                  />
+                </Section>
               </View>
-              <TasksListSection
+
+              <Section
                 key={'section-2'}
                 title="Completed"
-                prefix="sub-completed-task"
-                limit={1}
                 linkOption={{
-                  isShow: true,
+                  isShow: false,
                   text: 'See All',
                   onPress: () => navigation.navigate('AllCompleted'),
                 }}
-                plugText="Completed tasks will be here"
-              />
+              >
+                <TasksListSection
+                  prefix="sub-completed-task"
+                  limit={1}
+                  plugText="Completed tasks will be here"
+                />
+              </Section>
               <DefaultButton
                 text="Add new task"
                 icon={{name: 'plus', size: 16}}
