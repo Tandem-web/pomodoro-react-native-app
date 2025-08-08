@@ -3,7 +3,7 @@ import { Colors } from "../../shared/styles/colorsPalete";
 import { FONT_FAMILY } from "../../shared/config/customFont";
 
 interface SectionProps {
-    title: string;
+    title?: string;
     children: React.ReactNode;
     linkOption?: {
         isShow: boolean,
@@ -14,7 +14,7 @@ interface SectionProps {
 
 const Section: React.FC<SectionProps> = (props) => {
     const {
-        title,
+        title = null,
         children,
         linkOption = {
             isShow: false,
