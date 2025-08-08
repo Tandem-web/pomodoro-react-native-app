@@ -5,6 +5,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { FontAwesome } from '@react-native-vector-icons/fontawesome';
 import Ionicons from '@react-native-vector-icons/ionicons';
 import { Colors } from '../../../shared/styles/colorsPalete';
+import { Screens } from '../Navigator';
 
 type BottomTabsBarProps = PropsWithChildren<BottomTabBarProps>
 
@@ -19,27 +20,33 @@ const BottomTabsBar: React.FC<BottomTabsBarProps> = (props) => {
                     const isFocused = state.index === index;
 
                     const onPress = () => {
-                    const event = navigation.emit({
-                        type: 'tabPress',
-                        target: route.key,
-                        canPreventDefault: true,
-                    });
+                        const event = navigation.emit({
+                            type: 'tabPress',
+                            target: route.key,
+                            canPreventDefault: true,
+                        });
 
-                    if (!isFocused && !event.defaultPrevented) {
-                        navigation.navigate(route.name);
-                    }
+                        if (!isFocused && !event.defaultPrevented) {
+                            navigation.navigate(route.name);
+                        }
                     };
+
                     let icon;
-                    if(route.name === 'Session'){
-                        icon = (<FontAwesome name="th-list" size={22} color={isFocused ? Colors.primary : Colors.white} />);
-                    }
 
-                    if(route.name === 'Timer'){
-                        icon = (<Ionicons name="timer" size={28} color={isFocused ? Colors.primary : Colors.white} />);
-                    }
+                    switch (route.name) {
+                        case Screens.SESSION:
+                            icon = (<FontAwesome name="th-list" size={22} color={isFocused ? Colors.primary : Colors.white} />);
+                            break;
 
-                    if(route.name === 'Settings'){
-                        icon = (<FontAwesome name="user" size={26} color={isFocused ? Colors.primary : Colors.white} />);
+                        case Screens.TIMER:
+                            icon = (<Ionicons name="timer" size={28} color={isFocused ? Colors.primary : Colors.white} />);
+                            break;
+                        case Screens.SETTINGS:
+                            icon = (<FontAwesome name="user" size={26} color={isFocused ? Colors.primary : Colors.white} />);
+                            break;
+                        default:
+                            icon = null;
+                            break;
                     }
                     return (
                     <TouchableOpacity
