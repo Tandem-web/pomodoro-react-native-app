@@ -23,10 +23,8 @@ const DefaultButton: React.FC<ButtonWithIconProps> = (props) => {
             <TouchableOpacity onPress={onPress}>
                 <View style={styles.DefaultButton}>
                     {
-                        icon != null ? (
+                        icon != null && (
                             <FontAwesome size={icon.size} name={icon.name} color={Colors.white}/>
-                        ) : (
-                            <></>
                         )
                     }
                     <Text ellipsizeMode={'tail'} numberOfLines={1} style={styles.DefaultButtonText}>{text}</Text>

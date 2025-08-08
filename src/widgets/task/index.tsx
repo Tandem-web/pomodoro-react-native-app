@@ -40,9 +40,9 @@ export const TaskCard:React.FC<TaskCardProps> = (props) => {
 
 export const TaskPlug = () => {
     return(
-        <View style={styles.TaskPlug}></View>
-    )
-}
+        <View style={styles.TaskPlug}/>
+    );
+};
 
 
 const styles = StyleSheet.create({

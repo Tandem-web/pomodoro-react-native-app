@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import {
   View,
   StatusBar,
   StyleSheet,
+  LayoutChangeEvent,
 } from 'react-native';
 import { sceenStyle } from '../../shared/styles/screens';
 import TasksListSection from '../../widgets/task-list';
@@ -20,6 +21,12 @@ function SessionScreen(): React.JSX.Element {
   const navigation = useNavigation<SessionScreenNavigationProp>();
   const [sectionSize, setSectionSize] = useState({ width: 0, height: 0 });
 
+  const handleLayout = useCallback((event: LayoutChangeEvent) => {
+    const { width, height } = event.nativeEvent.layout;
+    setSectionSize({ width, height });
+  }, []);
+
+  const testTask = new Array(5).fill(1);
   return (
     <>
       <SafeAreaView edges={['left', 'right']} style={[sceenStyle.main]}>
@@ -28,10 +35,7 @@ function SessionScreen(): React.JSX.Element {
 
             <View
               style={{flex: 1}}
-              onLayout={(event) => {
-                const {width, height } = event.nativeEvent.layout;
-                setSectionSize({ width, height });
-              }}
+              onLayout={handleLayout}
             >
               <TasksListSection
                 key={'section-1'}
@@ -43,7 +47,7 @@ function SessionScreen(): React.JSX.Element {
                   text: 'See All',
                   onPress: () => navigation.navigate('AllTasks'),
                 }}
-                plugText='All tasks are completed'
+                plugText="All tasks are completed"
               />
             </View>
             <TasksListSection
@@ -56,7 +60,7 @@ function SessionScreen(): React.JSX.Element {
                 text: 'See All',
                 onPress: () => navigation.navigate('AllCompleted'),
               }}
-              plugText='Completed tasks will be here'
+              plugText="Completed tasks will be here"
             />
             <DefaultButton 
               text="Add new task"

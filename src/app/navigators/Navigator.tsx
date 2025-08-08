@@ -1,37 +1,40 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import BottomTabsBar from './ui/BottomTab';
-<<<<<<< HEAD
 import SessionScreen from '../../screens/your-tasks';
 import TimerScreen from '../../screens/timer';
 import TaskManagerScreen from '../../screens/settings';
 import { StackParamList, TabParamList } from '../../@types/navigators';
-=======
-import SessionScreen from '../../screens/statistic';
-import TimerScreen from '../../screens/timer';
-import TaskManagerScreen from '../../screens/settings';
-import { TabParamList } from '../../@types/navigators';
->>>>>>> main
 import { FONT_FAMILY } from '../../shared/config/customFont';
 import { Colors } from '../../shared/styles/colorsPalete';
 import { createNativeStackNavigator, NativeStackNavigationProp } from '@react-navigation/native-stack';
 import AllTasksScreen from '../../screens/all-tasks';
 import AddNewTaskScreen from '../../screens/add-new-task';
-import { TouchableOpacity } from 'react-native';
-import Ionicons from '@react-native-vector-icons/ionicons';
-import { useNavigation } from '@react-navigation/native';
 import AllCompletedTaskScreen from '../../screens/all-completed-task';
+import { NavigationBackButton } from './ui/BackButton';
 
 
 const Stack = createNativeStackNavigator<StackParamList>();
 const Tab = createBottomTabNavigator<TabParamList>();
 
+export const Screens = {
+  // Bottom Tabs Screens
+  TABS: 'Tabs',
+  SESSION: 'Session',
+  TIMER: 'Timer',
+  SETTINGS: 'Settings',
+
+  // Stack Screens
+  ALL_TASKS: 'AllTasks',
+  ADD_TASK: 'AddTask',
+  ALL_COMPLETED: 'AllCompleted',
+} as const;
 
 function PomodoroBottomTabs() {
 
   return (
     <Tab.Navigator
-        initialRouteName='Timer'
+        initialRouteName={Screens.TIMER}
         tabBar={(props) => <BottomTabsBar {...props} />}
         screenOptions={{
           headerTitleAlign: 'center',
@@ -46,23 +49,23 @@ function PomodoroBottomTabs() {
           },
         }}
     >
-        <Tab.Screen 
-          name="Session" 
+        <Tab.Screen
+          name={Screens.SESSION}
           component={SessionScreen}
           options={{
             title: 'Your Tasks',
           }}
 
         />
-        <Tab.Screen 
-          name="Timer"
+        <Tab.Screen
+          name={Screens.TIMER}
           component={TimerScreen}
           options={{
             title: 'Pomodoro timer',
           }}
         />
-        <Tab.Screen 
-          name="Settings"
+        <Tab.Screen
+          name={Screens.SETTINGS}
           component={TaskManagerScreen}
           options={{
             title: 'Settings',
@@ -75,7 +78,10 @@ function PomodoroBottomTabs() {
 export type YourTaskScreenNavigationProp = NativeStackNavigationProp<StackParamList, 'Tabs'>;
 
 export default function PomodoroNavigation() {
-  const navigation = useNavigation<YourTaskScreenNavigationProp>();
+
+  const renderBackButton = useCallback(() => {
+    return (<NavigationBackButton />);
+  }, []);
 
   return (
     <Stack.Navigator
@@ -88,51 +94,40 @@ export default function PomodoroNavigation() {
         },
 
         headerTintColor: Colors.white,
-        
+
         headerTitleStyle: {
           fontFamily: FONT_FAMILY.AvenirNext_BOLD,
           fontSize: 18,
         },
       }}
     >
-      <Stack.Screen name="Tabs" component={PomodoroBottomTabs} 
+      <Stack.Screen name={Screens.TABS} component={PomodoroBottomTabs}
         options={{
           headerShown: false,
         }}
       />
       <Stack.Screen 
-        name="AllTasks"
-        component={AllTasksScreen} 
+        name={Screens.ALL_TASKS}
+        component={AllTasksScreen}
         options={{
           title: 'All Task',
-          headerLeft: () => (
-            <TouchableOpacity onPress={() => navigation.goBack()} style={{ marginLeft: 15 }}>
-              <Ionicons name="chevron-back" size={24} color="white" />
-            </TouchableOpacity>
-          ),
+          headerLeft: renderBackButton,
         }}/>
       <Stack.Screen 
-        name="AddTask"
-        component={AddNewTaskScreen} 
+        name={Screens.ADD_TASK}
+        component={AddNewTaskScreen}
         options={{
           title: 'Add new Task',
-          headerLeft: () => (
-            <TouchableOpacity onPress={() => navigation.goBack()} style={{ marginLeft: 15 }}>
-              <Ionicons name="chevron-back" size={24} color="white" />
-            </TouchableOpacity>
-          ),
+          headerLeft: renderBackButton,
         }}/>
-        <Stack.Screen 
-          name="AllCompleted"
-          component={AllCompletedTaskScreen} 
+        <Stack.Screen
+          name={Screens.ALL_COMPLETED}
+          component={AllCompletedTaskScreen}
           options={{
             title: 'All completed task',
-            headerLeft: () => (
-              <TouchableOpacity onPress={() => navigation.goBack()} style={{ marginLeft: 15 }}>
-                <Ionicons name="chevron-back" size={24} color="white" />
-              </TouchableOpacity>
-            ),
+            headerLeft: renderBackButton,
         }}/>
     </Stack.Navigator>
   );
 }
+

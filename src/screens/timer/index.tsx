@@ -9,7 +9,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 function TimerScreen(): React.JSX.Element {
   return (
-    <SafeAreaView style={[sceenStyle.main]}>
+    <SafeAreaView edges={['left', 'right']} style={[sceenStyle.main]}>
       <StatusBar barStyle="light-content"/>
       <PomodoroTimer/>
     </SafeAreaView>
