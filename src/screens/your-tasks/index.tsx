@@ -25,8 +25,6 @@ function SessionScreen(): React.JSX.Element {
     const { width, height } = event.nativeEvent.layout;
     setSectionSize({ width, height });
   }, []);
-
-  const testTask = new Array(5).fill(1);
   return (
     <>
       <SafeAreaView edges={['left', 'right']} style={[sceenStyle.main]}>
@@ -62,7 +60,7 @@ function SessionScreen(): React.JSX.Element {
               }}
               plugText="Completed tasks will be here"
             />
-            <DefaultButton 
+            <DefaultButton
               text="Add new task"
               icon={{name: 'plus', size: 16}}
               onPress={() => navigation.navigate('AddTask')}
@@ -76,7 +74,7 @@ function SessionScreen(): React.JSX.Element {
 const styles = StyleSheet.create({
   innerContainer: {
     flex: 1,
-    gap: 25
+    gap: 25,
   },
 });
 

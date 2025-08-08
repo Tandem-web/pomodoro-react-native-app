@@ -1,4 +1,4 @@
-import { TouchableOpacity, View, Text, StyleSheet, ScrollView, ListRenderItem, FlatList } from 'react-native';
+import { TouchableOpacity, View, Text, StyleSheet, ListRenderItem, FlatList } from 'react-native';
 import { FONT_FAMILY } from '../../shared/config/customFont';
 import { Colors } from '../../shared/styles/colorsPalete';
 import { TaskCard, TaskPlug } from '../task';
@@ -23,7 +23,7 @@ interface TasksListProps {
     paddBottom?: number,
     sectionStyles?: Object,
     plugText?: string,
-};
+}
 
 const TasksListSection: React.FC<TasksListProps> = (props) => {
     const {
@@ -44,8 +44,8 @@ const TasksListSection: React.FC<TasksListProps> = (props) => {
       const listData = useMemo<FlatListItem[]>(() => {
         if (tasks.length === 0) {
             // Создаем массив заглушек
-            Array.from
-            return limit > 0 
+            Array.from;
+            return limit > 0
                 ?   Array.from({ length: limit }, (_, i) => ({
                         task: null,
                         key: `${prefix}__${i}`,
@@ -112,29 +112,6 @@ const TasksListSection: React.FC<TasksListProps> = (props) => {
                 ]}
                 showsVerticalScrollIndicator={false}
             />
-            {/* <ScrollView  showsVerticalScrollIndicator={false} style={styles.sectionBody}>
-                {
-                    tasks.length === 0 ? (
-                        new Array(limit).fill(null).map((_, index) => (
-                            index === 0 ? (
-                                <TaskCard key={`${prefix}__${index}`} text={plugText}/>
-                            ) : (
-                                <TaskPlug key={`${prefix}__plug__${index}`}/>
-                            )
-                        ))
-                    ) : (
-                        limit === -1 ? (
-                            tasks.map((_, index) => (
-                                <TaskCard key={`${prefix}__${index}`} task={{}}/>
-                            ))
-                        ) : (
-                            tasks.slice(-Math.abs(limit)).map((_, index) => (
-                                <TaskCard key={`${prefix}__${index}`} task={{}}/>
-                            ))
-                        )
-                    )
-                }
-            </ScrollView> */}
         </View>
     );
 };
@@ -166,8 +143,8 @@ const styles = StyleSheet.create({
 
     flatListContainerStyle: {
         gap: 15,
-    }
+    },
 
-})
+});
 
 export default TasksListSection;

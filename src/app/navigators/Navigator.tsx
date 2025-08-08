@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { BottomTabBarProps, createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import BottomTabsBar from './ui/BottomTab';
 import SessionScreen from '../../screens/your-tasks';
 import TimerScreen from '../../screens/timer';
@@ -31,11 +31,12 @@ export const Screens = {
 } as const;
 
 function PomodoroBottomTabs() {
+  const renderTabBar = useCallback((props: BottomTabBarProps) => <BottomTabsBar {...props} />, []);
 
   return (
     <Tab.Navigator
         initialRouteName={Screens.TIMER}
-        tabBar={(props) => <BottomTabsBar {...props} />}
+        tabBar={renderTabBar}
         screenOptions={{
           headerTitleAlign: 'center',
           headerShadowVisible: false,
@@ -106,14 +107,14 @@ export default function PomodoroNavigation() {
           headerShown: false,
         }}
       />
-      <Stack.Screen 
+      <Stack.Screen
         name={Screens.ALL_TASKS}
         component={AllTasksScreen}
         options={{
           title: 'All Task',
           headerLeft: renderBackButton,
         }}/>
-      <Stack.Screen 
+      <Stack.Screen
         name={Screens.ADD_TASK}
         component={AddNewTaskScreen}
         options={{

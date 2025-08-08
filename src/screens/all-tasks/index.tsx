@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  Text,
   StatusBar,
 } from 'react-native';
 import { sceenStyle } from '../../shared/styles/screens';
