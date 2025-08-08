@@ -1,7 +1,8 @@
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, ViewStyle } from 'react-native';
 import { Colors } from '../../../shared/styles/colorsPalete';
 import FontAwesome from '@react-native-vector-icons/fontawesome';
 import { TaskPriority, TaskPriorityType, TaskStatus, TaskStatusType } from '../../../@types/task';
+import { useMemo } from 'react';
 
 
 
@@ -10,26 +11,33 @@ interface TaskCardStatusProps {
     priority: TaskPriorityType;
 }
 
+function createTaskCardStatusStyle(status: TaskStatusType, priority:TaskPriorityType ): Pick<ViewStyle, 'backgroundColor' | 'borderColor'>{
+    const isComplete = status === TaskStatus.COMPLETE;
+    const targetPriority = isComplete ? TaskPriority.LOW_PRIORITY : priority;
+
+    return {
+        backgroundColor: Colors.TaskCardStatus[targetPriority].bgColor,
+        borderColor: Colors.TaskCardStatus[targetPriority].borderColor,
+    };
+}
+
 const TaskCardStatus: React.FC<TaskCardStatusProps> = (props) => {
     const {status, priority} = props;
+
+    const taskCardStatusStyle = useMemo<ViewStyle>(() => {
+        return createTaskCardStatusStyle(status, priority);
+    }, [status, priority]);
 
     return (
         <>
             <View style={[
                 styles.status,
-                {
-                    backgroundColor:
-                        status === TaskStatus.COMPLETE
-                            ? Colors.TaskCardStatus[TaskPriority.LOW_PRIORITY].bgColor
-                            : Colors.TaskCardStatus[priority].bgColor,
-                    borderColor:
-                        status === TaskStatus.COMPLETE
-                            ? Colors.TaskCardStatus[TaskPriority.LOW_PRIORITY].borderColor
-                            : Colors.TaskCardStatus[priority].borderColor,
-                },
+                taskCardStatusStyle,
             ]}>
                 {
-                    status === TaskStatus.COMPLETE && (<FontAwesome color={Colors.TaskCardStatus[TaskPriority.LOW_PRIORITY].borderColor} size={12} name="check"/>)
+                    status === TaskStatus.COMPLETE && (
+                        <FontAwesome color={Colors.TaskCardStatus[TaskPriority.LOW_PRIORITY].borderColor} size={12} name="check"/>
+                    )
                 }
             </View>
         </>
@@ -45,6 +53,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderWidth: 1.5,
     },
-})
+});
 
 export default TaskCardStatus;

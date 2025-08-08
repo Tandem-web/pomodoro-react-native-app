@@ -1,7 +1,7 @@
-import { TouchableOpacity, View, Text, StyleSheet } from "react-native";
-import { Colors } from "../../shared/styles/colorsPalete";
-import { FONT_FAMILY } from "../../shared/config/customFont";
-import FontAwesome, { FontAwesomeIconName } from "@react-native-vector-icons/fontawesome";
+import { TouchableOpacity, View, Text, StyleSheet } from 'react-native';
+import { Colors } from '../../shared/styles/colorsPalete';
+import { FONT_FAMILY } from '../../shared/config/customFont';
+import FontAwesome, { FontAwesomeIconName } from '@react-native-vector-icons/fontawesome';
 
 interface ButtonWithIconProps {
     onPress?: () => void
@@ -11,7 +11,7 @@ interface ButtonWithIconProps {
         size: number,
     }
 }
- 
+
 const DefaultButton: React.FC<ButtonWithIconProps> = (props) => {
     const {
         onPress = undefined,
@@ -23,10 +23,8 @@ const DefaultButton: React.FC<ButtonWithIconProps> = (props) => {
             <TouchableOpacity onPress={onPress}>
                 <View style={styles.DefaultButton}>
                     {
-                        icon != null ? (
+                        icon != null && (
                             <FontAwesome size={icon.size} name={icon.name} color={Colors.white}/>
-                        ) : (
-                            <></>
                         )
                     }
                     <Text ellipsizeMode={'tail'} numberOfLines={1} style={styles.DefaultButtonText}>{text}</Text>
@@ -34,8 +32,8 @@ const DefaultButton: React.FC<ButtonWithIconProps> = (props) => {
             </TouchableOpacity>
         </>
     );
-}
- 
+};
+
 const styles = StyleSheet.create({
     DefaultButton: {
         height: 60,
@@ -54,6 +52,7 @@ const styles = StyleSheet.create({
         fontSize: 15,
         textAlign: 'center',
         color: Colors.white,
-    }
-})
+    },
+});
+
 export default DefaultButton;

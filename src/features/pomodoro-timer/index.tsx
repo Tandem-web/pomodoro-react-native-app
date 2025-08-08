@@ -11,7 +11,7 @@ import { TaskCard } from '../../widgets/task';
 
 
 function PomodoroTimer(): React.JSX.Element {
-  
+
   return (
     <View style={styles.pomodoroContainer}>
         <TaskCard task={{}}/>

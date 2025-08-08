@@ -66,6 +66,7 @@ export const TaskPlug = () => {
     );
 };
 
+
 const styles = StyleSheet.create({
     cardWrap: {
         height: 60,

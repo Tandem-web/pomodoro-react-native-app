@@ -2,14 +2,9 @@ import { View, Text, StyleSheet } from 'react-native';
 import { FONT_FAMILY } from '../../../shared/config/customFont';
 import { Colors } from '../../../shared/styles/colorsPalete';
 
-type TimerTextProps = {
+// TODO TimerTextProps interface
 
-}
-
-const TimerText: React.FC<TimerTextProps> = (props) =>{
-
-    const {} = props;
-
+const TimerText: React.FC = () =>{
     return (
         <View style={styles.timerTextWrapper}>
             <Text style={styles.timerText}>25:00</Text>

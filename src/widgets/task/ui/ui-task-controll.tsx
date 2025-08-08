@@ -20,6 +20,7 @@ const TaskCardControll: React.FC<TaskCardControllProps> = (props) => {
         onPress = () => {},
         type,
     } = props;
+
     return (
         <>
             <TouchableOpacity onPress={onPress}>
@@ -33,7 +34,7 @@ const TaskCardControll: React.FC<TaskCardControllProps> = (props) => {
             </TouchableOpacity>
         </>
     );
-}
+};
 
 const styles = StyleSheet.create({
     controllButton: {
@@ -43,7 +44,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         borderWidth: 2,
-    }
-})
+    },
+});
 
 export default TaskCardControll;
