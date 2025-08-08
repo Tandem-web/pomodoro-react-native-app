@@ -11,8 +11,6 @@ type BottomTabsBarProps = PropsWithChildren<BottomTabBarProps>
 const BottomTabsBar: React.FC<BottomTabsBarProps> = (props) => {
     const { state, descriptors, navigation } = props;
 
-    console.log(props);
-
     return (
         <SafeAreaView edges={['bottom']} style={styles.safeArea}>
             <View style={styles.tabContainer}>

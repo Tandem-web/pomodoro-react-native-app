@@ -17,9 +17,10 @@ interface TaskCardControllProps {
 
 const TaskCardControll: React.FC<TaskCardControllProps> = (props) => {
     const {
-        onPress = undefined,
+        onPress = () => {},
         type,
     } = props;
+
     return (
         <>
             <TouchableOpacity onPress={onPress}>
@@ -33,7 +34,7 @@ const TaskCardControll: React.FC<TaskCardControllProps> = (props) => {
             </TouchableOpacity>
         </>
     );
-}
+};
 
 const styles = StyleSheet.create({
     controllButton: {

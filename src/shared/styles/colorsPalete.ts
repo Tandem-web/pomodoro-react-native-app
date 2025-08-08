@@ -1,6 +1,9 @@
 const BaseColors = {
     white: '#f2f2f2',
     black: '#111111',
+
+    mutedWhite: '#B4B4B4',
+
     transparent: 'transparent',
 
     gray100: '#F9FAFB',
@@ -18,10 +21,10 @@ const AppColors = {
     primary: '#4E4BEC',
     primary50: 'rgb(94, 91, 252, 0.5)',
 
-    success: '#338A68',      // Успех
-    warning: '#D5BF92',      // Предупреждение
-    danger: '#BB687E',       // Ошибка/опасность
-    info: '#3498DB',         // Информация
+    success: '#338A68',
+    warning: '#D5BF92',
+    danger: '#BB687E',
+    info: '#3498DB',
 
     background: '#22204A',
     surface: '#313152',
