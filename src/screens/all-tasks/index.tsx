@@ -7,7 +7,7 @@ import { DefaultStyle } from '../../shared/styles/defaultStyles';
 
 function AllTasksScreen(): React.JSX.Element {
   return (
-    <SafeAreaView edges={['left', 'right', 'bottom']} style={[DefaultStyle.screen]}>
+    <SafeAreaView edges={['left', 'right']} style={[DefaultStyle.screen]}>
         <StatusBar barStyle="light-content"/>
         <TasksListSection
           key={'all-task-section-1'}

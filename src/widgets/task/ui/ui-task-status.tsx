@@ -16,8 +16,8 @@ function createTaskCardStatusStyle(status: TaskStatusType, priority:TaskPriority
     const targetPriority = isComplete ? TaskPriority.LOW_PRIORITY : priority;
 
     return {
-        backgroundColor: Colors.TaskCardStatus[targetPriority].bgColor,
-        borderColor: Colors.TaskCardStatus[targetPriority].borderColor,
+        backgroundColor: Colors.TaskCardPriority[targetPriority].bgColor,
+        borderColor: Colors.TaskCardPriority[targetPriority].borderColor,
     };
 }
 
@@ -36,7 +36,7 @@ const TaskCardStatus: React.FC<TaskCardStatusProps> = (props) => {
             ]}>
                 {
                     status === TaskStatus.COMPLETE && (
-                        <FontAwesome color={Colors.TaskCardStatus[TaskPriority.LOW_PRIORITY].borderColor} size={12} name="check"/>
+                        <FontAwesome color={Colors.TaskCardPriority[TaskPriority.LOW_PRIORITY].borderColor} size={12} name="check"/>
                     )
                 }
             </View>

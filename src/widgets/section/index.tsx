@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     },
     sectionName: {
         fontFamily: FONT_FAMILY.AvenirNext_BOLD,
-        fontSize: 16,
+        fontSize: 18,
         color: Colors.white,
     },
     urlToNested: {

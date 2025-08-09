@@ -17,9 +17,9 @@ export const TaskStatus = {
 export type TaskStatusType = (typeof TaskStatus)[keyof typeof TaskStatus];
 
 export const TaskPriority = {
-    LOW_PRIORITY: 'low-priority',
-    MEDIUM_PRIORITY: 'medium-priority',
-    HiGH_PRIORITY: 'high-priority',
+    LOW_PRIORITY: 'Low',
+    MEDIUM_PRIORITY: 'Medium',
+    HiGH_PRIORITY: 'High',
 } as const;
 
 export type TaskPriorityType = (typeof TaskPriority)[keyof typeof TaskPriority];

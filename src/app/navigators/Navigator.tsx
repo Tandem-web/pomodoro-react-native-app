@@ -46,7 +46,7 @@ function PomodoroBottomTabs() {
           headerTintColor: Colors.white,
           headerTitleStyle: {
             fontFamily: FONT_FAMILY.AvenirNext_BOLD,
-            fontSize: 18,
+            fontSize: 20,
           },
         }}
     >
@@ -98,7 +98,7 @@ export default function PomodoroNavigation() {
 
         headerTitleStyle: {
           fontFamily: FONT_FAMILY.AvenirNext_BOLD,
-          fontSize: 18,
+          fontSize: 20,
         },
       }}
     >
