@@ -38,8 +38,8 @@ const RadioInput: React.FC<RadioInputProps> = (props) => {
 
     useEffect(() => {
         valueAnim.value = withTiming(isSelected ? 1 : 0, {
-            duration: 300,
-            easing: Easing.inOut(Easing.quad),
+            duration: 250,
+            easing: Easing.inOut(Easing.linear),
         });
     }, [isSelected, valueAnim]);
 

@@ -2,6 +2,7 @@ import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import { Colors } from '../../../../shared/styles/colorsPalete';
 import Ionicons from '@react-native-vector-icons/ionicons';
 import { TimerControllButtonType, TimerControllIconType } from '../../../../shared/types/timer-controlls';
+import { noop } from '../../../../shared/utilities/noop';
 
 const TimerControllsIcons = {
     'start': (<Ionicons size={40}color={Colors.white} name="play"/>),
@@ -17,7 +18,11 @@ interface ControllButtonProps{
 }
 
 const ControllButton: React.FC<ControllButtonProps> = (props) => {
-    const {onPress = undefined, type, icon} = props;
+    const {
+        onPress = noop,
+        type,
+        icon
+    } = props;
 
     switch (type) {
         case TimerControllButtonType.MainButton:

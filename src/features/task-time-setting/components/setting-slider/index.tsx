@@ -27,7 +27,7 @@ const SettingSlider: React.FC<SettingSliderProps> = (props) => {
         min,
         max,
         visible_items = 7,
-        initialIndex = Math.floor(max - min),
+        initialIndex = Math.floor((max - min) / 2),
     } = props;
 
     const [sectionSize, setSectionSize] = useState({ width: 0, height: 0 });
@@ -98,10 +98,17 @@ const SettingSlider: React.FC<SettingSliderProps> = (props) => {
                     horizontal
                     decelerationRate="fast"
                     snapToInterval={ITEM_SIZE}
-                    scrollEventThrottle={16}
+                    initialScrollIndex={initialIndex}
+                    scrollEventThrottle={5}
                     onScroll={scrollHandler}
-                    style={[styles.sliderFlatList, {paddingHorizontal: sectionSize.width / 2 - ITEM_SIZE / 2}]}
+                    style={[styles.sliderFlatList]}
+                    contentContainerStyle={{paddingHorizontal: sectionSize.width / 2 - ITEM_SIZE / 2}}
                     showsHorizontalScrollIndicator={false}
+                    getItemLayout={(data, index) => ({
+                        length: ITEM_SIZE,
+                        offset: (ITEM_SIZE) * index,
+                        index,
+                    })}
                 />
                 <View style={[styles.centerCursor, {width: ITEM_SIZE}]}/>
             </View>
@@ -126,7 +133,7 @@ const styles = StyleSheet.create({
         backgroundColor: Colors.primary,
         zIndex: 5,
         borderRadius: 10,
-    }
+    },
 });
 
 export default SettingSlider;
