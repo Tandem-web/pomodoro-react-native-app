@@ -1,7 +1,6 @@
 import { StyleSheet, ListRenderItem, FlatList } from 'react-native';
 import { TaskCard, TaskPlug } from '../task';
 import { useCallback, useMemo } from 'react';
-import { noop } from '../../shared/utilities/noop';
 
 interface FlatListItem {
     task: Object | null,

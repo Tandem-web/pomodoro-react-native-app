@@ -1,6 +1,7 @@
 import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { Colors } from "../../shared/styles/colorsPalete";
 import { FONT_FAMILY } from "../../shared/config/customFont";
+import { noop } from "../../shared/utilities/noop";
 
 interface SectionProps {
     title?: string;
@@ -19,7 +20,7 @@ const Section: React.FC<SectionProps> = (props) => {
         linkOption = {
             isShow: false,
             text: '',
-            onPress: () => {},
+            onPress: noop,
         },
     } = props;
 
