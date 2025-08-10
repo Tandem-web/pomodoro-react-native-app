@@ -2,6 +2,7 @@ import { TouchableOpacity, View, Text, StyleSheet } from 'react-native';
 import { Colors } from '../../shared/styles/colorsPalete';
 import { FONT_FAMILY } from '../../shared/config/customFont';
 import FontAwesome, { FontAwesomeIconName } from '@react-native-vector-icons/fontawesome';
+import { noop } from '../../shared/utilities/noop';
 
 interface ButtonWithIconProps {
     onPress?: () => void
@@ -14,7 +15,7 @@ interface ButtonWithIconProps {
 
 const DefaultButton: React.FC<ButtonWithIconProps> = (props) => {
     const {
-        onPress = undefined,
+        onPress = noop,
         text,
         icon = null,
     } = props;

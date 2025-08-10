@@ -10,6 +10,7 @@ interface RightActionProps{
     drag: SharedValue<number>,
     buttons?: TaskCardRightButton[],
     swipeRef: RefObject<SwipeableMethods | null>,
+    prefix: string,
 }
 
 const RightAction: React.FC<RightActionProps> = (props) => {
@@ -17,6 +18,7 @@ const RightAction: React.FC<RightActionProps> = (props) => {
         drag,
         buttons = [],
         swipeRef,
+        prefix,
     } = props;
 
     const measure = (40 * buttons.length) + (10 * buttons.length);
@@ -35,8 +37,8 @@ const RightAction: React.FC<RightActionProps> = (props) => {
         <>
             <Reanimated.View style={[styleAnimation, styles.reanimatedContainer, {width: measure}]}>
                 {
-                    buttons.map((item) => (
-                        <TaskSwipeButton type={item.type} onPress={item.onPress} swipeRef={swipeRef}/>
+                    buttons.map((item, index) => (
+                        <TaskSwipeButton key={`${prefix}_rightAction_${index}`}type={item.type} onPress={item.onPress} swipeRef={swipeRef}/>
                     ))
                 }
             </Reanimated.View>

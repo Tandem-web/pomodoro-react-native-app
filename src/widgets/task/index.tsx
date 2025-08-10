@@ -17,6 +17,7 @@ interface RightActionBlock{
 interface TaskCardProps {
     task?: Object;
     text?: string,
+    prefix: string,
     rightActionBlock?: RightActionBlock,
 }
 
@@ -24,6 +25,7 @@ export const TaskCard:React.FC<TaskCardProps> = (props) => {
     const {
         task = null,
         text = 'A text was supposed to be here',
+        prefix,
         rightActionBlock = {
             enabled: false,
             buttons: [],
@@ -39,9 +41,10 @@ export const TaskCard:React.FC<TaskCardProps> = (props) => {
                 buttons={rightActionBlock.buttons}
                 prog={progress}
                 drag={dragX}
+                prefix={prefix}
             />
         ),
-        [rightActionBlock.buttons]
+        [rightActionBlock.buttons, prefix]
     );
 
     return (
@@ -57,17 +60,17 @@ export const TaskCard:React.FC<TaskCardProps> = (props) => {
             >
                 <View style={styles.cardWrap}>
                     {
-                    task === null ? (
-                        <View style={styles.nullTaskWrap}>
-                            <Text style={styles.nullTaskText}>{text}</Text>
-                        </View>
-                    ) : (
-                        <View style={styles.cardInfo}>
-                            <TaskCardStatus status={TaskStatus.UNCOMPLETE} priority={TaskPriority.MEDIUM_PRIORITY}/>
-                            <TaskCardInfo/>
-                            <TaskCardControll type={TaskButton.DELETE}/>
-                        </View>
-                    )
+                        task === null ? (
+                            <View style={styles.nullTaskWrap}>
+                                <Text style={styles.nullTaskText}>{text}</Text>
+                            </View>
+                        ) : (
+                            <View style={styles.cardInfo}>
+                                <TaskCardStatus status={TaskStatus.UNCOMPLETE} priority={TaskPriority.MEDIUM_PRIORITY}/>
+                                <TaskCardInfo/>
+                                <TaskCardControll type={TaskButton.DELETE}/>
+                            </View>
+                        )
                     }
                 </View>
             </ReanimatedSwipeable>
