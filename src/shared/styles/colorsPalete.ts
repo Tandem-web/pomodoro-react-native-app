@@ -19,7 +19,7 @@ const BaseColors = {
 
 const AppColors = {
     primary: '#4E4BEC',
-    primary50: 'rgb(94, 91, 252, 0.5)',
+    primary50: 'rgba(94, 91, 252, 0.5)',
 
     success: '#338A68',
     warning: '#D5BF92',
