@@ -5,6 +5,7 @@ import GroupRadioInputs from '../../features/form/group-radio-input';
 import { TaskPriority } from '../../shared/types/task';
 import TaskTimeSetting from '../../features/task-time-setting';
 import { StyleSheet } from 'react-native';
+import DefaultButton from '../../shared/ui-kit/button/DeafultButton';
 
 const priority = Object.values(TaskPriority);
 
@@ -19,12 +20,19 @@ const AddNewTaskForm: React.FC = () => {
                     <GroupRadioInputs prefix="task-priority" values={priority}/>
                 </Section>
                 <Section title="Time settings">
-                    <TaskTimeSetting title={'Tasks'} unit={'Intervals'}/>
-                    <TaskTimeSetting title={'Work Interval'} unit={'Minutes'}/>
-                    <TaskTimeSetting title={'Short Break'} unit={'Minutes'}/>
-                    <TaskTimeSetting title={'Long Break'} unit={'Minutes'}/>
-                    <TaskTimeSetting title={'Long interval after'} unit={'Intervals'}/>
+                    <TaskTimeSetting key={'time-settings-1'} title={'Tasks'} unit={'Intervals'}/>
+                    <TaskTimeSetting key={'time-settings-2'} title={'Work Interval'} unit={'Minutes'}/>
+                    <TaskTimeSetting key={'time-settings-3'} title={'Short Break'} unit={'Minutes'}/>
+                    <TaskTimeSetting key={'time-settings-4'} title={'Long Break'} unit={'Minutes'}/>
+                    <TaskTimeSetting key={'time-settings-5'} title={'Long interval after'} unit={'Intervals'}/>
                 </Section>
+                <Section style={{paddingBottom: 40}}>
+                    <DefaultButton
+                        text="Create New Task"
+                        icon={{name: 'plus', size: 16}}
+                    />
+                </Section>
+
             </Section>
         </ScrollView>
     );

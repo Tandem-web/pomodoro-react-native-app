@@ -1,11 +1,11 @@
 import { NavigationContainer } from '@react-navigation/native';
 import React from 'react';
-import PomodoroNavigation from './navigators/Navigator';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { DefaultStyle } from '../shared/styles/defaultStyles';
 import { View } from 'react-native';
 import { Colors } from '../shared/styles/colorsPalete';
+import { PomodoroNavigation } from './navigation/';
 
 function App(): React.JSX.Element {
   return (
@@ -14,7 +14,7 @@ function App(): React.JSX.Element {
         <GestureHandlerRootView>
           <SafeAreaView edges={['left', 'right']} style={DefaultStyle.fullSpace}>
             <NavigationContainer>
-              <PomodoroNavigation/>
+              <PomodoroNavigation />
             </NavigationContainer>
           </SafeAreaView>
         </GestureHandlerRootView>

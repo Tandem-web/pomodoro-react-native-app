@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
         minHeight: 60,
         backgroundColor: Colors.surface,
         borderRadius: 10,
-        paddingHorizontal: 15,
+        paddingHorizontal: 10,
         paddingVertical: 10,
         gap: 15,
         flexDirection: 'row',

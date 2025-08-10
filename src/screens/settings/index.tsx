@@ -6,7 +6,7 @@ import {
 import { DefaultStyle } from '../../shared/styles/defaultStyles';
 
 
-function TaskManagerScreen(): React.JSX.Element {
+function Settings(): React.JSX.Element {
   return (
     <View style={DefaultStyle.screen}>
         <StatusBar barStyle="light-content"/>
@@ -15,4 +15,4 @@ function TaskManagerScreen(): React.JSX.Element {
   );
 }
 
-export default TaskManagerScreen;
+export default Settings;

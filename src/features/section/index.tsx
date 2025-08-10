@@ -1,4 +1,4 @@
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, StyleProp, ViewStyle } from 'react-native';
 import { Colors } from '../../shared/styles/colorsPalete';
 import { FONT_FAMILY } from '../../shared/config/customFont';
 import { noop } from '../../shared/utilities/noop';
@@ -11,6 +11,7 @@ interface SectionProps {
         text: string,
         onPress?: () => void;
     },
+    style?: StyleProp<ViewStyle>
 }
 
 const Section: React.FC<SectionProps> = (props) => {
@@ -22,10 +23,11 @@ const Section: React.FC<SectionProps> = (props) => {
             text: '',
             onPress: noop,
         },
+        style = undefined,
     } = props;
 
     return (
-        <View style={styles.section}>
+        <View style={[styles.section, style]}>
             <View style={styles.sectionHeader}>
                 {
                     title !== null && (

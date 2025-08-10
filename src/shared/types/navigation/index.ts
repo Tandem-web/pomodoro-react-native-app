@@ -1,5 +1,7 @@
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+
 export type TabParamList = {
-  Session: undefined;
+  TaskManager: undefined;
   Timer: undefined;
   Settings: undefined;
 };
@@ -10,3 +12,6 @@ export type StackParamList = {
   AddTask: undefined;
   AllCompleted: undefined;
 };
+
+
+export type YourTaskScreenNavigationProp = NativeStackNavigationProp<StackParamList, 'Tabs'>;

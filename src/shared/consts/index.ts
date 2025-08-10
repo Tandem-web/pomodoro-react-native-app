@@ -1,6 +1,6 @@
 export const Screens = {
   // Bottom Tabs Screens
-  SESSION: 'Session',
+  TASK_MANAGER: 'TaskManager',
   TIMER: 'Timer',
   SETTINGS: 'Settings',
 

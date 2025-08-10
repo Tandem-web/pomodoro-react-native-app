@@ -10,7 +10,7 @@ import { Screens } from '../../../shared/consts';
 
 type BottomTabsBarProps = PropsWithChildren<BottomTabBarProps>
 
-const BottomTabsBar: React.FC<BottomTabsBarProps> = (props) => {
+const TabBar: React.FC<BottomTabsBarProps> = (props) => {
     const { state, descriptors, navigation } = props;
 
     return (
@@ -35,7 +35,7 @@ const BottomTabsBar: React.FC<BottomTabsBarProps> = (props) => {
                     let icon;
 
                     switch (route.name) {
-                        case Screens.SESSION:
+                        case Screens.TASK_MANAGER:
                             icon = (<FontAwesome name="th-list" size={22} color={isFocused ? Colors.primary : Colors.white} />);
                             break;
 
@@ -85,4 +85,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default BottomTabsBar;
+export default TabBar;

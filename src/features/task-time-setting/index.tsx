@@ -21,7 +21,7 @@ const TaskTimeSetting: React.FC<TaskTimeSettingProps> = (props) => {
                     <Text style={styles.timeSettingTitle}>{title}</Text>
                     <Text style={styles.timeSettingsUnit}>{unit}</Text>
                 </View>
-                <View style={styles.timerSettingBody}>
+                <View>
                     <SettingSlider min={1} max={20}/>
                 </View>
             </View>
@@ -54,9 +54,6 @@ const styles = StyleSheet.create({
         fontFamily: FONT_FAMILY.AvenirNext_MEDIUM,
         fontSize: 13,
         color: Colors.mutedWhite,
-    },
-    timerSettingBody: {
-
     },
 });
 
