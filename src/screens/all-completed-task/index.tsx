@@ -6,7 +6,7 @@ import {
 import { sceenStyle } from '../../shared/styles/screens';
 import TasksListSection from '../../widgets/task-list';
 
-const testTask = new Array(5).fill(1);
+const testTasks = new Array(5).fill(1);
 
 function AllCompletedTaskScreen(): React.JSX.Element {
 
@@ -16,8 +16,8 @@ function AllCompletedTaskScreen(): React.JSX.Element {
         <TasksListSection
           key={'completed-task-section-1'}
           prefix="completed-task"
-          tasks={testTask}
-          limit={-1}
+          limit={null}
+          tasks={testTasks}
           paddBottom={30}
         />
     </SafeAreaView>

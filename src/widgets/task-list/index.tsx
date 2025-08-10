@@ -3,6 +3,7 @@ import { FONT_FAMILY } from '../../shared/config/customFont';
 import { Colors } from '../../shared/styles/colorsPalete';
 import { TaskCard, TaskPlug } from '../task';
 import { useCallback, useMemo } from 'react';
+import { noop } from '../../shared/utilities/noop';
 
 interface FlatListItem {
     task: Object | null,
@@ -14,7 +15,7 @@ interface TasksListProps {
     title?: string,
     prefix: string,
     tasks?: {}[],
-    limit?: number,
+    limit?: number | null,
     linkOption?: {
         isShow: boolean,
         text: string,
@@ -25,6 +26,8 @@ interface TasksListProps {
     plugText?: string,
 }
 
+const FlatListKeyExtractor = (item:FlatListItem) => item.key;
+
 const TasksListSection: React.FC<TasksListProps> = (props) => {
     const {
         title = null,
@@ -34,19 +37,17 @@ const TasksListSection: React.FC<TasksListProps> = (props) => {
         linkOption = {
             isShow: false,
             text: '',
-            onPress: undefined,
+            onPress: noop,
         },
         paddBottom = 0,
         plugText = 'A text was supposed to be here',
     } = props;
 
-    // Подготовка данных для Flatlist
-      const listData = useMemo<FlatListItem[]>(() => {
-        if (tasks.length === 0) {
-            // Создаем массив заглушек
-            Array.from;
-            return limit > 0
-                ?   Array.from({ length: limit }, (_, i) => ({
+
+    const listData = useMemo<FlatListItem[]>(() => {
+        if(tasks.length === 0) {
+            return Number(limit) > 0
+                ?   Array.from(new Array(limit).fill(null), (_, i) => ({
                         task: null,
                         key: `${prefix}__${i}`,
                         isPlug: true,
@@ -56,9 +57,8 @@ const TasksListSection: React.FC<TasksListProps> = (props) => {
                 :   [];
         }
 
-        // Берем нужное количество задач
-        const slicedTasks = limit === -1 ? tasks
-                                         : tasks.slice(-Math.abs(limit));
+        const slicedTasks = limit === null ? tasks
+                                            : tasks.slice(-Math.abs(limit));
 
         return slicedTasks.map((task, index) => ({
             task: task,
@@ -69,7 +69,7 @@ const TasksListSection: React.FC<TasksListProps> = (props) => {
 
     }, [tasks, limit, prefix]);
 
-    // Функция рендера элементов в FlatList
+
     const renderItem = useCallback<ListRenderItem<FlatListItem>>(({ item }) => {
         if (item.isPlug) {
             return item.isFirst
@@ -83,7 +83,7 @@ const TasksListSection: React.FC<TasksListProps> = (props) => {
         <View style={styles.section}>
             <View style={styles.sectionHeader}>
                 {
-                    title !== null && (
+                    Boolean(title) && (
                         <Text style={styles.sectionName}>
                             {title}
                         </Text>
@@ -91,21 +91,19 @@ const TasksListSection: React.FC<TasksListProps> = (props) => {
                 }
 
                 {
-                    linkOption.isShow === true && tasks.length !== 0 ? (
-                    <TouchableOpacity onPress={linkOption.onPress}>
-                        <Text style={styles.urlToNested}>
-                            {linkOption.text}
-                        </Text>
-                    </TouchableOpacity>
-                    ) : (
-                        <></>
+                    linkOption.isShow && tasks.length !== 0 && (
+                        <TouchableOpacity onPress={linkOption.onPress}>
+                            <Text style={styles.urlToNested}>
+                                {linkOption.text}
+                            </Text>
+                        </TouchableOpacity>
                     )
                 }
             </View>
             <FlatList
                 data={listData}
                 renderItem={renderItem}
-                keyExtractor={(item:FlatListItem) => item.key}
+                keyExtractor={FlatListKeyExtractor}
                 contentContainerStyle={[
                     {paddingBottom: paddBottom},
                     styles.flatListContainerStyle,
