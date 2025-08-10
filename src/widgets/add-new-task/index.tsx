@@ -1,9 +1,9 @@
 import { ScrollView } from 'react-native-gesture-handler';
-import Section from '../../widgets/section';
-import FormTextInput from '../../widgets/form/text-input';
-import GroupRadioInputs from '../../widgets/form/group-radio-input';
-import { TaskPriority } from '../../@types/task';
-import TaskTimeSetting from '../../widgets/task-time-setting';
+import Section from '../../features/section';
+import FormTextInput from '../../features/form/text-input';
+import GroupRadioInputs from '../../features/form/group-radio-input';
+import { TaskPriority } from '../../shared/types/task';
+import TaskTimeSetting from '../../features/task-time-setting';
 import { StyleSheet } from 'react-native';
 
 const priority = Object.values(TaskPriority);
@@ -33,7 +33,7 @@ const AddNewTaskForm: React.FC = () => {
 const styles = StyleSheet.create({
     addNewTaskContainer: {
         paddingBottom: 20,
-    }
-})
+    },
+});
 
 export default AddNewTaskForm;

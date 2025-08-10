@@ -1,7 +1,7 @@
 import {
   StatusBar,
 } from 'react-native';
-import TasksListSection from '../../widgets/task-list';
+import TasksListSection from '../../features/task-list';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { DefaultStyle } from '../../shared/styles/defaultStyles';
 

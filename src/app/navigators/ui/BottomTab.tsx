@@ -5,7 +5,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { FontAwesome } from '@react-native-vector-icons/fontawesome';
 import Ionicons from '@react-native-vector-icons/ionicons';
 import { Colors } from '../../../shared/styles/colorsPalete';
-import { Screens } from '../Navigator';
+import { Screens } from '../../../shared/consts';
+
 
 type BottomTabsBarProps = PropsWithChildren<BottomTabBarProps>
 

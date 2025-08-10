@@ -1,6 +1,6 @@
 import { View, StyleSheet } from 'react-native';
 import ControllButton from './controll-button';
-import { TimerControllButtonType, TimerControllIconType } from '../../../../@types/timer-controlls';
+import { TimerControllButtonType, TimerControllIconType } from '../../../../shared/types/timer-controlls';
 
 
 const TimerControls = () => {

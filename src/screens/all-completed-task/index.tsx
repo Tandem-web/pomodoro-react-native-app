@@ -2,7 +2,7 @@ import {
   StatusBar,
   SafeAreaView,
 } from 'react-native';
-import TasksListSection from '../../widgets/task-list';
+import TasksListSection from '../../features/task-list';
 import { DefaultStyle } from '../../shared/styles/defaultStyles';
 
 const testTasks = new Array(5).fill(1);

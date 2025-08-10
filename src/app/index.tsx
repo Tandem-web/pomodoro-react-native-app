@@ -20,7 +20,6 @@ function App(): React.JSX.Element {
         </GestureHandlerRootView>
       </SafeAreaProvider>
     </View>
-
   );
 }
 

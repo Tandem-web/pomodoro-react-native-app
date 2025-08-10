@@ -1,7 +1,7 @@
 import {
   StatusBar,
 } from 'react-native';
-import PomodoroTimer from '../../features/pomodoro-timer';
+import PomodoroTimer from '../../widgets/pomodoro-timer';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { DefaultStyle } from '../../shared/styles/defaultStyles';
 

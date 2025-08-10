@@ -1,8 +1,8 @@
-import { useCallback, useMemo, useRef, useState } from "react";
-import { LayoutChangeEvent, ListRenderItem, StyleSheet, View } from "react-native";
-import Animated, { useAnimatedScrollHandler, useSharedValue } from "react-native-reanimated";
-import SettingSliderElement from "./ui/ui-slider-element";
-import { Colors } from "../../../../shared/styles/colorsPalete";
+import { useCallback, useMemo, useRef, useState } from 'react';
+import { LayoutChangeEvent, ListRenderItem, StyleSheet, View } from 'react-native';
+import Animated, { useAnimatedScrollHandler, useSharedValue } from 'react-native-reanimated';
+import SettingSliderElement from './ui/ui-slider-element';
+import { Colors } from '../../../../shared/styles/colorsPalete';
 
 interface SettingSliderProps {
     min: number;

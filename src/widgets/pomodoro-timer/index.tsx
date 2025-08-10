@@ -3,11 +3,11 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
-import ProgressRing from '../../widgets/timer/progress-ring';
-import TimerText from '../../widgets/timer/timer-text';
+import ProgressRing from '../../features/timer/progress-ring';
+import TimerText from '../../features/timer/timer-text';
 import TimerControls from './ui/timer-controls';
 import { Colors } from '../../shared/styles/colorsPalete';
-import { TaskCard } from '../../widgets/task';
+import { TaskCard } from '../../features/task';
 
 
 function PomodoroTimer(): React.JSX.Element {

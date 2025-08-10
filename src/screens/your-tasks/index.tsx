@@ -5,14 +5,14 @@ import {
   StyleSheet,
   LayoutChangeEvent,
 } from 'react-native';
-import TasksListSection from '../../widgets/task-list';
-import DefaultButton from '../../widgets/button/DeafultButton';
+import TasksListSection from '../../features/task-list';
+import DefaultButton from '../../shared/ui-kit/button/DeafultButton';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { StackParamList } from '../../@types/navigators';
+import { StackParamList } from '../../shared/types/navigators';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { DefaultStyle } from '../../shared/styles/defaultStyles';
-import Section from '../../widgets/section';
+import Section from '../../features/section';
 
 
 

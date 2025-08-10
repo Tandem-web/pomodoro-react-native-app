@@ -92,7 +92,6 @@ const styles = StyleSheet.create({
         fontSize: 16,
     },
     textInput: {
-        // backgroundColor: Colors.surface,
         color: Colors.white,
         fontSize: 16,
         height: 60,
@@ -102,10 +101,7 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         borderColor: Colors.transparent,
     },
-    // textInputFocused: {
-    //     borderColor: Colors.primary,
-    //     backgroundColor: Colors.primary50,
-    // },
+
 
 });
 

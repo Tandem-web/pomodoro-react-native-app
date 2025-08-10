@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 import { FONT_FAMILY } from "../../../../../shared/config/customFont";
 import { Colors } from "../../../../../shared/styles/colorsPalete";
-import Animated, {interpolate, SharedValue, useAnimatedStyle, useDerivedValue, withSpring, withTiming} from "react-native-reanimated";
+import Animated, {interpolate, SharedValue, useAnimatedStyle, useDerivedValue, withSpring} from "react-native-reanimated";
 
 interface SettingSliderElementProps {
     text: string;

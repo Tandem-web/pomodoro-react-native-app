@@ -4,7 +4,7 @@ import TaskCardInfo from './ui/ui-task-info';
 import TaskCardControll from './ui/ui-task-controll';
 import { Colors } from '../../shared/styles/colorsPalete';
 import { FONT_FAMILY } from '../../shared/config/customFont';
-import { TaskButton, TaskPriority, TaskCardRightButton, TaskStatus } from '../../@types/task';
+import { TaskButton, TaskPriority, TaskCardRightButton, TaskStatus } from '../../shared/types/task';
 import ReanimatedSwipeable, { SwipeableMethods} from 'react-native-gesture-handler/ReanimatedSwipeable';
 import { useCallback, useRef } from 'react';
 import RightAction from './components/task-swipe-righ-action';

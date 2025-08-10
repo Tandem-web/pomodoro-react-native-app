@@ -4,7 +4,7 @@ import BottomTabsBar from './ui/BottomTab';
 import SessionScreen from '../../screens/your-tasks';
 import TimerScreen from '../../screens/timer';
 import TaskManagerScreen from '../../screens/settings';
-import { StackParamList, TabParamList } from '../../@types/navigators';
+import { StackParamList, TabParamList } from '../../shared/types/navigators';
 import { FONT_FAMILY } from '../../shared/config/customFont';
 import { Colors } from '../../shared/styles/colorsPalete';
 import { createNativeStackNavigator, NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -12,23 +12,13 @@ import AllTasksScreen from '../../screens/all-tasks';
 import AddNewTaskScreen from '../../screens/add-new-task';
 import AllCompletedTaskScreen from '../../screens/all-completed-task';
 import { NavigationBackButton } from './ui/BackButton';
+import { Screens } from '../../shared/consts';
 
 
 const Stack = createNativeStackNavigator<StackParamList>();
 const Tab = createBottomTabNavigator<TabParamList>();
 
-export const Screens = {
-  // Bottom Tabs Screens
-  TABS: 'Tabs',
-  SESSION: 'Session',
-  TIMER: 'Timer',
-  SETTINGS: 'Settings',
-
-  // Stack Screens
-  ALL_TASKS: 'AllTasks',
-  ADD_TASK: 'AddTask',
-  ALL_COMPLETED: 'AllCompleted',
-} as const;
+// TODO Сделать разбиение навигаторов
 
 function PomodoroBottomTabs() {
   const renderTabBar = useCallback((props: BottomTabBarProps) => <BottomTabsBar {...props} />, []);

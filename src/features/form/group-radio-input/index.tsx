@@ -1,6 +1,6 @@
 import { StyleSheet, View } from 'react-native';
 import { Colors } from '../../../shared/styles/colorsPalete';
-import { TaskPriorityType } from '../../../@types/task';
+import { TaskPriorityType } from '../../../shared/types/task';
 import RadioInput from './components/radio-input';
 import { useState } from 'react';
 

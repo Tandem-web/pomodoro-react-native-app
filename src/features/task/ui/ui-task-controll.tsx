@@ -1,7 +1,7 @@
 import Ionicons from '@react-native-vector-icons/ionicons';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Colors } from '../../../shared/styles/colorsPalete';
-import { TaskButtonTypes, TaskButton } from '../../../@types/task';
+import { TaskButtonTypes, TaskButton } from '../../../shared/types/task';
 
 
 const buttonIcons = {
