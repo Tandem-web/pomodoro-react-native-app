@@ -1,17 +1,16 @@
-import React from 'react';
 import {
   StatusBar,
   SafeAreaView,
 } from 'react-native';
-import { sceenStyle } from '../../shared/styles/screens';
 import TasksListSection from '../../widgets/task-list';
+import { DefaultStyle } from '../../shared/styles/defaultStyles';
 
 const testTasks = new Array(5).fill(1);
 
 function AllCompletedTaskScreen(): React.JSX.Element {
 
   return (
-    <SafeAreaView  style={[sceenStyle.main]}>
+    <SafeAreaView  style={[DefaultStyle.screen]}>
         <StatusBar barStyle="light-content"/>
         <TasksListSection
           key={'completed-task-section-1'}

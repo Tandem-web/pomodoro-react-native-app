@@ -73,10 +73,10 @@ const TasksListSection: React.FC<TasksListProps> = (props) => {
     const renderItem = useCallback<ListRenderItem<FlatListItem>>(({ item }) => {
         if (item.isPlug) {
             return item.isFirst
-                ? <TaskCard text={plugText} />
+                ? <TaskCard prefix={item.key} text={plugText} />
                 : <TaskPlug />;
         }
-        return <TaskCard task={item} />;
+        return <TaskCard prefix={item.key} task={item} />;
     }, [plugText]);
 
     return (
