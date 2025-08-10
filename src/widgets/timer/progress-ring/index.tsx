@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {StyleSheet, View } from 'react-native';
 import Svg, { Circle,  } from 'react-native-svg';
 import { Colors } from '../../../shared/styles/colorsPalete';
 import { Rect } from 'react-native-safe-area-context';
 
 type ProgressRingProps = {
+    dimension: Rect,
     strokeColors: [string, string],
     strokeWidth?: [number, number],
 }
@@ -12,39 +13,34 @@ type ProgressRingProps = {
 
 
 const ProgressRing: React.FC<ProgressRingProps> = (props) =>{
+
     const {
+        dimension: {width},
         strokeColors,
         strokeWidth = [30, 30],
     } = props;
 
-    const [parentSize, setParentSize] = useState({ width: 0, height: 0 });
-    const parentWidth = parentSize.width;
 
-    const R = ((parentWidth - strokeWidth[0]) / 2) * 0.8;
+    const R = ((width-strokeWidth[0]) / 2)*0.78;
     const CIRCLE_LENGTH = 2 * Math.PI * R;
     return (
-        <View 
-            style={styles.svgWrapper}
-            onLayout={(event) => {
-                const {width, height } = event.nativeEvent.layout;
-                setParentSize({ width, height });
-            }}>
+        <View style={styles.svgWrapper}>
             <Svg
-                width={Number(parentWidth)}
-                height={Number(parentWidth)}
+                width={Number(width)}
+                height={Number(width)}
             >
                 <Circle 
-                    cx={parentWidth / 2}
-                    cy={parentWidth / 2}
+                    cx={width/2}
+                    cy={width/2}
                     r={R}
                     stroke={strokeColors[0]}
                     strokeWidth={strokeWidth[0]}
                 />
 
                 <Circle
-                    transform={`rotate(-90, ${parentWidth / 2}, ${parentWidth / 2})`}
-                    cx={parentWidth / 2}
-                    cy={parentWidth / 2}
+                    transform={`rotate(-90, ${width / 2}, ${width / 2})`}
+                    cx={width/2}
+                    cy={width/2}
                     r={R}
                     stroke={strokeColors[1]}
                     strokeWidth={strokeWidth[1]}
