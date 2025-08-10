@@ -6,8 +6,8 @@ import { TimerControllButtonType, TimerControllIconType } from '../../../../@typ
 const TimerControllsIcons = {
     'start': (<Ionicons size={40}color={Colors.white} name="play"/>),
     'pause': (<Ionicons size={40}color={Colors.white} name="pause"/>),
-    'stop': (<Ionicons size={30} color={Colors.primary} name="stop"/>),
-    'reload': (<Ionicons size={30} color={Colors.primary} name="reload"/>),
+    'stop': (<Ionicons size={30} color={Colors.gray400} name="stop"/>),
+    'reload': (<Ionicons size={30} color={Colors.gray400} name="reload"/>),
 } as const;
 
 interface ControllButtonProps{
@@ -59,6 +59,7 @@ const styles = StyleSheet.create({
     sideButton: {
         height: 65,
         width: 65,
+        borderRadius: '100%',
         backgroundColor: Colors.primary50,
     },
 });

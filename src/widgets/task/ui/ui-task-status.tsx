@@ -35,7 +35,9 @@ const TaskCardStatus: React.FC<TaskCardStatusProps> = (props) => {
                 taskCardStatusStyle,
             ]}>
                 {
-                    status === TaskStatus.COMPLETE && (<FontAwesome color={Colors.TaskCardStatus[TaskPriority.LOW_PRIORITY].borderColor} size={12} name="check"/>)
+                    status === TaskStatus.COMPLETE && (
+                        <FontAwesome color={Colors.TaskCardStatus[TaskPriority.LOW_PRIORITY].borderColor} size={12} name="check"/>
+                    )
                 }
             </View>
         </>
@@ -51,6 +53,6 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderWidth: 1.5,
     },
-})
+});
 
 export default TaskCardStatus;
