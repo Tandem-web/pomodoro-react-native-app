@@ -15,7 +15,7 @@ const TaskCardInfo: React.FC = () => {
         <>
             <View style={styles.taskInfoContainer}>
                 <View style={styles.taskInfoRow}>
-                    <Text
+                    <Text 
                         style={[styles.textFull, styles.defText]}
                         numberOfLines={1}
                         ellipsizeMode="tail"
@@ -23,7 +23,7 @@ const TaskCardInfo: React.FC = () => {
                     <Text style={[styles.defText]}>{intervalText}</Text>
                 </View>
                 <View style={styles.taskInfoRow}>
-                    <Text
+                    <Text 
                         style={[styles.textFull, styles.mutedText]}
                         numberOfLines={1}
                         ellipsizeMode="tail"

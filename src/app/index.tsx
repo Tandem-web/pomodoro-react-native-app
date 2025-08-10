@@ -4,15 +4,15 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
+import PomodoroBottomTabs from './navigators/Navigator';
 import { Colors } from '../shared/styles/colorsPalete';
-import PomodoroNavigation from './navigators/Navigator';
 
 function App(): React.JSX.Element {
   return (
     <View style={styles.main}>
       <>
         <NavigationContainer>
-          <PomodoroNavigation/>
+          <PomodoroBottomTabs/>
         </NavigationContainer>
       </>
     </View>
