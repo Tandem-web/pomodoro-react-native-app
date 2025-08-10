@@ -2,18 +2,25 @@ import { StyleSheet, View } from "react-native";
 import { Colors } from "../../../shared/styles/colorsPalete";
 import { TaskPriorityType } from "../../../@types/task";
 import RadioInput from "./components/radio-input";
+import { useState } from "react";
 
 interface GroupRadioInputsProps {
     prefix: string;
-    // Вопрос
     values: TaskPriorityType[];
 }
 
 const GroupRadioInputs: React.FC<GroupRadioInputsProps> = (props) => {
+    const [selectRadio, setSelectRadio] = useState<TaskPriorityType | null>(null)
+    ;
     const {
         prefix,
         values,
     } = props;
+
+    const onPressHandler = (item: TaskPriorityType) => {
+        console.log(1)
+        setSelectRadio(item);
+    };
 
     return (
         <>
@@ -28,6 +35,8 @@ const GroupRadioInputs: React.FC<GroupRadioInputsProps> = (props) => {
                                 idle: Colors.TaskCardPriority.Idle,
                                 selected: Colors.TaskCardPriority[item],
                             }}
+                            onPress={() => onPressHandler(item)}
+                            isSelected={selectRadio === item}
                         />
                     ))
                 }
