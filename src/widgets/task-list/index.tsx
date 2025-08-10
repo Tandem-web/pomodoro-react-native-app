@@ -1,6 +1,7 @@
 import { StyleSheet, ListRenderItem, FlatList } from 'react-native';
 import { TaskCard, TaskPlug } from '../task';
 import { useCallback, useMemo } from 'react';
+import { noop } from '../../shared/utilities/noop';
 
 interface FlatListItem {
     task: Object | null,
@@ -11,11 +12,13 @@ interface FlatListItem {
 interface TasksListProps {
     prefix: string,
     tasks?: {}[],
-    limit?: number,
+    limit?: number | null,
     paddBottom?: number,
     sectionStyles?: Object,
     plugText?: string,
 }
+
+const FlatListKeyExtractor = (item:FlatListItem) => item.key;
 
 const TasksListSection: React.FC<TasksListProps> = (props) => {
     const {
@@ -26,13 +29,11 @@ const TasksListSection: React.FC<TasksListProps> = (props) => {
         plugText = 'A text was supposed to be here',
     } = props;
 
-    // Подготовка данных для Flatlist
-      const listData = useMemo<FlatListItem[]>(() => {
-        if (tasks.length === 0) {
-            // Создаем массив заглушек
-            Array.from;
-            return limit > 0
-                ?   Array.from({ length: limit }, (_, i) => ({
+
+    const listData = useMemo<FlatListItem[]>(() => {
+        if(tasks.length === 0) {
+            return Number(limit) > 0
+                ?   Array.from(new Array(limit).fill(null), (_, i) => ({
                         task: null,
                         key: `${prefix}__${i}`,
                         isPlug: true,
@@ -42,9 +43,8 @@ const TasksListSection: React.FC<TasksListProps> = (props) => {
                 :   [];
         }
 
-        // Берем нужное количество задач
-        const slicedTasks = limit === -1 ? tasks
-                                         : tasks.slice(-Math.abs(limit));
+        const slicedTasks = limit === null ? tasks
+                                            : tasks.slice(-Math.abs(limit));
 
         return slicedTasks.map((task, index) => ({
             task: task,
@@ -55,7 +55,7 @@ const TasksListSection: React.FC<TasksListProps> = (props) => {
 
     }, [tasks, limit, prefix]);
 
-    // Функция рендера элементов в FlatList
+
     const renderItem = useCallback<ListRenderItem<FlatListItem>>(({ item }) => {
         if (item.isPlug) {
             return item.isFirst
@@ -69,7 +69,7 @@ const TasksListSection: React.FC<TasksListProps> = (props) => {
         <FlatList
             data={listData}
             renderItem={renderItem}
-            keyExtractor={(item:FlatListItem) => item.key}
+            keyExtractor={FlatListKeyExtractor}
             contentContainerStyle={[
                 {paddingBottom: paddBottom},
                 styles.flatListContainerStyle,
