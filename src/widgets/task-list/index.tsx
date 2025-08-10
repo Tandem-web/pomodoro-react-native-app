@@ -32,7 +32,7 @@ const TasksListSection: React.FC<TasksListProps> = (props) => {
     const listData = useMemo<FlatListItem[]>(() => {
         if(tasks.length === 0) {
             return Number(limit) > 0
-                ?   Array.from(new Array(limit).fill(null), (_, i) => ({
+                ?   Array.from({length: Number(limit)}, (_, i) => ({
                         task: null,
                         key: `${prefix}__${i}`,
                         isPlug: true,

@@ -1,9 +1,9 @@
-import { StyleSheet, TouchableOpacity } from "react-native";
-import { DefaultStyle } from "../../../../shared/styles/defaultStyles";
-import { noop } from "../../../../shared/utilities/noop";
-import Animated, { Easing, interpolateColor, useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
-import { FONT_FAMILY } from "../../../../shared/config/customFont";
-import { useEffect } from "react";
+import { StyleSheet, TouchableOpacity } from 'react-native';
+import { DefaultStyle } from '../../../../shared/styles/defaultStyles';
+import { noop } from '../../../../shared/utilities/noop';
+import Animated, { Easing, interpolateColor, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
+import { FONT_FAMILY } from '../../../../shared/config/customFont';
+import { useEffect } from 'react';
 
 type colorsPalleteType = {
     idle: {

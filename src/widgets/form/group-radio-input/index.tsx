@@ -1,8 +1,8 @@
-import { StyleSheet, View } from "react-native";
-import { Colors } from "../../../shared/styles/colorsPalete";
-import { TaskPriorityType } from "../../../@types/task";
-import RadioInput from "./components/radio-input";
-import { useState } from "react";
+import { StyleSheet, View } from 'react-native';
+import { Colors } from '../../../shared/styles/colorsPalete';
+import { TaskPriorityType } from '../../../@types/task';
+import RadioInput from './components/radio-input';
+import { useState } from 'react';
 
 interface GroupRadioInputsProps {
     prefix: string;
@@ -18,7 +18,6 @@ const GroupRadioInputs: React.FC<GroupRadioInputsProps> = (props) => {
     } = props;
 
     const onPressHandler = (item: TaskPriorityType) => {
-        console.log(1)
         setSelectRadio(item);
     };
 

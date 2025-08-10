@@ -1,7 +1,7 @@
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
-import { Colors } from "../../shared/styles/colorsPalete";
-import { FONT_FAMILY } from "../../shared/config/customFont";
-import { noop } from "../../shared/utilities/noop";
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { Colors } from '../../shared/styles/colorsPalete';
+import { FONT_FAMILY } from '../../shared/config/customFont';
+import { noop } from '../../shared/utilities/noop';
 
 interface SectionProps {
     title?: string;
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
     },
     sectionName: {
         fontFamily: FONT_FAMILY.AvenirNext_BOLD,
-        fontSize: 18,
+        fontSize: 16,
         color: Colors.white,
     },
     urlToNested: {

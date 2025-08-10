@@ -1,8 +1,8 @@
-import { StyleSheet, Text, View, TextInput } from "react-native";
-import { FONT_FAMILY } from "../../../shared/config/customFont";
-import { Colors } from "../../../shared/styles/colorsPalete";
-import { useCallback, useState } from "react";
-import Animated, { Easing, interpolateColor, useAnimatedStyle, useSharedValue, withTiming } from "react-native-reanimated";
+import { StyleSheet, Text, View, TextInput } from 'react-native';
+import { FONT_FAMILY } from '../../../shared/config/customFont';
+import { Colors } from '../../../shared/styles/colorsPalete';
+import { useCallback, useState } from 'react';
+import Animated, { Easing, interpolateColor, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 
 interface FormTextInputProps {
     label?: string,
