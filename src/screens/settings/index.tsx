@@ -1,20 +1,18 @@
-import React from 'react';
+import { DefaultStyle } from '@app/shared/styles/defaultStyles';
 import {
-  StyleSheet,
-  View,
   Text,
-  StatusBar
+  StatusBar,
 } from 'react-native';
-import { sceenStyle } from '../../shared/styles/screens';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 
-function TaskManagerScreen(): React.JSX.Element {
+function Settings(): React.JSX.Element {
   return (
-    <View style={sceenStyle.main}>
-        <StatusBar barStyle="light-content"/>
-        <Text>Экран тасков</Text>
-    </View>
+    <SafeAreaView edges={['left', 'right']} style={DefaultStyle.screen}>
+      <StatusBar barStyle="light-content"/>
+      <Text>Экран тасков</Text>
+    </SafeAreaView>
   );
 }
 
-export default TaskManagerScreen;
+export default Settings;

@@ -1,6 +1,10 @@
 {
   "compilerOptions": {
     "jsx": "react-native",
+    "baseUrl": "./",
+    "paths": {
+      "@app/*": ["src/*"]
+    },
     "strict": true,
     "moduleResolution": "bundler"
   }

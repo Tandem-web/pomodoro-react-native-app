@@ -1,18 +1,18 @@
 import { DefaultStyle } from '@app/shared/styles/defaultStyles';
-import PomodoroTimer from '@app/widgets/pomodoro-timer';
+import TaskManager from '@app/widgets/task-manager';
 import {
   StatusBar,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 
-function TimerScreen(): React.JSX.Element {
+function TaskManagerScreen(): React.JSX.Element {
   return (
     <SafeAreaView edges={['left', 'right']} style={DefaultStyle.screen}>
-        <StatusBar barStyle="light-content"/>
-        <PomodoroTimer/>
+          <StatusBar barStyle="light-content"/>
+          <TaskManager/>
     </SafeAreaView>
   );
 }
 
-export default TimerScreen;
+export default TaskManagerScreen;
