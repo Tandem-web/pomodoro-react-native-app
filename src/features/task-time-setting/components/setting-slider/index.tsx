@@ -1,8 +1,9 @@
-import { useCallback, useMemo, useRef, useState } from 'react';
-import { LayoutChangeEvent, ListRenderItem, StyleSheet, View } from 'react-native';
-import Animated, { useAnimatedScrollHandler, useSharedValue } from 'react-native-reanimated';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import { Dimensions, LayoutChangeEvent, ListRenderItem, StyleSheet, Vibration, View } from 'react-native';
+import Animated, { useAnimatedReaction, useAnimatedScrollHandler, useSharedValue } from 'react-native-reanimated';
 import SettingSliderElement from './ui/ui-slider-element';
 import { Colors } from '../../../../shared/styles/colorsPalete';
+import { runOnJS } from 'react-native-worklets';
 
 interface SettingSliderProps {
     min: number;
@@ -17,7 +18,7 @@ interface FlatListItem{
 }
 
 const generateInterval = (min: number, max: number):number[] => {
-    return  Array.from({ length: max - min + 1 }, (_, i) => min + i);
+    return Array.from({ length: max - min + 1 }, (_, i) => min + i);
 };
 
 const FlatListKeyExtractor = (item:FlatListItem) => item.key;
@@ -30,25 +31,32 @@ const SettingSlider: React.FC<SettingSliderProps> = (props) => {
         initialIndex = Math.floor((max - min) / 2),
     } = props;
 
-    const [sectionSize, setSectionSize] = useState({ width: 0, height: 0 });
-    const flatListRef = useRef(null);
+    const [sectionWidth, setSectionWidth] = useState(Dimensions.get('window').width);
+    const currentIndex = useSharedValue(initialIndex);
 
     /* -------------------------------------------------------------------------- */
     /*                      Получаем размер внутреннего блока                     */
     /* -------------------------------------------------------------------------- */
     const handleLayout = useCallback((event: LayoutChangeEvent) => {
-        const { width, height } = event.nativeEvent.layout;
-        setSectionSize({ width, height });
+        const { width } = event.nativeEvent.layout;
+        setSectionWidth(width);
     }, []);
 
     const ITEM_SIZE = useMemo<number>(() => {
-        return Math.floor(sectionSize.width / visible_items);
-    }, [sectionSize, visible_items]);
+        return Math.floor(sectionWidth / visible_items);
+    }, [sectionWidth, visible_items]);
+
+    const centeredPadding = useMemo<{paddingHorizontal: number}>(() => {
+        return { paddingHorizontal: sectionWidth / 2 - ITEM_SIZE / 2 };
+    }, [sectionWidth, ITEM_SIZE]);
+
+    const MaxToRenderPerBatch = useMemo<number>(() => {
+        return visible_items * 2;
+    }, [visible_items]);
 
     /* -------------------------------------------------------------------------- */
     /*                            Значения для анимации                           */
     /* -------------------------------------------------------------------------- */
-    const currentIndex = useSharedValue(initialIndex);
 
     const scrollHandler = useAnimatedScrollHandler({
         onScroll: (event) => {
@@ -84,6 +92,14 @@ const SettingSlider: React.FC<SettingSliderProps> = (props) => {
         );
     }, [ITEM_SIZE, currentIndex]);
 
+
+    const FastListItemLayout = useCallback((data:ArrayLike<FlatListItem> | null | undefined, index: number) => (
+        {
+            length: ITEM_SIZE,
+            offset: ITEM_SIZE * index,
+            index,
+        }
+    ), [ITEM_SIZE]);
     return (
         <>
             <View
@@ -91,24 +107,22 @@ const SettingSlider: React.FC<SettingSliderProps> = (props) => {
                 onLayout={handleLayout}
             >
                 <Animated.FlatList
-                    ref={flatListRef}
                     data={numbers}
                     renderItem={renderItem}
                     keyExtractor={FlatListKeyExtractor}
                     horizontal
-                    decelerationRate="fast"
+                    decelerationRate={'fast'}
                     snapToInterval={ITEM_SIZE}
                     initialScrollIndex={initialIndex}
-                    scrollEventThrottle={5}
+                    // initialNumToRender={15}
+                    scrollEventThrottle={32}
                     onScroll={scrollHandler}
                     style={[styles.sliderFlatList]}
-                    contentContainerStyle={{paddingHorizontal: sectionSize.width / 2 - ITEM_SIZE / 2}}
+                    contentContainerStyle={centeredPadding}
                     showsHorizontalScrollIndicator={false}
-                    getItemLayout={(data, index) => ({
-                        length: ITEM_SIZE,
-                        offset: (ITEM_SIZE) * index,
-                        index,
-                    })}
+                    getItemLayout={FastListItemLayout}
+                    removeClippedSubviews={true}
+                    maxToRenderPerBatch={MaxToRenderPerBatch}
                 />
                 <View style={[styles.centerCursor, {width: ITEM_SIZE}]}/>
             </View>

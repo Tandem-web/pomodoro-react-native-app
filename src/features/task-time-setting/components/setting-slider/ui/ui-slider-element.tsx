@@ -1,7 +1,7 @@
-import { StyleSheet } from "react-native";
-import { FONT_FAMILY } from "../../../../../shared/config/customFont";
-import { Colors } from "../../../../../shared/styles/colorsPalete";
-import Animated, {interpolate, SharedValue, useAnimatedStyle, useDerivedValue, withSpring} from "react-native-reanimated";
+import { StyleSheet } from 'react-native';
+import { FONT_FAMILY } from '../../../../../shared/config/customFont';
+import { Colors } from '../../../../../shared/styles/colorsPalete';
+import Animated, {interpolate, SharedValue, useAnimatedStyle, useDerivedValue, withSpring} from 'react-native-reanimated';
 
 interface SettingSliderElementProps {
     text: string;
@@ -18,34 +18,26 @@ const SettingSliderElement: React.FC<SettingSliderElementProps> = (props) => {
         centerIndex,
     } = props;
 
-    const position = useDerivedValue(() => {
-        return Math.abs(centerIndex.value - index);
-    });
+    const position = useDerivedValue(() => Math.abs(centerIndex.value - index));
 
     const SliderViewStyle = useAnimatedStyle(() => {
-        const scale = interpolate(
-            Math.abs(position.value),
-            [0, 1, 2, 3],
-            [1, 0.9, 0.8, 0.7],
-        );
+        const pos = position.value;
 
-        const opacity = interpolate(
-            Math.abs(position.value),
-            [0, 1, 2, 3],
-            [1, 0.8, 0.7, 0.6],
-        );
+        if (pos > 4 ) {return {};}
 
+        const scale = interpolate(pos, [0, 1, 2, 3], [1, 0.9, 0.8, 0.7]);
+        const opacity = interpolate(pos, [0, 1, 2, 3], [1, 0.8, 0.7, 0.6]);
 
         return {
             opacity: withSpring(opacity, {
-                stiffness: 430,
-                damping: 80,
+                stiffness: 300,
+                damping: 50,
             }),
             transform: [
                 {
                     scale: withSpring(scale, {
-                        stiffness: 430,
-                        damping: 80,
+                        stiffness: 300,
+                        damping: 50,
                     }),
                 },
             ],
