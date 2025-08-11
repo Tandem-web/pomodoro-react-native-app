@@ -1,8 +1,9 @@
-import { useCallback, useMemo, useState } from 'react';
-import { Dimensions, LayoutChangeEvent, ListRenderItem, StyleSheet, View } from 'react-native';
-import Animated, { useAnimatedScrollHandler, useSharedValue } from 'react-native-reanimated';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import { Dimensions, LayoutChangeEvent, ListRenderItem, StyleSheet, Vibration, View } from 'react-native';
+import Animated, { useAnimatedReaction, useAnimatedScrollHandler, useSharedValue } from 'react-native-reanimated';
 import SettingSliderElement from './ui/ui-slider-element';
 import { Colors } from '../../../../shared/styles/colorsPalete';
+import { runOnJS } from 'react-native-worklets';
 
 interface SettingSliderProps {
     min: number;
@@ -27,12 +28,11 @@ const SettingSlider: React.FC<SettingSliderProps> = (props) => {
         min,
         max,
         visible_items = 7,
-        initialIndex = Math.floor((max - min) / 2),
+        initialIndex = 0,
     } = props;
 
     const [sectionWidth, setSectionWidth] = useState(Dimensions.get('window').width);
     const currentIndex = useSharedValue(initialIndex);
-
     /* -------------------------------------------------------------------------- */
     /*                      Получаем размер внутреннего блока                     */
     /* -------------------------------------------------------------------------- */
@@ -63,7 +63,14 @@ const SettingSlider: React.FC<SettingSliderProps> = (props) => {
             currentIndex.value = newIndex;
         },
     });
-
+    useAnimatedReaction(() => {
+      return currentIndex.value;
+    },
+    (currentValue, previousValue) => {
+      if (currentValue !== previousValue) {
+        runOnJS(Vibration.vibrate)(10);
+      }
+    });
     /* -------------------------------------------------------------------------- */
     /*                         Создаем данные для FlatList                        */
     /* -------------------------------------------------------------------------- */
@@ -92,13 +99,13 @@ const SettingSlider: React.FC<SettingSliderProps> = (props) => {
     }, [ITEM_SIZE, currentIndex]);
 
 
-    const FastListItemLayout = useCallback((data:ArrayLike<FlatListItem> | null | undefined, index: number) => (
-        {
+    const FastListItemLayout = useCallback((data:ArrayLike<FlatListItem> | null | undefined, index: number) => {
+        return {
             length: ITEM_SIZE,
             offset: ITEM_SIZE * index,
             index,
-        }
-    ), [ITEM_SIZE]);
+        };
+    }, [ITEM_SIZE]);
     return (
         <>
             <View
@@ -113,7 +120,6 @@ const SettingSlider: React.FC<SettingSliderProps> = (props) => {
                     decelerationRate={'fast'}
                     snapToInterval={ITEM_SIZE}
                     initialScrollIndex={initialIndex}
-                    // initialNumToRender={15}
                     scrollEventThrottle={32}
                     onScroll={scrollHandler}
                     style={[styles.sliderFlatList]}

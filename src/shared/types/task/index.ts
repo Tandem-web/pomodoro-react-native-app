@@ -29,3 +29,9 @@ export type TaskCardRightButton = {
     type:  Exclude<TaskButtonTypes, 'close' | 'play'>;
     onPress?: () => void;
 }
+
+
+export interface TaskRightActionBlock{
+    enabled: boolean,
+    buttons: TaskCardRightButton[],
+}

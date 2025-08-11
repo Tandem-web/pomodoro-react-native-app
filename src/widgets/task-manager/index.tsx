@@ -29,15 +29,26 @@ const TaskManager: React.FC = () => {
                 key={'section-1'}
                 title="All Task"
                 linkOption={{
-                  isShow: false,
+                  isShow: true,
                   text: 'See All',
                   onPress: () => navigation.navigate('AllTasks'),
                 }}
               >
                 <TasksListSection
-                  prefix="sub-task"
+                  prefix="sub-all-task"
                   limit={Math.floor(sectionSize.height / 75)}
                   plugText="All tasks are completed"
+                  rightActionBlock={{
+                    enabled: true,
+                    buttons: [
+                      {
+                        type:  'complete',
+                      },
+                      {
+                        type: 'delete',
+                      },
+                    ],
+                  }}
                 />
               </Section>
             </View>
@@ -55,6 +66,14 @@ const TaskManager: React.FC = () => {
                 prefix="sub-completed-task"
                 limit={1}
                 plugText="Completed tasks will be here"
+                rightActionBlock={{
+                  enabled: true,
+                  buttons: [
+                    {
+                      type: 'delete',
+                    },
+                  ],
+                }}
               />
             </Section>
             <DefaultButton

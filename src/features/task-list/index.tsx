@@ -1,6 +1,7 @@
 import { StyleSheet, ListRenderItem, FlatList } from 'react-native';
 import { TaskCard, TaskPlug } from '../task';
 import { useCallback, useMemo } from 'react';
+import { TaskRightActionBlock } from '../../shared/types/task';
 
 interface FlatListItem {
     task: Object | null,
@@ -15,6 +16,7 @@ interface TasksListProps {
     paddBottom?: number,
     sectionStyles?: Object,
     plugText?: string,
+    rightActionBlock?: TaskRightActionBlock,
 }
 
 const FlatListKeyExtractor = (item:FlatListItem) => item.key;
@@ -26,6 +28,10 @@ const TasksListSection: React.FC<TasksListProps> = (props) => {
         limit = 1,
         paddBottom = 0,
         plugText = 'A text was supposed to be here',
+        rightActionBlock = {
+            enabled: false,
+            buttons: [],
+        },
     } = props;
 
 
@@ -58,11 +64,11 @@ const TasksListSection: React.FC<TasksListProps> = (props) => {
     const renderItem = useCallback<ListRenderItem<FlatListItem>>(({ item }) => {
         if (item.isPlug) {
             return item.isFirst
-                ? <TaskCard text={plugText} />
+                ? <TaskCard prefix={prefix} text={plugText} />
                 : <TaskPlug />;
         }
-        return <TaskCard task={item} />;
-    }, [plugText]);
+        return rightActionBlock.enabled ? <TaskCard prefix={prefix} task={item} rightActionBlock={rightActionBlock}/> : <TaskCard prefix={prefix} task={item}/>;
+    }, [plugText, prefix, rightActionBlock]);
 
     return (
         <FlatList
@@ -73,6 +79,8 @@ const TasksListSection: React.FC<TasksListProps> = (props) => {
                 {paddingBottom: paddBottom},
                 styles.flatListContainerStyle,
             ]}
+            decelerationRate={'normal'}
+            scrollEventThrottle={32}
             showsVerticalScrollIndicator={false}
         />
     );

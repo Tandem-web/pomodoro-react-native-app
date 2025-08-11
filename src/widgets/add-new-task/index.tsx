@@ -10,8 +10,14 @@ import DefaultButton from '../../shared/ui-kit/button/DeafultButton';
 const priority = Object.values(TaskPriority);
 
 const AddNewTaskForm: React.FC = () => {
+
     return (
-        <ScrollView showsVerticalScrollIndicator={false} style={styles.addNewTaskContainer}>
+        <ScrollView
+            showsVerticalScrollIndicator={false}
+            style={styles.addNewTaskContainer}
+            overScrollMode={'auto'}
+            scrollEventThrottle={16} // Оптимальная частота событий
+        >
             <Section>
                 <Section>
                     <FormTextInput label={'Title'} inputPlaceholder={'Task title'}/>
@@ -32,7 +38,6 @@ const AddNewTaskForm: React.FC = () => {
                         icon={{name: 'plus', size: 16}}
                     />
                 </Section>
-
             </Section>
         </ScrollView>
     );

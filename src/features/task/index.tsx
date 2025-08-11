@@ -4,20 +4,18 @@ import TaskCardInfo from './ui/ui-task-info';
 import TaskCardControll from './ui/ui-task-controll';
 import { Colors } from '../../shared/styles/colorsPalete';
 import { FONT_FAMILY } from '../../shared/config/customFont';
-import { TaskButton, TaskPriority, TaskCardRightButton, TaskStatus } from '../../shared/types/task';
+import { TaskButton, TaskPriority, TaskStatus, TaskRightActionBlock } from '../../shared/types/task';
 import ReanimatedSwipeable, { SwipeableMethods} from 'react-native-gesture-handler/ReanimatedSwipeable';
 import { useCallback, useRef } from 'react';
 import RightAction from './components/task-swipe-righ-action';
 import { SharedValue } from 'react-native-reanimated';
 
-interface RightActionBlock{
-    enabled: boolean,
-    buttons: TaskCardRightButton[],
-}
+
 interface TaskCardProps {
     task?: Object;
     text?: string,
-    rightActionBlock?: RightActionBlock,
+    rightActionBlock?: TaskRightActionBlock,
+    prefix: string,
 }
 
 export const TaskCard:React.FC<TaskCardProps> = (props) => {
@@ -28,6 +26,7 @@ export const TaskCard:React.FC<TaskCardProps> = (props) => {
             enabled: false,
             buttons: [],
         },
+        prefix,
     } = props;
 
     const swipeableRef = useRef<SwipeableMethods>(null);
@@ -39,9 +38,10 @@ export const TaskCard:React.FC<TaskCardProps> = (props) => {
                 buttons={rightActionBlock.buttons}
                 prog={progress}
                 drag={dragX}
+                prefix={prefix}
             />
         ),
-        [rightActionBlock.buttons]
+        [rightActionBlock.buttons, prefix]
     );
 
     return (
