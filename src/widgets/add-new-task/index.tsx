@@ -1,11 +1,11 @@
 import { ScrollView } from 'react-native-gesture-handler';
-import Section from '../../features/section';
-import FormTextInput from '../../features/form/text-input';
-import GroupRadioInputs from '../../features/form/group-radio-input';
-import { TaskPriority } from '../../shared/types/task';
-import TaskTimeSetting from '../../features/task-time-setting';
 import { StyleSheet } from 'react-native';
-import DefaultButton from '../../shared/ui-kit/button/DeafultButton';
+import Section from '@app/features/section';
+import { TaskPriority } from '@app/shared/types/task';
+import FormTextInput from '@app/features/form/text-input';
+import GroupRadioInputs from '@app/features/form/group-radio-input';
+import TaskTimeSetting from '@app/features/task-time-setting';
+import DefaultButton from '@app/shared/ui-kit/button/DeafultButton';
 
 const priority = Object.values(TaskPriority);
 

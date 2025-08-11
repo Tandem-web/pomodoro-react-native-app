@@ -1,7 +1,7 @@
+import { Colors } from '@app/shared/styles/colorsPalete';
 import React, { useState } from 'react';
 import {StyleSheet, View } from 'react-native';
 import Svg, { Circle } from 'react-native-svg';
-import { Colors } from '../../../shared/styles/colorsPalete';
 
 type ProgressRingProps = {
     strokeColors: [string, string],

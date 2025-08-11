@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, TextInput } from 'react-native';
-import { FONT_FAMILY } from '../../../shared/config/customFont';
-import { Colors } from '../../../shared/styles/colorsPalete';
+import { FONT_FAMILY } from '@app/shared/config/customFont';
+import { Colors } from '@app/shared/styles/colorsPalete';
 import { useCallback, useState } from 'react';
 import Animated, { Easing, interpolateColor, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 

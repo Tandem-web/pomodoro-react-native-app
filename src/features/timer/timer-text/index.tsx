@@ -1,6 +1,7 @@
+import { FONT_FAMILY } from '@app/shared/config/customFont';
+import { Colors } from '@app/shared/styles/colorsPalete';
 import { View, Text, StyleSheet } from 'react-native';
-import { FONT_FAMILY } from '../../../shared/config/customFont';
-import { Colors } from '../../../shared/styles/colorsPalete';
+
 
 // TODO TimerTextProps interface
 

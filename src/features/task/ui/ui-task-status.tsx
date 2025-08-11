@@ -1,7 +1,7 @@
 import { StyleSheet, View, ViewStyle } from 'react-native';
-import { Colors } from '../../../shared/styles/colorsPalete';
+import { Colors } from '@app/shared/styles/colorsPalete';
 import FontAwesome from '@react-native-vector-icons/fontawesome';
-import { TaskPriority, TaskPriorityType, TaskStatus, TaskStatusType } from '../../../shared/types/task';
+import { TaskPriority, TaskPriorityType, TaskStatus, TaskStatusType } from '@app/shared/types/task';
 import { useMemo } from 'react';
 
 

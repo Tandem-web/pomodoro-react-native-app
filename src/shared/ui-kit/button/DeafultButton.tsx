@@ -1,8 +1,8 @@
 import { TouchableOpacity, View, Text, StyleSheet } from 'react-native';
-import { Colors } from '../../styles/colorsPalete';
-import { FONT_FAMILY } from '../../config/customFont';
 import FontAwesome, { FontAwesomeIconName } from '@react-native-vector-icons/fontawesome';
-import { noop } from '../../utilities/noop';
+import { noop } from '@app/shared/utilities/noop';
+import { Colors } from '@app/shared/styles/colorsPalete';
+import { FONT_FAMILY } from '@app/shared/config/customFont';
 
 interface ButtonWithIconProps {
     onPress?: () => void

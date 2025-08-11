@@ -2,8 +2,8 @@ import Ionicons from '@react-native-vector-icons/ionicons';
 import { useNavigation } from '@react-navigation/native';
 import React, { useCallback } from 'react';
 import { TouchableOpacity, StyleSheet } from 'react-native';
-import { YourTaskScreenNavigationProp } from '../../../shared/types/navigation';
-import { Colors } from '../../../shared/styles/colorsPalete';
+import { YourTaskScreenNavigationProp } from '@app/shared/types/navigation';
+import { Colors } from '@app/shared/styles/colorsPalete';
 
 
 export const NavigationBackButton = React.memo(() => {

@@ -1,8 +1,8 @@
 import { StyleSheet, View } from 'react-native';
-import { Colors } from '../../../shared/styles/colorsPalete';
-import { TaskPriorityType } from '../../../shared/types/task';
-import RadioInput from './components/radio-input';
+import { Colors } from '@app/shared/styles/colorsPalete';
+import { TaskPriorityType } from '@app/shared/types/task';
 import { useState } from 'react';
+import RadioInput from './components/radio-input';
 
 interface GroupRadioInputsProps {
     prefix: string;

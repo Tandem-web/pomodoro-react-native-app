@@ -4,8 +4,8 @@ import { TouchableOpacity, View, StyleSheet} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { FontAwesome } from '@react-native-vector-icons/fontawesome';
 import Ionicons from '@react-native-vector-icons/ionicons';
-import { Colors } from '../../../shared/styles/colorsPalete';
-import { Screens } from '../../../shared/consts';
+import { Colors } from '@app/shared/styles/colorsPalete';
+import { Screens } from '@app/shared/consts';
 
 
 type BottomTabsBarProps = PropsWithChildren<BottomTabBarProps>

@@ -1,7 +1,7 @@
 import Ionicons from '@react-native-vector-icons/ionicons';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { TaskButton, TaskButtonTypes } from '../../../shared/types/task';
-import { Colors } from '../../../shared/styles/colorsPalete';
+import { Colors } from '@app/shared/styles/colorsPalete';
 import { RefObject, useCallback } from 'react';
 import { SwipeableMethods } from 'react-native-gesture-handler/lib/typescript/components/ReanimatedSwipeable';
 

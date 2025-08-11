@@ -1,8 +1,8 @@
 import { View, StyleSheet, TouchableOpacity } from 'react-native';
-import { Colors } from '../../../../shared/styles/colorsPalete';
 import Ionicons from '@react-native-vector-icons/ionicons';
-import { TimerControllButtonType, TimerControllIconType } from '../../../../shared/types/timer-controlls';
-import { noop } from '../../../../shared/utilities/noop';
+import { TimerControllButtonType, TimerControllIconType } from '@app/shared/types/timer-controlls';
+import { Colors } from '@app/shared/styles/colorsPalete';
+import { noop } from '@app/shared/utilities/noop';
 
 const TimerControllsIcons = {
     'start': (<Ionicons size={40}color={Colors.white} name="play"/>),

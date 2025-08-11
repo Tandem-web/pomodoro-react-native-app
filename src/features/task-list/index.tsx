@@ -1,7 +1,7 @@
 import { StyleSheet, ListRenderItem, FlatList } from 'react-native';
 import { TaskCard, TaskPlug } from '../task';
 import { useCallback, useMemo } from 'react';
-import { TaskRightActionBlock } from '../../shared/types/task';
+import { TaskRightActionBlock } from '@app/shared/types/task';
 
 interface FlatListItem {
     task: Object | null,

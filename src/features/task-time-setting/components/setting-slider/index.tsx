@@ -1,8 +1,8 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { Dimensions, LayoutChangeEvent, ListRenderItem, StyleSheet, Vibration, View } from 'react-native';
 import Animated, { useAnimatedReaction, useAnimatedScrollHandler, useSharedValue } from 'react-native-reanimated';
 import SettingSliderElement from './ui/ui-slider-element';
-import { Colors } from '../../../../shared/styles/colorsPalete';
+import { Colors } from '@app/shared/styles/colorsPalete';
 import { runOnJS } from 'react-native-worklets';
 
 interface SettingSliderProps {

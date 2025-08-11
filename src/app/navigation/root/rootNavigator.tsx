@@ -1,14 +1,14 @@
 import { useCallback } from 'react';
 import { NavigationBackButton } from '../components/BackButton';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { StackParamList } from '../../../shared/types/navigation';
-import { FONT_FAMILY } from '../../../shared/config/customFont';
-import { Screens } from '../../../shared/consts';
-import AllTasksScreen from '../../../screens/all-tasks';
-import AddNewTaskScreen from '../../../screens/add-new-task';
-import AllCompletedTaskScreen from '../../../screens/all-completed-task';
+import { StackParamList } from '@app/shared/types/navigation';
+import { FONT_FAMILY } from '@app/shared/config/customFont';
+import { Screens } from '@app/shared/consts';
+import AllTasksScreen from '@app/screens/all-tasks';
+import AddNewTaskScreen from '@app/screens/add-new-task';
+import AllCompletedTaskScreen from '@app/screens/all-completed-task';
 import { PomodoroBottomTabs } from '../tabs/TabNavigator';
-import { Colors } from '../../../shared/styles/colorsPalete';
+import { Colors } from '@app/shared/styles/colorsPalete';
 
 const Stack = createNativeStackNavigator<StackParamList>();
 

@@ -1,12 +1,12 @@
 import { LayoutChangeEvent, View, StyleSheet } from 'react-native';
-import Section from '../../features/section';
-import TasksListSection from '../../features/task-list';
 import { useNavigation } from '@react-navigation/native';
 import { useCallback, useState } from 'react';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { StackParamList } from '../../shared/types/navigation';
-import { DefaultStyle } from '../../shared/styles/defaultStyles';
-import DefaultButton from '../../shared/ui-kit/button/DeafultButton';
+import { StackParamList } from '@app/shared/types/navigation';
+import { DefaultStyle } from '@app/shared/styles/defaultStyles';
+import Section from '@app/features/section';
+import TasksListSection from '@app/features/task-list';
+import DefaultButton from '@app/shared/ui-kit/button/DeafultButton';
 
 type TaskManagerScreenNavigationProp = NativeStackNavigationProp<StackParamList, 'Tabs'>;
 
