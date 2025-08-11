@@ -20,7 +20,7 @@ const TaskCardInfo: React.FC = () => {
                         numberOfLines={1}
                         ellipsizeMode="tail"
                     >{taskText}</Text>
-                    <Text style={[styles.defText]}>{intervalText}</Text>
+                    <Text style={styles.defText}>{intervalText}</Text>
                 </View>
                 <View style={styles.taskInfoRow}>
                     <Text
@@ -28,7 +28,7 @@ const TaskCardInfo: React.FC = () => {
                         numberOfLines={1}
                         ellipsizeMode="tail"
                     >{workTimeText}</Text>
-                    <Text style={[styles.mutedText]}>{intervalTimeText}</Text>
+                    <Text style={styles.mutedText}>{intervalTimeText}</Text>
                 </View>
             </View>
         </>

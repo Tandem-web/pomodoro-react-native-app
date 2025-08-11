@@ -12,13 +12,6 @@ function AllTasksScreen(): React.JSX.Element {
   return (
     <SafeAreaView edges={['left', 'right', 'bottom']} style={DefaultStyle.screen}>
         <StatusBar barStyle="light-content"/>
-        <TasksListSection
-          key={'all-task-section-1'}
-          prefix="all-task"
-          limit={null}
-          tasks={testTasks}
-          paddBottom={30}
-        />
         <Section
           key={'section-nested-all-task'}
           style={{ paddingBottom: 30 }}

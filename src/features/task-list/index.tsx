@@ -13,7 +13,6 @@ interface TasksListProps {
     prefix: string,
     tasks?: {}[],
     limit?: number | null,
-    paddBottom?: number,
     sectionStyles?: Object,
     plugText?: string,
     rightActionBlock?: TaskRightActionBlock,
@@ -26,7 +25,6 @@ const TasksListSection: React.FC<TasksListProps> = (props) => {
         prefix,
         tasks = [],
         limit = 1,
-        paddBottom = 0,
         plugText = 'A text was supposed to be here',
         rightActionBlock = {
             enabled: false,
@@ -75,10 +73,7 @@ const TasksListSection: React.FC<TasksListProps> = (props) => {
             data={listData}
             renderItem={renderItem}
             keyExtractor={FlatListKeyExtractor}
-            contentContainerStyle={[
-                {paddingBottom: paddBottom},
-                styles.flatListContainerStyle,
-            ]}
+            contentContainerStyle={styles.flatListContainerStyle}
             decelerationRate={'normal'}
             scrollEventThrottle={32}
             showsVerticalScrollIndicator={false}

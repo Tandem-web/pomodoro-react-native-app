@@ -122,7 +122,7 @@ const SettingSlider: React.FC<SettingSliderProps> = (props) => {
                     initialScrollIndex={initialIndex}
                     scrollEventThrottle={32}
                     onScroll={scrollHandler}
-                    style={[styles.sliderFlatList]}
+                    style={styles.sliderFlatList}
                     contentContainerStyle={centeredPadding}
                     showsHorizontalScrollIndicator={false}
                     getItemLayout={FastListItemLayout}
