@@ -1,4 +1,4 @@
-import { TaskCard } from '@app/features/task';
+import { TaskCard } from '@app/features/task/task-card';
 import ProgressRing from '@app/features/timer/progress-ring';
 import TimerText from '@app/features/timer/timer-text';
 import { Colors } from '@app/shared/styles/colorsPalete';

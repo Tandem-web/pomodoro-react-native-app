@@ -1,6 +1,6 @@
 import { View, Text, TouchableOpacity, StyleSheet, StyleProp, ViewStyle } from 'react-native';
 import { Colors } from '@app/shared/styles/colorsPalete';
-import { FONT_FAMILY } from '@app/shared/config/customFont';
+import { FONT_FAMILY } from '@app/shared/font/avenir';
 import { noop } from '@app/shared/utilities/noop';
 
 interface SectionProps {

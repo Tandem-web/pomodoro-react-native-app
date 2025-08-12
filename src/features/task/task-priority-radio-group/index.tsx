@@ -3,23 +3,25 @@ import { Colors } from '@app/shared/styles/colorsPalete';
 import { TaskPriorityType } from '@app/shared/types/task';
 import { useState } from 'react';
 import RadioInput from './components/radio-input';
+import { noop } from '@app/shared/utilities/noop';
 
 interface GroupRadioInputsProps {
     prefix: string;
     values: TaskPriorityType[];
+    selectRadio?: TaskPriorityType | null;
+    onSelect?: (item: TaskPriorityType) => void;
 }
 
 const GroupRadioInputs: React.FC<GroupRadioInputsProps> = (props) => {
-    const [selectRadio, setSelectRadio] = useState<TaskPriorityType | null>(null)
-    ;
+    
     const {
         prefix,
         values,
+        selectRadio = null,
+        onSelect = noop,
     } = props;
 
-    const onPressHandler = (item: TaskPriorityType) => {
-        setSelectRadio(item);
-    };
+
 
     return (
         <>
@@ -34,7 +36,7 @@ const GroupRadioInputs: React.FC<GroupRadioInputsProps> = (props) => {
                                 idle: Colors.TaskCardPriority.Idle,
                                 selected: Colors.TaskCardPriority[item],
                             }}
-                            onPress={() => onPressHandler(item)}
+                            onPress={() => onSelect(item)}
                             isSelected={selectRadio === item}
                         />
                     ))

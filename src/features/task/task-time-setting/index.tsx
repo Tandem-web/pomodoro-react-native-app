@@ -1,17 +1,24 @@
 import { StyleSheet, View, Text} from 'react-native';
-import { FONT_FAMILY } from '@app/shared/config/customFont';
+import { FONT_FAMILY } from '@app/shared/font/avenir';
 import { Colors } from '@app/shared/styles/colorsPalete';
 import SettingSlider from './components/setting-slider';
+import { noop } from '@app/shared/utilities/noop';
 
 interface TaskTimeSettingProps {
     title: string,
-    unit: string
+    unit: string,
+    min?: number,
+    max?: number,
+    onChange?: (value: number) => void;
 }
 
 const TaskTimeSetting: React.FC<TaskTimeSettingProps> = (props) => {
     const {
         title,
         unit,
+        min = 1,
+        max = 20,
+        onChange = noop,
     } = props;
 
     return (
@@ -22,7 +29,7 @@ const TaskTimeSetting: React.FC<TaskTimeSettingProps> = (props) => {
                     <Text style={styles.timeSettingsUnit}>{unit}</Text>
                 </View>
                 <View>
-                    <SettingSlider min={1} max={20}/>
+                    <SettingSlider min={min} max={max} onChange={onChange}/>
                 </View>
             </View>
         </>

@@ -2,7 +2,7 @@ import { StyleSheet, TouchableOpacity } from 'react-native';
 import { DefaultStyle } from '@app/shared/styles/defaultStyles';
 import { noop } from '@app/shared/utilities/noop';
 import Animated, { Easing, interpolateColor, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
-import { FONT_FAMILY } from '@app/shared/config/customFont';
+import { FONT_FAMILY } from '@app/shared/font/avenir';
 import { useEffect } from 'react';
 
 type colorsPalleteType = {

@@ -1,4 +1,4 @@
-import { FONT_FAMILY } from '@app/shared/config/customFont';
+import { FONT_FAMILY } from '@app/shared/font/avenir';
 import { Colors } from '@app/shared/styles/colorsPalete';
 import { View, Text, StyleSheet } from 'react-native';
 

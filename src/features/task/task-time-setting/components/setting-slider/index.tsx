@@ -4,12 +4,14 @@ import Animated, { useAnimatedReaction, useAnimatedScrollHandler, useSharedValue
 import SettingSliderElement from './ui/ui-slider-element';
 import { Colors } from '@app/shared/styles/colorsPalete';
 import { runOnJS } from 'react-native-worklets';
+import { noop } from '@app/shared/utilities/noop';
 
 interface SettingSliderProps {
     min: number;
     max: number;
     visible_items?: number;
     initialIndex?: number;
+    onChange?: (value: number) => void;
 }
 interface FlatListItem{
     value: number,
@@ -29,6 +31,7 @@ const SettingSlider: React.FC<SettingSliderProps> = (props) => {
         max,
         visible_items = 7,
         initialIndex = 0,
+        onChange = noop,
     } = props;
 
     const [sectionWidth, setSectionWidth] = useState(Dimensions.get('window').width);
@@ -63,14 +66,16 @@ const SettingSlider: React.FC<SettingSliderProps> = (props) => {
             currentIndex.value = newIndex;
         },
     });
-    useAnimatedReaction(() => {
-      return currentIndex.value;
-    },
-    (currentValue, previousValue) => {
-      if (currentValue !== previousValue) {
-        runOnJS(Vibration.vibrate)(10);
-      }
-    });
+    useAnimatedReaction(
+        () => {
+            return currentIndex.value;
+        },(currentValue, previousValue) => {
+            if (currentValue !== previousValue) {
+                runOnJS(onChange)(currentValue);
+                runOnJS(Vibration.vibrate)(10);
+            }
+        }
+    );
     /* -------------------------------------------------------------------------- */
     /*                         Создаем данные для FlatList                        */
     /* -------------------------------------------------------------------------- */

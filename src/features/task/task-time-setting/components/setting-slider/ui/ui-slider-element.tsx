@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native';
-import { FONT_FAMILY } from '@app/shared/config/customFont';
+import { FONT_FAMILY } from '@app/shared/font/avenir';
 import { Colors } from '@app/shared/styles/colorsPalete';
 import Animated, {interpolate, SharedValue, useAnimatedStyle, useDerivedValue, withSpring} from 'react-native-reanimated';
 
@@ -9,7 +9,6 @@ interface SettingSliderElementProps {
     index: number,
     centerIndex: SharedValue<number>,
 }
-
 const SettingSliderElement: React.FC<SettingSliderElementProps> = (props) => {
     const {
         text,

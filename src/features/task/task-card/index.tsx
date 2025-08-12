@@ -3,7 +3,7 @@ import TaskCardStatus from './ui/ui-task-status';
 import TaskCardInfo from './ui/ui-task-info';
 import TaskCardControll from './ui/ui-task-controll';
 import { Colors } from '@app/shared/styles/colorsPalete';
-import { FONT_FAMILY } from '@app/shared/config/customFont';
+import { FONT_FAMILY } from '@app/shared/font/avenir';
 import { TaskButton, TaskPriority, TaskStatus, TaskRightActionBlock } from '@app/shared/types/task';
 import ReanimatedSwipeable, { SwipeableMethods} from 'react-native-gesture-handler/ReanimatedSwipeable';
 import { useCallback, useRef } from 'react';

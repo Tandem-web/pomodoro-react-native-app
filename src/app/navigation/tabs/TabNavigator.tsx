@@ -3,7 +3,7 @@ import { useCallback } from 'react';
 import TabBar from './TabBar';
 import { Screens } from '@app/shared/consts';
 import { Colors } from '@app/shared/styles/colorsPalete';
-import { FONT_FAMILY } from '@app/shared/config/customFont';
+import { FONT_FAMILY } from '@app/shared/font/avenir';
 import TaskManagerScreen from '@app/screens/task-manager';
 import TimerScreen from '@app/screens/timer';
 import Settings from '@app/screens/settings';

@@ -1,10 +1,10 @@
-import Section from '@app/features/section';
-import TasksListSection from '@app/features/task-list';
+import Section from '@app/shared/ui-kit/section';
 import { DefaultStyle } from '@app/shared/styles/defaultStyles';
 import {
   StatusBar,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import TasksListSection from '@app/features/task/task-list';
 
 const testTasks = new Array(20).fill(1);
 

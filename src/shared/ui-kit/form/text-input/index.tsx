@@ -1,29 +1,32 @@
 import { StyleSheet, Text, View, TextInput } from 'react-native';
-import { FONT_FAMILY } from '@app/shared/config/customFont';
+import { FONT_FAMILY } from '@app/shared/font/avenir';
 import { Colors } from '@app/shared/styles/colorsPalete';
-import { useCallback, useState } from 'react';
+import { useCallback } from 'react';
 import Animated, { Easing, interpolateColor, useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
+import { noop } from '@app/shared/utilities/noop';
 
 interface FormTextInputProps {
     label?: string,
     inputPlaceholder?: string,
+    value?: string,
+    onChangeText?: (text: string) => void,
 }
 
 const AnimatedTextInput = Animated.createAnimatedComponent(TextInput);
 
 const FormTextInput: React.FC<FormTextInputProps> = (props) => {
-    const [value, setValue] = useState<string>('');
+    
     const focusAnim = useSharedValue(0);
 
     const {
         label = null,
         inputPlaceholder = '',
+        value = undefined,
+        onChangeText = noop,
     } = props;
 
 
-    const onChangeText = useCallback((text: string) => {
-        setValue(text);
-    }, []);
+
 
     const onFocus = useCallback(() => {
         focusAnim.value = withTiming(1, {

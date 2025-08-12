@@ -4,9 +4,9 @@ import { useCallback, useState } from 'react';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { StackParamList } from '@app/shared/types/navigation';
 import { DefaultStyle } from '@app/shared/styles/defaultStyles';
-import Section from '@app/features/section';
-import TasksListSection from '@app/features/task-list';
+import Section from '@app/shared/ui-kit/section';
 import DefaultButton from '@app/shared/ui-kit/button/DeafultButton';
+import TasksListSection from '@app/features/task/task-list';
 
 type TaskManagerScreenNavigationProp = NativeStackNavigationProp<StackParamList, 'Tabs'>;
 
