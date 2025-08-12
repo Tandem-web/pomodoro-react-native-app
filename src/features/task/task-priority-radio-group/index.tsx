@@ -1,7 +1,6 @@
 import { StyleSheet, View } from 'react-native';
 import { Colors } from '@app/shared/styles/colorsPalete';
 import { TaskPriorityType } from '@app/shared/types/task';
-import { useState } from 'react';
 import RadioInput from './components/radio-input';
 import { noop } from '@app/shared/utilities/noop';
 
@@ -13,15 +12,13 @@ interface GroupRadioInputsProps {
 }
 
 const GroupRadioInputs: React.FC<GroupRadioInputsProps> = (props) => {
-    
+
     const {
         prefix,
         values,
         selectRadio = null,
         onSelect = noop,
     } = props;
-
-
 
     return (
         <>

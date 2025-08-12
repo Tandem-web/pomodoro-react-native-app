@@ -38,7 +38,7 @@ const AddNewTaskForm: React.FC = () => {
     const handleTimeSettingChange = useCallback((key: keyof TimeSettings, value: number) => {
         setTimeSettings(prev => ({
             ...prev,
-            [key]: value
+            [key]: value,
         }));
     }, []);
 
