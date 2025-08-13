@@ -4,16 +4,18 @@ import TaskCardInfo from './ui/ui-task-info';
 import TaskCardControll from './ui/ui-task-controll';
 import { Colors } from '@app/shared/styles/colorsPalete';
 import { FONT_FAMILY } from '@app/shared/font/avenir';
-import { TaskButton, TaskPriority, TaskStatus, TaskRightActionBlock } from '@app/shared/types/task';
+import { TaskButtonTypes, TaskRightActionBlock } from '@app/shared/types/task';
 import ReanimatedSwipeable, { SwipeableMethods} from 'react-native-gesture-handler/ReanimatedSwipeable';
 import { useCallback, useRef } from 'react';
 import RightAction from './components/task-swipe-righ-action';
 import { SharedValue } from 'react-native-reanimated';
+import { Task } from '@app/entities/task/model/types';
 
 
 interface TaskCardProps {
-    task?: Object;
+    task?: Task | null;
     text?: string,
+    controllButton: Exclude<TaskButtonTypes, 'complete'>,
     rightActionBlock?: TaskRightActionBlock,
     prefix: string,
 }
@@ -27,8 +29,8 @@ export const TaskCard:React.FC<TaskCardProps> = (props) => {
             buttons: [],
         },
         prefix,
+        controllButton,
     } = props;
-
     const swipeableRef = useRef<SwipeableMethods>(null);
 
     const renderRightActions = useCallback(
@@ -57,17 +59,23 @@ export const TaskCard:React.FC<TaskCardProps> = (props) => {
             >
                 <View style={styles.cardWrap}>
                     {
-                    task === null ? (
-                        <View style={styles.nullTaskWrap}>
-                            <Text style={styles.nullTaskText}>{text}</Text>
-                        </View>
-                    ) : (
-                        <View style={styles.cardInfo}>
-                            <TaskCardStatus status={TaskStatus.UNCOMPLETE} priority={TaskPriority.MEDIUM_PRIORITY}/>
-                            <TaskCardInfo/>
-                            <TaskCardControll type={TaskButton.DELETE}/>
-                        </View>
-                    )
+                        task === null ? (
+                            <View style={styles.nullTaskWrap}>
+                                <Text style={styles.nullTaskText}>{text}</Text>
+                            </View>
+                        ) : (
+                            <View style={styles.cardInfo}>
+                                <TaskCardStatus status={task.status} priority={task.priority}/>
+                                <TaskCardInfo
+                                    title={task.title}
+                                    workDuration={task.settings.timeSettings.workDuration}
+                                    totalWorkIntervals={task.settings.workIntervals}
+                                    currentWorkInterval={task.task_state.currentWorkInterval}
+                                    totalTime={task.task_state.totalTime}
+                                />
+                                <TaskCardControll type={controllButton}/>
+                            </View>
+                        )
                     }
                 </View>
             </ReanimatedSwipeable>

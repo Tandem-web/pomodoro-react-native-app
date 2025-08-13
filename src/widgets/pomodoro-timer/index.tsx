@@ -8,6 +8,7 @@ import {
   View,
 } from 'react-native';
 import TimerControls from './ui/timer-controls';
+import { TaskButton } from '@app/shared/types/task';
 
 
 
@@ -16,7 +17,8 @@ function PomodoroTimer(): React.JSX.Element {
   return (
     <View style={styles.pomodoroContainer}>
         <TaskCard
-          task={{}}
+          text="No task selected to work"
+          controllButton={TaskButton.CLOSE}
           rightActionBlock={{
             enabled: true,
             buttons: [

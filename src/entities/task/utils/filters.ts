@@ -1,11 +1,11 @@
-import { TaskPriorityType, TaskStatusType } from "@app/shared/types/task"
-import { Task, Tasks } from "../model/store";
+import { TaskPriorityType, TaskStatusType } from '@app/shared/types/task';
+import { Task, Tasks } from '../model/types';
 
 type Status = TaskStatusType | 'all'
 type Statuses = Array<TaskStatusType>;
 type FilterStatus = Status | Statuses;
 
-const filterByStatus = (task: Task, status: FilterStatus = 'all') => {
+const filterByStatus = (task: Task, status: FilterStatus = 'all'): boolean => {
     if(status === 'all'){
         return true;
     }else{
@@ -21,7 +21,7 @@ type Priority = TaskPriorityType | 'all';
 type Priorities = Array<TaskPriorityType> ;
 type FilterPriority = Priorities | Priority;
 
-const filterByPriority = (task: Task, priority: FilterPriority = 'all') => {
+const filterByPriority = (task: Task, priority: FilterPriority = 'all'): boolean => {
     if(priority === 'all'){
         return true;
     }else{

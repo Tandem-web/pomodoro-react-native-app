@@ -8,13 +8,13 @@ export const TaskButton = {
 export type TaskButtonTypes = (typeof TaskButton)[keyof typeof TaskButton];
 
 
-
 export const TaskStatus = {
     COMPLETE: 'complete',
     UNCOMPLETE: 'uncomplete',
 } as const;
 
 export type TaskStatusType = (typeof TaskStatus)[keyof typeof TaskStatus];
+
 
 export const TaskPriority = {
     LOW_PRIORITY: 'Low',
@@ -29,7 +29,6 @@ export type TaskCardRightButton = {
     type:  Exclude<TaskButtonTypes, 'close' | 'play'>;
     onPress?: () => void;
 }
-
 
 export interface TaskRightActionBlock{
     enabled: boolean,

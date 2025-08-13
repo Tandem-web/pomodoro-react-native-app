@@ -28,11 +28,11 @@ const AddNewTaskForm: React.FC = () => {
     const [title, setTitle] = useState<string>('');
     const [priority, setPriority] = useState<TaskPriorityType | null>(null);
     const [timeSettings, setTimeSettings] = useState<TimeSettings>({
-        workIntervals: 1,
-        workDuration: 1,
-        shortDuration: 1,
-        longDuration: 1,
-        intervalsToLong: 1,
+        workIntervals: 60,
+        workDuration: 60,
+        shortDuration: 60,
+        longDuration: 60,
+        intervalsToLong: 60,
     });
 
     const handleTimeSettingChange = useCallback((key: keyof TimeSettings, value: number) => {
@@ -72,14 +72,13 @@ const AddNewTaskForm: React.FC = () => {
                 settings: {
                     workIntervals: timeSettings.workIntervals,
                     timeSettings: {
-                        workDuration: timeSettings.workDuration,
-                        shortDuration: timeSettings.shortDuration,
-                        longDuration: timeSettings.longDuration,
+                        workDuration: timeSettings.workDuration * 60,
+                        shortDuration: timeSettings.shortDuration * 60,
+                        longDuration: timeSettings.longDuration * 60,
                         intervalsToLong: timeSettings.intervalsToLong,
                     },
                 },
             };
-
             addNewTask(newTask);
             resetForm();
             navigation.goBack();

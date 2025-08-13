@@ -1,16 +1,35 @@
 import { View, Text, StyleSheet } from 'react-native';
 import { FONT_FAMILY } from '@app/shared/font/avenir';
 import { Colors } from '@app/shared/styles/colorsPalete';
+import { Task } from '@app/entities/task/model/types';
+import { useMemo } from 'react';
+import { formatTime } from '@app/shared/utilities/format-time';
 
-// TODO TaskInfoProps interface
 
-const TaskCardInfo: React.FC = () => {
+interface TaskCardInfoProps {
+    title: Task['title'],
+    workDuration: Task['settings']['timeSettings']['workDuration'],
+    totalWorkIntervals: Task['settings']['workIntervals'],
+    currentWorkInterval: Task['task_state']['currentWorkInterval'],
+    totalTime: Task['task_state']['totalTime'],
+}
 
-    const taskText = 'Бла-бла-бла',
-          intervalText = '1/4',
-          workTimeText = '0 minutes',
-          intervalTimeText = '25 min';
-
+const TaskCardInfo: React.FC<TaskCardInfoProps> = (props) => {
+    const {
+        title = null,
+        workDuration = 0,
+        totalWorkIntervals = 0,
+        currentWorkInterval = 0,
+        totalTime = 0,
+    } = props;
+    const taskText = title,
+          intervalText = `${currentWorkInterval}/${totalWorkIntervals}`,
+          workTimeText = useMemo(() => (
+            formatTime(totalTime)
+          ), [totalTime]),
+          intervalTimeText = useMemo(() => (
+            formatTime(workDuration)
+          ), [workDuration]);
     return (
         <>
             <View style={styles.taskInfoContainer}>

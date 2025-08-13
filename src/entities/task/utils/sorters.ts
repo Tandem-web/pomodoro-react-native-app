@@ -1,4 +1,5 @@
-import { Tasks } from '../model/store';
+import { Tasks } from '../model/types';
+
 
 export type TaskSortParams = {
     sortBy: 'createAt' | 'completeAt';

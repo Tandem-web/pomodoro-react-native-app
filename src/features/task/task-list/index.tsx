@@ -1,17 +1,19 @@
 import { StyleSheet, ListRenderItem, FlatList } from 'react-native';
 import { useCallback, useMemo } from 'react';
-import { TaskRightActionBlock } from '@app/shared/types/task';
+import { TaskButtonTypes, TaskRightActionBlock } from '@app/shared/types/task';
 import { TaskCard, TaskPlug } from '../task-card';
+import { Task, Tasks } from '@app/entities/task/model/types';
 
 interface FlatListItem {
-    task: Object | null,
+    task: Task | null,
     key: string,
     isPlug: boolean,
     isFirst: boolean,
 }
 interface TasksListProps {
     prefix: string,
-    tasks?: {}[],
+    tasks?: Tasks,
+    controllButton: Exclude<TaskButtonTypes, 'complete'>
     limit?: number | null,
     sectionStyles?: Object,
     plugText?: string,
@@ -30,6 +32,7 @@ const TasksListSection: React.FC<TasksListProps> = (props) => {
             enabled: false,
             buttons: [],
         },
+        controllButton,
     } = props;
 
 
@@ -62,11 +65,11 @@ const TasksListSection: React.FC<TasksListProps> = (props) => {
     const renderItem = useCallback<ListRenderItem<FlatListItem>>(({ item }) => {
         if (item.isPlug) {
             return item.isFirst
-                ? <TaskCard prefix={prefix} text={plugText} />
+                ? <TaskCard controllButton={controllButton} prefix={prefix} text={plugText} />
                 : <TaskPlug />;
         }
-        return rightActionBlock.enabled ? <TaskCard prefix={prefix} task={item} rightActionBlock={rightActionBlock}/> : <TaskCard prefix={prefix} task={item}/>;
-    }, [plugText, prefix, rightActionBlock]);
+        return rightActionBlock.enabled ? <TaskCard prefix={prefix} task={item.task} controllButton={controllButton} rightActionBlock={rightActionBlock}/> : <TaskCard prefix={prefix} controllButton={controllButton} task={item.task}/>;
+    }, [plugText, prefix, rightActionBlock, controllButton]);
 
     return (
         <FlatList

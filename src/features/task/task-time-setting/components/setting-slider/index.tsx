@@ -71,7 +71,7 @@ const SettingSlider: React.FC<SettingSliderProps> = (props) => {
             return currentIndex.value;
         },(currentValue, previousValue) => {
             if (currentValue !== previousValue) {
-                runOnJS(onChange)(currentValue);
+                runOnJS(onChange)(currentValue + 1);
                 runOnJS(Vibration.vibrate)(10);
             }
         }

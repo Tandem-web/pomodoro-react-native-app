@@ -2,6 +2,7 @@ import Ionicons from '@react-native-vector-icons/ionicons';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Colors } from '@app/shared/styles/colorsPalete';
 import { TaskButtonTypes, TaskButton } from '@app/shared/types/task';
+import { noop } from '@app/shared/utilities/noop';
 
 
 const buttonIcons = {
@@ -17,7 +18,7 @@ interface TaskCardControllProps {
 
 const TaskCardControll: React.FC<TaskCardControllProps> = (props) => {
     const {
-        onPress = () => {},
+        onPress = noop,
         type,
     } = props;
 

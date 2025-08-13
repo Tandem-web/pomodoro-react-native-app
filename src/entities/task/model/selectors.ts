@@ -4,24 +4,25 @@ import useTaskStore from './store';
 
 
 export const useTaskList = (filters?: TaskFilterParams, sorters?: TaskSortParams) => {
-    return useTaskStore(state => {
-        if (!filters){
-            return state.tasks;
-        }
-        const filteredTasks = taskApplyFilters(state.tasks, filters);
+    const tasks = Object.values(useTaskStore(state => state.tasks));
+    if (!filters){
+        return tasks;
+    }
+    const filteredTasks = taskApplyFilters(tasks, filters);
 
-        if(!sorters){
-            return filteredTasks;
-        }
+    if(!sorters){
+        return filteredTasks;
+    }
 
-        return SortTask(filteredTasks, sorters);
-    });
+    const sortedTasks = SortTask(filteredTasks, sorters);
+
+    return sortedTasks;
 };
 
 export const useTaskActions = () => {
-    return useTaskStore(state => ({
-        addNewTask: state.addNewTask,
-        completeTask: state.completeTask,
-        deleteTask: state.deleteTask,
-    }));
+    const addNewTask = useTaskStore(state => state.addNewTask);
+    const completeTask = useTaskStore(state => state.completeTask);
+    const deleteTask = useTaskStore(state => state.deleteTask);
+
+    return { addNewTask, completeTask, deleteTask };
 };

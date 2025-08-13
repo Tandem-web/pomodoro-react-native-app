@@ -14,7 +14,6 @@ interface TaskCardStatusProps {
 function createTaskCardStatusStyle(status: TaskStatusType, priority:TaskPriorityType ): Pick<ViewStyle, 'backgroundColor' | 'borderColor'>{
     const isComplete = status === TaskStatus.COMPLETE;
     const targetPriority = isComplete ? TaskPriority.LOW_PRIORITY : priority;
-
     return {
         backgroundColor: Colors.TaskCardPriority[targetPriority].bgColor,
         borderColor: Colors.TaskCardPriority[targetPriority].borderColor,
@@ -27,6 +26,7 @@ const TaskCardStatus: React.FC<TaskCardStatusProps> = (props) => {
     const taskCardStatusStyle = useMemo<ViewStyle>(() => {
         return createTaskCardStatusStyle(status, priority);
     }, [status, priority]);
+
 
     return (
         <>
