@@ -1,18 +1,18 @@
 import Ionicons from '@react-native-vector-icons/ionicons';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
-import { TaskButton, TaskButtonTypes } from '../../../../shared/types/task';
+import { TaskNameButton } from '../../../../shared/types/task';
 import { Colors } from '@app/shared/styles/colorsPalete';
 import { RefObject, useCallback } from 'react';
 import { SwipeableMethods } from 'react-native-gesture-handler/lib/typescript/components/ReanimatedSwipeable';
 
 const buttonIcons = {
-    'complete': (<Ionicons size={22} color={Colors.TaskCardRightAction[TaskButton.COMPLETE].iconColor} name="checkmark"/>),
-    'delete': (<Ionicons size={22} color={Colors.TaskCardRightAction[TaskButton.DELETE].iconColor} name="trash"/>),
+    'complete': (<Ionicons size={22} color={Colors.TaskCardRightAction[TaskNameButton.COMPLETE].iconColor} name="checkmark"/>),
+    'delete': (<Ionicons size={22} color={Colors.TaskCardRightAction[TaskNameButton.DELETE].iconColor} name="trash"/>),
 } as const;
 
 
 export interface TaskSwipeButtonProps {
-    type:  Exclude<TaskButtonTypes, 'close' | 'play'>;
+    type:  Exclude<TaskNameButton, 'close' | 'play'>;
     onPress?: () => void;
     swipeRef: RefObject<SwipeableMethods | null>;
 }

@@ -13,17 +13,18 @@ type newTask = Pick<Task, 'title' | 'status' | 'priority' | 'settings'>;
 
 interface TasksState{
     tasks: TasksStore,
-    currentTaskId: Task['id'] | null,
+    activeTaskId: Task['id'] | null,
     addNewTask: (task: newTask) => void;
     completeTask: (taskId: Task['id']) => void;
     deleteTask: (taskId: Task['id']) => void;
+    setCurrentTaskId: (taskId: Task['id'] | null) => void;
 }
 
 const useTaskStore = create<TasksState>()(
     persist(
         ( set, get ) => ({
             tasks: {},
-            currentTaskId: null,
+            activeTaskId: null,
             addNewTask: (task) => {
                 const tasks = get().tasks;
                 const newTask = {
@@ -47,6 +48,13 @@ const useTaskStore = create<TasksState>()(
             completeTask: (taskId) => {
                 const tasks = get().tasks;
                 const task = tasks[taskId];
+
+                if(get().activeTaskId === taskId){
+                    set({
+                        activeTaskId: null,
+                    });
+                }
+
                 if (task){
                     set({
                         tasks: {
@@ -65,16 +73,32 @@ const useTaskStore = create<TasksState>()(
                 const tasks = {...get().tasks};
                 delete tasks[taskId];
 
+                if(get().activeTaskId === taskId){
+                    set({
+                        activeTaskId: null,
+                    });
+                }
+
                 set({
                     tasks: tasks,
                 });
+            },
+
+            setCurrentTaskId: (taskId) => {
+                const tasks = {...get().tasks};
+
+                if(taskId === null || !tasks[taskId]) {
+                    set({activeTaskId: null});
+                }else{
+                    set({activeTaskId: taskId});
+                }
             },
         }),
         {
             name: 'task-storage',
             partialize: (state) => ({
                 tasks: state.tasks,
-                currentTaskId: state.currentTaskId,
+                currentTaskId: state.activeTaskId,
             }),
             storage: createJSONStorage(() => zustandMMKVStorage),
         }

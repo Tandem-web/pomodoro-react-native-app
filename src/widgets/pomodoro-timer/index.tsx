@@ -8,25 +8,32 @@ import {
   View,
 } from 'react-native';
 import TimerControls from './ui/timer-controls';
-import { TaskButton } from '@app/shared/types/task';
+import { TaskNameButton } from '@app/shared/types/task';
+import { useGetActiveTask, useTaskActions } from '@app/entities/task/model/selectors';
+import { noop } from '@app/shared/utilities/noop';
 
 
 
 function PomodoroTimer(): React.JSX.Element {
+  const activeTask = useGetActiveTask();
+  const { completeTask, deleteTask } = useTaskActions();
 
   return (
     <View style={styles.pomodoroContainer}>
         <TaskCard
+          task={activeTask}
           text="No task selected to work"
-          controllButton={TaskButton.CLOSE}
+          controllButton={TaskNameButton.CLOSE}
           rightActionBlock={{
             enabled: true,
             buttons: [
               {
                 type:  'complete',
+                onPress: () => activeTask != null ? completeTask(activeTask.id) : noop(),
               },
               {
                 type: 'delete',
+                onPress: () => activeTask != null ? deleteTask(activeTask.id) : noop(),
               },
             ],
           }}

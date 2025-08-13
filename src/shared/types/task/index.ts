@@ -1,11 +1,13 @@
-export const TaskButton = {
+import { Task } from "@app/entities/task/model/types";
+
+export const TaskNameButton = {
     CLOSE: 'close',
     PLAY: 'play',
     DELETE: 'delete',
     COMPLETE: 'complete',
 } as const;
 
-export type TaskButtonTypes = (typeof TaskButton)[keyof typeof TaskButton];
+export type TaskNameButton = (typeof TaskNameButton)[keyof typeof TaskNameButton];
 
 
 export const TaskStatus = {
@@ -26,8 +28,8 @@ export type TaskPriorityType = (typeof TaskPriority)[keyof typeof TaskPriority];
 
 
 export type TaskCardRightButton = {
-    type:  Exclude<TaskButtonTypes, 'close' | 'play'>;
-    onPress?: () => void;
+    type:  Exclude<TaskNameButton, 'close' | 'play'>;
+    onPress?: ((taskId: Task["id"]) => void);
 }
 
 export interface TaskRightActionBlock{

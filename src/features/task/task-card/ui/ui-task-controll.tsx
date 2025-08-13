@@ -1,18 +1,18 @@
 import Ionicons from '@react-native-vector-icons/ionicons';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import { Colors } from '@app/shared/styles/colorsPalete';
-import { TaskButtonTypes, TaskButton } from '@app/shared/types/task';
+import { TaskNameButton } from '@app/shared/types/task';
 import { noop } from '@app/shared/utilities/noop';
 
 
 const buttonIcons = {
-    'close': (<Ionicons size={16} color={Colors.TaskCardControll[TaskButton.CLOSE].iconColor} name="close"/>),
-    'play': (<Ionicons style={{ marginLeft: 2 }} size={12} color={Colors.TaskCardControll[TaskButton.PLAY].iconColor} name="play"/>),
-    'delete': (<Ionicons size={12} color={Colors.TaskCardControll[TaskButton.DELETE].iconColor} name="trash"/>),
+    'close': (<Ionicons size={16} color={Colors.TaskCardControll[TaskNameButton.CLOSE].iconColor} name="close"/>),
+    'play': (<Ionicons style={{ marginLeft: 2 }} size={12} color={Colors.TaskCardControll[TaskNameButton.PLAY].iconColor} name="play"/>),
+    'delete': (<Ionicons size={12} color={Colors.TaskCardControll[TaskNameButton.DELETE].iconColor} name="trash"/>),
 } as const;
 
 interface TaskCardControllProps {
-    type:  Exclude<TaskButtonTypes, 'complete'>;
+    type:  Exclude<TaskNameButton, 'complete'>;
     onPress?: () => void;
 }
 

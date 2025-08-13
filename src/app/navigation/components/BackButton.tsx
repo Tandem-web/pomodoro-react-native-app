@@ -10,7 +10,6 @@ export const NavigationBackButton = React.memo(() => {
   const navigation = useNavigation<YourTaskScreenNavigationProp>();
 
   const handlePress = useCallback(() => {
-    console.log(1);
     navigation.goBack();
   }, [navigation]);
 

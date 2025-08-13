@@ -1,6 +1,6 @@
 import { StyleSheet, ListRenderItem, FlatList } from 'react-native';
 import { useCallback, useMemo } from 'react';
-import { TaskButtonTypes, TaskRightActionBlock } from '@app/shared/types/task';
+import { TaskNameButton, TaskRightActionBlock } from '@app/shared/types/task';
 import { TaskCard, TaskPlug } from '../task-card';
 import { Task, Tasks } from '@app/entities/task/model/types';
 
@@ -13,7 +13,7 @@ interface FlatListItem {
 interface TasksListProps {
     prefix: string,
     tasks?: Tasks,
-    controllButton: Exclude<TaskButtonTypes, 'complete'>
+    controllButton: Exclude<TaskNameButton, 'complete'>
     limit?: number | null,
     sectionStyles?: Object,
     plugText?: string,

@@ -3,6 +3,17 @@ import { SortTask, TaskSortParams } from '../utils/sorters';
 import useTaskStore from './store';
 
 
+export const useGetActiveTask = () => {
+    const tasks = useTaskStore(state => state.tasks);
+    const activeId = useTaskStore(state => state.activeTaskId);
+
+    if(activeId === null || !tasks[activeId]){
+        return null;
+    }else{
+        return tasks[activeId];
+    }
+};
+
 export const useTaskList = (filters?: TaskFilterParams, sorters?: TaskSortParams) => {
     const tasks = Object.values(useTaskStore(state => state.tasks));
     if (!filters){

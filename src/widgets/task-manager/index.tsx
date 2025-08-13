@@ -7,14 +7,15 @@ import { DefaultStyle } from '@app/shared/styles/defaultStyles';
 import Section from '@app/shared/ui-kit/section';
 import DefaultButton from '@app/shared/ui-kit/button/DeafultButton';
 import TasksListSection from '@app/features/task/task-list';
-import { useTaskList } from '@app/entities/task/model/selectors';
-import { TaskButton, TaskStatus } from '@app/shared/types/task';
+import { useTaskActions, useTaskList } from '@app/entities/task/model/selectors';
+import { TaskNameButton, TaskStatus } from '@app/shared/types/task';
 
 type TaskManagerScreenNavigationProp = NativeStackNavigationProp<StackParamList, 'Tabs'>;
 
 const TaskManager: React.FC = () => {
-    const uncompleteTask = useTaskList({status: TaskStatus.UNCOMPLETE}, {sortBy: 'createAt', orderBy: 'asc'});
-    const completeTask = useTaskList({status: TaskStatus.COMPLETE}, {sortBy: 'completeAt', orderBy: 'asc'});
+    const uncompletedTask = useTaskList({status: TaskStatus.UNCOMPLETE}, {sortBy: 'createAt', orderBy: 'asc'});
+    const completedTask = useTaskList({status: TaskStatus.COMPLETE}, {sortBy: 'completeAt', orderBy: 'asc'});
+    const { completeTask, deleteTask } = useTaskActions();
 
     const navigation = useNavigation<TaskManagerScreenNavigationProp>();
     const [sectionSize, setSectionSize] = useState({ width: 0, height: 0 });
@@ -38,7 +39,7 @@ const TaskManager: React.FC = () => {
                 key={'section-1'}
                 title="All Task"
                 linkOption={{
-                  isShow: limitCalc < uncompleteTask.length,
+                  isShow: limitCalc < uncompletedTask.length,
                   text: 'See All',
                   onPress: () => navigation.navigate('AllTasks'),
                 }}
@@ -47,16 +48,18 @@ const TaskManager: React.FC = () => {
                   prefix="sub-all-task"
                   limit={limitCalc}
                   plugText="All tasks are completed"
-                  tasks={uncompleteTask}
-                  controllButton={TaskButton.PLAY}
+                  tasks={uncompletedTask}
+                  controllButton={TaskNameButton.PLAY}
                   rightActionBlock={{
                     enabled: true,
                     buttons: [
                       {
-                        type:  'complete',
+                        type:  TaskNameButton.COMPLETE,
+                        onPress: (taskId) => completeTask(taskId),
                       },
                       {
-                        type: 'delete',
+                        type: TaskNameButton.DELETE,
+                        onPress: (taskId) => deleteTask(taskId),
                       },
                     ],
                   }}
@@ -68,7 +71,7 @@ const TaskManager: React.FC = () => {
               key={'section-2'}
               title="Completed"
               linkOption={{
-                isShow: completeTask.length > 1,
+                isShow: completedTask.length > 1,
                 text: 'See All',
                 onPress: () => navigation.navigate('AllCompleted'),
               }}
@@ -76,14 +79,14 @@ const TaskManager: React.FC = () => {
               <TasksListSection
                 prefix="sub-completed-task"
                 limit={1}
-                tasks={completeTask}
+                tasks={completedTask}
                 plugText="Completed tasks will be here"
-                controllButton={TaskButton.DELETE}
+                controllButton={TaskNameButton.DELETE}
                 rightActionBlock={{
                   enabled: true,
                   buttons: [
                     {
-                      type: 'delete',
+                      type: TaskNameButton.DELETE,
                     },
                   ],
                 }}
