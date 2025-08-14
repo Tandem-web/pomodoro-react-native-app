@@ -1,0 +1,113 @@
+import { LayoutChangeEvent, View, StyleSheet } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { useCallback, useMemo, useState } from 'react';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { StackParamList } from '@app/shared/types/navigation';
+import { DefaultStyle } from '@app/shared/styles/defaultStyles';
+import Section from '@app/shared/ui-kit/section';
+import DefaultButton from '@app/shared/ui-kit/button/DeafultButton';
+import TasksListSection from '@app/features/task/task-list';
+import { TaskNameButton, TaskStatus } from '@app/shared/types/task';
+import { useTaskActions, useTaskList } from '@app/entities/task/intex';
+
+type TaskManagerScreenNavigationProp = NativeStackNavigationProp<StackParamList, 'Tabs'>;
+
+const TaskManager: React.FC = () => {
+    const uncompletedTask = useTaskList({status: TaskStatus.UNCOMPLETE}, {sortBy: 'createAt', orderBy: 'asc'});
+    const completedTask = useTaskList({status: TaskStatus.COMPLETE}, {sortBy: 'completeAt', orderBy: 'asc'});
+
+    const { completeTask, deleteTask } = useTaskActions();
+
+    const navigation = useNavigation<TaskManagerScreenNavigationProp>();
+    const [sectionSize, setSectionSize] = useState({ width: 0, height: 0 });
+
+    const handleLayout = useCallback((event: LayoutChangeEvent) => {
+        const { width, height } = event.nativeEvent.layout;
+        setSectionSize({ width, height });
+    }, []);
+
+    const limitCalc = useMemo(() => {
+      return Math.floor(sectionSize.height / 75);
+    }, [sectionSize.height]);
+
+    return (
+        <View style={styles.innerContainer}>
+            <View
+              style={DefaultStyle.fullSpace}
+              onLayout={handleLayout}
+            >
+              <Section
+                key={'section-1'}
+                title="All Task"
+                linkOption={{
+                  isShow: limitCalc < uncompletedTask.length,
+                  text: 'See All',
+                  onPress: () => navigation.navigate('AllTasks'),
+                }}
+              >
+                <TasksListSection
+                  prefix="sub-all-task"
+                  limit={limitCalc}
+                  plugText="All tasks are completed"
+                  tasks={uncompletedTask}
+                  controllButton={TaskNameButton.PLAY}
+                  rightActionBlock={{
+                    enabled: true,
+                    buttons: [
+                      {
+                        type:  TaskNameButton.COMPLETE,
+                        onPress: (taskId) => completeTask(taskId),
+                      },
+                      {
+                        type: TaskNameButton.DELETE,
+                        onPress: (taskId) => deleteTask(taskId),
+                      },
+                    ],
+                  }}
+                />
+              </Section>
+            </View>
+
+            <Section
+              key={'section-2'}
+              title="Completed"
+              linkOption={{
+                isShow: completedTask.length > 1,
+                text: 'See All',
+                onPress: () => navigation.navigate('AllCompleted'),
+              }}
+            >
+              <TasksListSection
+                prefix="sub-completed-task"
+                limit={1}
+                tasks={completedTask}
+                plugText="Completed tasks will be here"
+                controllButton={TaskNameButton.DELETE}
+                rightActionBlock={{
+                  enabled: false,
+                  buttons: [
+                    {
+                      type: TaskNameButton.DELETE,
+                      onPress: (taskId) => deleteTask(taskId),
+                    },
+                  ],
+                }}
+              />
+            </Section>
+            <DefaultButton
+              text="Add new task"
+              icon={{name: 'plus', size: 16}}
+              onPress={() => navigation.navigate('AddTask')}
+            />
+        </View>
+    );
+};
+
+const styles = StyleSheet.create({
+  innerContainer: {
+    flex: 1,
+    gap: 25,
+  },
+});
+
+export default TaskManager;

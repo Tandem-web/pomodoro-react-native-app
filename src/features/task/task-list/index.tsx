@@ -1,0 +1,94 @@
+import { StyleSheet, ListRenderItem, FlatList } from 'react-native';
+import { useCallback, useMemo } from 'react';
+import { TaskNameButton, TaskRightActionBlock } from '@app/shared/types/task';
+
+import { Task, Tasks } from '@app/entities/task/model/types';
+import { TaskCard, TaskPlug } from '@app/entities/task/ui/task-card';
+
+interface FlatListItem {
+    task?: Task,
+    key: string,
+    isPlug: boolean,
+    isFirst: boolean,
+}
+interface TasksListProps {
+    prefix: string,
+    tasks?: Tasks,
+    controllButton: Exclude<TaskNameButton, 'complete'>
+    limit?: number | null,
+    sectionStyles?: Object,
+    plugText?: string,
+    rightActionBlock?: TaskRightActionBlock,
+}
+
+const FlatListKeyExtractor = (item:FlatListItem) => item.key;
+
+const TasksListSection: React.FC<TasksListProps> = (props) => {
+    const {
+        prefix,
+        tasks = [],
+        limit = 1,
+        plugText = 'A text was supposed to be here',
+        rightActionBlock = {
+            enabled: false,
+            buttons: [],
+        },
+        controllButton,
+    } = props;
+
+
+    const listData = useMemo<FlatListItem[]>(() => {
+        if(tasks.length === 0) {
+            return Number(limit) > 0
+                ?   Array.from({length: Number(limit)}, (_, i) => ({
+                        task: undefined,
+                        key: `${prefix}__${i}`,
+                        isPlug: true,
+                        isFirst: i === 0,
+                    })
+                )
+                :   [];
+        }
+
+        const slicedTasks = limit === null ? tasks
+                                            : tasks.slice(-Math.abs(limit));
+
+        return slicedTasks.map((task, index) => ({
+            task: task,
+            key: `${prefix}__${index}`,
+            isPlug: false,
+            isFirst: false,
+        }));
+
+    }, [tasks, limit, prefix]);
+
+
+    const renderItem = useCallback<ListRenderItem<FlatListItem>>(({ item }) => {
+        if (item.isPlug) {
+            return item.isFirst
+                ? <TaskCard controllButton={controllButton} prefix={prefix} text={plugText} />
+                : <TaskPlug />;
+        }
+        return rightActionBlock.enabled ? <TaskCard prefix={prefix} task={item.task} controllButton={controllButton} rightActionBlock={rightActionBlock}/> : <TaskCard prefix={prefix} controllButton={controllButton} task={item.task}/>;
+    }, [plugText, prefix, rightActionBlock, controllButton]);
+
+    return (
+        <FlatList
+            data={listData}
+            renderItem={renderItem}
+            keyExtractor={FlatListKeyExtractor}
+            contentContainerStyle={styles.flatListContainerStyle}
+            decelerationRate={'normal'}
+            scrollEventThrottle={32}
+            showsVerticalScrollIndicator={false}
+        />
+    );
+};
+
+const styles = StyleSheet.create({
+    flatListContainerStyle: {
+        gap: 15,
+    },
+});
+
+export default TasksListSection;
