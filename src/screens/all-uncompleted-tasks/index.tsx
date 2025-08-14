@@ -5,12 +5,12 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import TasksListSection from '@app/features/task/task-list';
-import { useTaskActions } from '@app/entities/task/intex';
-import { TaskNameButton } from '@app/shared/types/task';
+import { useTaskActions, useTaskList } from '@app/entities/task/intex';
+import { TaskNameButton, TaskStatus } from '@app/shared/types/task';
 
-const testTasks = new Array(20).fill(1);
 
 function AllTasksScreen(): React.JSX.Element {
+  const uncompletedTask = useTaskList({status: TaskStatus.UNCOMPLETE}, {sortBy: 'completeAt', orderBy: 'asc'});
   const {completeTask , deleteTask } = useTaskActions();
   return (
     <SafeAreaView edges={['left', 'right', 'bottom']} style={DefaultStyle.screen}>
@@ -23,7 +23,7 @@ function AllTasksScreen(): React.JSX.Element {
             key={'all-task-section-1'}
             prefix="completed-task"
             limit={null}
-            tasks={testTasks}
+            tasks={uncompletedTask}
             controllButton={TaskNameButton.PLAY}
             rightActionBlock={{
               enabled: true,
