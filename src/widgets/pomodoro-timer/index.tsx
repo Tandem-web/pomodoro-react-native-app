@@ -1,4 +1,3 @@
-import { TaskCard } from '@app/features/task/task-card';
 import ProgressRing from '@app/features/timer/progress-ring';
 import TimerText from '@app/features/timer/timer-text';
 import { Colors } from '@app/shared/styles/colorsPalete';
@@ -11,6 +10,7 @@ import TimerControls from './ui/timer-controls';
 import { TaskNameButton } from '@app/shared/types/task';
 import { noop } from '@app/shared/utilities/noop';
 import { useGetActiveTask, useTaskActions } from '@app/entities/task/intex';
+import { TaskCard } from '@app/entities/task/ui/task-card';
 
 
 

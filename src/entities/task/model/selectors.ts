@@ -8,7 +8,7 @@ export const useGetActiveTask = () => {
     const activeId = useTaskStore(state => state.activeTaskId);
 
     if(activeId === null || !tasks[activeId]){
-        return null;
+        return undefined;
     }else{
         return tasks[activeId];
     }

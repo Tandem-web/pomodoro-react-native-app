@@ -22,14 +22,18 @@ const TaskCardInfo: React.FC<TaskCardInfoProps> = (props) => {
         currentWorkInterval = 0,
         totalTime = 0,
     } = props;
-    const taskText = title,
-          intervalText = `${currentWorkInterval}/${totalWorkIntervals}`,
-          workTimeText = useMemo(() => (
-            formatTime(totalTime)
-          ), [totalTime]),
-          intervalTimeText = useMemo(() => (
-            formatTime(workDuration)
-          ), [workDuration]);
+
+    const taskText = title;
+    const intervalText = `${currentWorkInterval}/${totalWorkIntervals}`;
+
+    const workTimeText  =   useMemo(() => (
+                                formatTime(totalTime)
+                            ), [totalTime]);
+
+    const intervalTimeText  =   useMemo(() => (
+                                    formatTime(workDuration)
+                                ), [workDuration]);
+
     return (
         <>
             <View style={styles.taskInfoContainer}>

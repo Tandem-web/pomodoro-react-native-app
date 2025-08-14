@@ -1,8 +1,9 @@
 import { StyleSheet, ListRenderItem, FlatList } from 'react-native';
 import { useCallback, useMemo } from 'react';
 import { TaskNameButton, TaskRightActionBlock } from '@app/shared/types/task';
-import { TaskCard, TaskPlug } from '../task-card';
+
 import { Task, Tasks } from '@app/entities/task/model/types';
+import { TaskCard, TaskPlug } from '@app/entities/task/ui/task-card';
 
 interface FlatListItem {
     task?: Task,

@@ -3,7 +3,7 @@ import Reanimated, { SharedValue, useAnimatedStyle } from 'react-native-reanimat
 import { SwipeableMethods } from 'react-native-gesture-handler/lib/typescript/components/ReanimatedSwipeable';
 import { RefObject } from 'react';
 import { TaskCardRightButton } from '@app/shared/types/task';
-import TaskSwipeButton from './ui-task-swipe-button';
+import TaskSwipeButton from './task-card-swipe-button';
 
 interface RightActionProps{
     prog: SharedValue<number>,
