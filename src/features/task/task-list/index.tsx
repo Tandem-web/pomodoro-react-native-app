@@ -5,7 +5,7 @@ import { TaskCard, TaskPlug } from '../task-card';
 import { Task, Tasks } from '@app/entities/task/model/types';
 
 interface FlatListItem {
-    task: Task | null,
+    task?: Task,
     key: string,
     isPlug: boolean,
     isFirst: boolean,
@@ -40,7 +40,7 @@ const TasksListSection: React.FC<TasksListProps> = (props) => {
         if(tasks.length === 0) {
             return Number(limit) > 0
                 ?   Array.from({length: Number(limit)}, (_, i) => ({
-                        task: null,
+                        task: undefined,
                         key: `${prefix}__${i}`,
                         isPlug: true,
                         isFirst: i === 0,

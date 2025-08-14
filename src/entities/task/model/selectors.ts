@@ -34,6 +34,7 @@ export const useTaskActions = () => {
     const addNewTask = useTaskStore(state => state.addNewTask);
     const completeTask = useTaskStore(state => state.completeTask);
     const deleteTask = useTaskStore(state => state.deleteTask);
+    const setCurrentTaskId = useTaskStore(state => state.setCurrentTaskId);
 
-    return { addNewTask, completeTask, deleteTask };
+    return { addNewTask, completeTask, deleteTask, setCurrentTaskId };
 };

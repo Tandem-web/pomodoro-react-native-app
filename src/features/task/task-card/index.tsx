@@ -1,19 +1,21 @@
 import { View, StyleSheet, Text} from 'react-native';
-import TaskCardStatus from './ui/ui-task-status';
-import TaskCardInfo from './ui/ui-task-info';
-import TaskCardControll from './ui/ui-task-controll';
+import TaskCardStatus from './ui/card/ui-task-status';
+import TaskCardInfo from './ui/card/ui-task-info';
+import TaskCardControll from './ui/card/ui-task-controll';
 import { Colors } from '@app/shared/styles/colorsPalete';
 import { FONT_FAMILY } from '@app/shared/font/avenir';
 import { TaskNameButton, TaskRightActionBlock } from '@app/shared/types/task';
 import ReanimatedSwipeable, { SwipeableMethods} from 'react-native-gesture-handler/ReanimatedSwipeable';
 import { useCallback, useRef } from 'react';
-import RightAction from './components/task-swipe-righ-action';
+import RightAction from './ui/swipe-buttons/ui-task-swipe-block';
 import { SharedValue } from 'react-native-reanimated';
 import { Task } from '@app/entities/task/model/types';
+import { noop } from '@app/shared/utilities/noop';
+import { useTaskActions } from '@app/entities/task/model/selectors';
 
 
 interface TaskCardProps {
-    task?: Task | null;
+    task?: Task;
     text?: string,
     controllButton: Exclude<TaskNameButton, 'complete'>,
     rightActionBlock?: TaskRightActionBlock,
@@ -31,21 +33,50 @@ export const TaskCard:React.FC<TaskCardProps> = (props) => {
         prefix,
         controllButton,
     } = props;
+    const { setCurrentTaskId, deleteTask } = useTaskActions();
     const swipeableRef = useRef<SwipeableMethods>(null);
 
-    const renderRightActions = useCallback(
-        (progress: SharedValue<number>, dragX: SharedValue<number>) => (
+    const renderRightActions = useCallback((progress: SharedValue<number>, dragX: SharedValue<number>) => {
+        if (!task || rightActionBlock.enabled === false || rightActionBlock.buttons.length === 0) {
+            return null;
+        }
+        const buttons = rightActionBlock.buttons.map((item) => {
+            if(!item.onPress){
+                item.onPress = () => noop;
+            }
+            return item;
+        });
+        return (
             <RightAction
-                id={task?.id}
+                id={task.id}
                 swipeRef={swipeableRef}
-                buttons={rightActionBlock.buttons}
+                buttons={buttons}
                 prog={progress}
                 drag={dragX}
                 prefix={prefix}
             />
-        ),
-        [rightActionBlock.buttons, prefix]
-    );
+        );
+    }, [rightActionBlock.buttons, rightActionBlock.enabled, prefix, task]);
+
+    const controllHandler = useCallback((type: TaskCardProps['controllButton']) => {
+        if (!task){
+            return null;
+        }
+        switch (type) {
+            case TaskNameButton.CLOSE:
+                setCurrentTaskId(null);
+                break;
+            case TaskNameButton.PLAY:
+                setCurrentTaskId(task.id);
+                break;
+            case TaskNameButton.DELETE:
+                deleteTask(task.id);
+                break;
+            default:
+                noop();
+                break;
+        }
+    }, [task, deleteTask, setCurrentTaskId]);
 
     return (
         <>
@@ -74,7 +105,7 @@ export const TaskCard:React.FC<TaskCardProps> = (props) => {
                                     currentWorkInterval={task.task_state.currentWorkInterval}
                                     totalTime={task.task_state.totalTime}
                                 />
-                                <TaskCardControll type={controllButton}/>
+                                <TaskCardControll type={controllButton} onPress={() => controllHandler(controllButton)}/>
                             </View>
                         )
                     }

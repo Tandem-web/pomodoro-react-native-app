@@ -29,7 +29,7 @@ export type TaskPriorityType = (typeof TaskPriority)[keyof typeof TaskPriority];
 
 export type TaskCardRightButton = {
     type:  Exclude<TaskNameButton, 'close' | 'play'>;
-    onPress?: (taskId: Task["id"]) => void;
+    onPress: (taskId: Task["id"]) => void;
 }
 
 export interface TaskRightActionBlock{

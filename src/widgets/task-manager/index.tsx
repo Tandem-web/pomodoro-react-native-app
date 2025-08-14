@@ -15,6 +15,7 @@ type TaskManagerScreenNavigationProp = NativeStackNavigationProp<StackParamList,
 const TaskManager: React.FC = () => {
     const uncompletedTask = useTaskList({status: TaskStatus.UNCOMPLETE}, {sortBy: 'createAt', orderBy: 'asc'});
     const completedTask = useTaskList({status: TaskStatus.COMPLETE}, {sortBy: 'completeAt', orderBy: 'asc'});
+
     const { completeTask, deleteTask } = useTaskActions();
 
     const navigation = useNavigation<TaskManagerScreenNavigationProp>();
@@ -83,10 +84,11 @@ const TaskManager: React.FC = () => {
                 plugText="Completed tasks will be here"
                 controllButton={TaskNameButton.DELETE}
                 rightActionBlock={{
-                  enabled: true,
+                  enabled: false,
                   buttons: [
                     {
                       type: TaskNameButton.DELETE,
+                      onPress: (taskId) => deleteTask(taskId),
                     },
                   ],
                 }}

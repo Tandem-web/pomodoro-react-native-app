@@ -3,21 +3,21 @@ import Reanimated, { SharedValue, useAnimatedStyle } from 'react-native-reanimat
 import { SwipeableMethods } from 'react-native-gesture-handler/lib/typescript/components/ReanimatedSwipeable';
 import { RefObject } from 'react';
 import { TaskCardRightButton } from '@app/shared/types/task';
-import TaskSwipeButton from '../ui/ui-task-swipe-button';
+import TaskSwipeButton from './ui-task-swipe-button';
 
 interface RightActionProps{
     prog: SharedValue<number>,
     drag: SharedValue<number>,
-    buttons?: TaskCardRightButton[],
+    buttons: TaskCardRightButton[],
     swipeRef: RefObject<SwipeableMethods | null>,
     prefix: string,
-    id: string | undefined,
+    id: string,
 }
 
 const RightAction: React.FC<RightActionProps> = (props) => {
     const {
         drag,
-        buttons = [],
+        buttons,
         swipeRef,
         prefix,
         id = '',
@@ -40,7 +40,7 @@ const RightAction: React.FC<RightActionProps> = (props) => {
             <Reanimated.View style={[styleAnimation, styles.reanimatedContainer, {width: measure}]}>
                 {
                     buttons.map((item, index) => (
-                        <TaskSwipeButton key={`${prefix}-right-block-button-${index}`} type={item.type} onPress={() => item.onPress(id)} swipeRef={swipeRef}/>
+                        <TaskSwipeButton key={`${prefix}-right-block-button-${index}`} type={item.type} onPress={() => item.onPress(id!)} swipeRef={swipeRef}/>
                     ))
                 }
             </Reanimated.View>
