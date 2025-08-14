@@ -6,10 +6,10 @@ import FormTextInput from '@app/shared/ui-kit/form/text-input';
 import GroupRadioInputs from '@app/features/task/task-priority-radio-group';
 import TaskTimeSetting from '@app/features/task/task-time-setting';
 import DefaultButton from '@app/shared/ui-kit/button/DeafultButton';
-import { useTaskActions } from '@app/entities/task/model/selectors';
 import { useCallback, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { YourTaskScreenNavigationProp } from '@app/shared/types/navigation';
+import { useTaskActions } from '@app/entities/task/intex';
 
 interface TimeSettings {
   workIntervals: number;

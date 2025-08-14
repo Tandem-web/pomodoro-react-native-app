@@ -9,8 +9,8 @@ import {
 } from 'react-native';
 import TimerControls from './ui/timer-controls';
 import { TaskNameButton } from '@app/shared/types/task';
-import { useGetActiveTask, useTaskActions } from '@app/entities/task/model/selectors';
 import { noop } from '@app/shared/utilities/noop';
+import { useGetActiveTask, useTaskActions } from '@app/entities/task/intex';
 
 
 

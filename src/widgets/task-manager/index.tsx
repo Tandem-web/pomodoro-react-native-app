@@ -7,8 +7,8 @@ import { DefaultStyle } from '@app/shared/styles/defaultStyles';
 import Section from '@app/shared/ui-kit/section';
 import DefaultButton from '@app/shared/ui-kit/button/DeafultButton';
 import TasksListSection from '@app/features/task/task-list';
-import { useTaskActions, useTaskList } from '@app/entities/task/model/selectors';
 import { TaskNameButton, TaskStatus } from '@app/shared/types/task';
+import { useTaskActions, useTaskList } from '@app/entities/task/intex';
 
 type TaskManagerScreenNavigationProp = NativeStackNavigationProp<StackParamList, 'Tabs'>;
 
