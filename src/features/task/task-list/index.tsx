@@ -3,7 +3,7 @@ import { useCallback, useMemo } from 'react';
 import { TaskNameButton, TaskRightActionBlock } from '@app/shared/types/task';
 
 import { Task, Tasks } from '@app/entities/task/model/types';
-import { TaskCard, TaskPlug } from '@app/entities/task/ui/task-card';
+import { TaskCard, TaskPlug } from '@app/entities/task/intex';
 
 interface FlatListItem {
     task?: Task,

@@ -4,26 +4,17 @@ import { Colors } from '@app/shared/styles/colorsPalete';
 import { TaskNameButton } from '@app/shared/types/task';
 import { ReactNode, useCallback } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import TaskCardStatus from './components/ui-task-status';
-import TaskCardInfo from './components/ui-task-info';
-import TaskCardControll from './components/ui-task-controll';
+import TaskCardStatus from './ui-task-status';
+import TaskCardInfo from './ui-task-info';
+import TaskCardControll from './ui-task-controll';
 import { useTaskActions } from '@app/entities/task/intex';
 import { noop } from '@app/shared/utilities/noop';
-
-interface TaskCardBlockProps {
-    task?: Task | null;
-    text: string,
-    controllButton: Exclude<TaskNameButton, 'complete'>,
-}
+import { TaskCardContext, useTaskCardContext } from '../../context/task-card-context';
 
 
-export const TaskCardBlock: React.FC<TaskCardBlockProps> = (props) => {
-    const {
-        task = null,
-        text,
-        controllButton,
-    } = props;
 
+export const TaskCardBlock: React.FC = () => {
+    const { task, text, controllButton } = useTaskCardContext();
     let content: ReactNode;
 
     if(!task){
@@ -41,12 +32,12 @@ export const TaskCardBlock: React.FC<TaskCardBlockProps> = (props) => {
     );
 };
 
-const TaskPlugText: React.FC<Pick<TaskCardBlockProps, 'text'>> = ({ text }) => {
+const TaskPlugText: React.FC<Pick<TaskCardContext, 'text'>> = ({ text }) => {
     return (
         <View style={styles.nullTaskWrap}>
             <Text style={styles.nullTaskText}>{text}</Text>
         </View>
-    )
+    );
 };
 
 interface TaskCardContentProps{
@@ -61,7 +52,7 @@ const TaskCardContent: React.FC<TaskCardContentProps> = (props) => {
 
     const { setCurrentTaskId, deleteTask } = useTaskActions();
 
-    const controllHandler = useCallback((type: TaskCardBlockProps['controllButton']) => {
+    const controllHandler = useCallback((type: TaskCardContext['controllButton']) => {
         if (!task){
             return null;
         }

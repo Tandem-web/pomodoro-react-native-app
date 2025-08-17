@@ -1,47 +1,32 @@
-import { Task } from '@app/entities/task/model/types';
-import { TaskRightActionBlock } from '@app/shared/types/task';
-import { noop } from '@app/shared/utilities/noop';
 import { ReactNode, useCallback, useRef } from 'react';
 import ReanimatedSwipeable, { SwipeableMethods} from 'react-native-gesture-handler/ReanimatedSwipeable';
 import { SharedValue } from 'react-native-reanimated';
 import { StyleSheet } from 'react-native';
-import RightAction from './components/task-card-swipe-block';
+import RightAction from './task-card-swipe-block';
+import { useTaskCardContext } from '../../context/task-card-context';
 
 interface TaskSwipeableWrapperProps {
     children: ReactNode,
-    task: Task,
-    prefix: string,
-    rightActionBlock: TaskRightActionBlock,
 }
 
 const TaskSwipeableWrapper: React.FC<TaskSwipeableWrapperProps> = (props) => {
     const {
-        task,
-        rightActionBlock,
-        prefix,
         children,
     } = props;
+
+    const { rightActionBlock } = useTaskCardContext();
 
     const swipeableRef = useRef<SwipeableMethods>(null);
 
     const renderRightActions = useCallback((progress: SharedValue<number>, dragX: SharedValue<number>) => {
-        const buttons = rightActionBlock.buttons.map((item) => {
-            if(!item.onPress){
-                item.onPress = () => noop;
-            }
-            return item;
-        });
         return (
             <RightAction
-                id={task.id}
                 swipeRef={swipeableRef}
-                buttons={buttons}
                 prog={progress}
                 drag={dragX}
-                prefix={prefix}
             />
         );
-    }, [rightActionBlock.buttons, prefix, task]);
+    }, []);
 
     return (
             <ReanimatedSwipeable

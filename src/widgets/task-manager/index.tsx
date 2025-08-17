@@ -8,15 +8,13 @@ import Section from '@app/shared/ui-kit/section';
 import DefaultButton from '@app/shared/ui-kit/button/DeafultButton';
 import TasksListSection from '@app/features/task/task-list';
 import { TaskNameButton, TaskStatus } from '@app/shared/types/task';
-import { useTaskActions, useTaskList } from '@app/entities/task/intex';
+import { useTaskList } from '@app/entities/task/intex';
 
 type TaskManagerScreenNavigationProp = NativeStackNavigationProp<StackParamList, 'Tabs'>;
 
 const TaskManager: React.FC = () => {
     const uncompletedTask = useTaskList({status: TaskStatus.UNCOMPLETE}, {sortBy: 'createAt', orderBy: 'asc'});
     const completedTask = useTaskList({status: TaskStatus.COMPLETE}, {sortBy: 'completeAt', orderBy: 'asc'});
-
-    const { completeTask, deleteTask } = useTaskActions();
 
     const navigation = useNavigation<TaskManagerScreenNavigationProp>();
     const [sectionSize, setSectionSize] = useState({ width: 0, height: 0 });
@@ -53,16 +51,7 @@ const TaskManager: React.FC = () => {
                   controllButton={TaskNameButton.PLAY}
                   rightActionBlock={{
                     enabled: true,
-                    buttons: [
-                      {
-                        type:  TaskNameButton.COMPLETE,
-                        onPress: (taskId) => completeTask(taskId),
-                      },
-                      {
-                        type: TaskNameButton.DELETE,
-                        onPress: (taskId) => deleteTask(taskId),
-                      },
-                    ],
+                    buttons: [TaskNameButton.COMPLETE, TaskNameButton.DELETE],
                   }}
                 />
               </Section>
@@ -85,12 +74,7 @@ const TaskManager: React.FC = () => {
                 controllButton={TaskNameButton.DELETE}
                 rightActionBlock={{
                   enabled: false,
-                  buttons: [
-                    {
-                      type: TaskNameButton.DELETE,
-                      onPress: (taskId) => deleteTask(taskId),
-                    },
-                  ],
+                  buttons: [TaskNameButton.DELETE],
                 }}
               />
             </Section>

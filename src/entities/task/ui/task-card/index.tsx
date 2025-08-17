@@ -1,8 +1,8 @@
-import { View, StyleSheet} from 'react-native';
 import { TaskNameButton, TaskRightActionBlock } from '@app/shared/types/task';
-import TaskSwipeableWrapper from './components/swipeable';
+import TaskSwipeableWrapper from './components/swipeable/task-swipeable-wrapper';
 import { Task } from '../../model/types';
-import { TaskCardBlock } from './components/common';
+import { TaskCardBlock } from './components/common/task-card-block';
+import TaskCardProvider from './context/task-card-provider';
 
 
 
@@ -26,47 +26,28 @@ export const TaskCard:React.FC<TaskCardProps> = (props) => {
         controllButton,
     } = props;
 
+    let content;
     if(rightActionBlock.enabled && task && rightActionBlock.buttons.length !== 0){
-        return (
-            <>
-                <TaskSwipeableWrapper
-                    task={task}
-                    prefix={prefix}
-                    rightActionBlock={rightActionBlock}
-                >
-                    <TaskCardBlock
-                        task={task}
-                        text={text}
-                        controllButton={controllButton}
-                    />
-                </TaskSwipeableWrapper>
-            </>
-        )
+        content = (
+            <TaskSwipeableWrapper>
+                <TaskCardBlock/>
+            </TaskSwipeableWrapper>
+        );
     }else{
-        return (
-            <>
-                <TaskCardBlock
-                    task={task}
-                    text={text}
-                    controllButton={controllButton}
-                />
-            </>
+        content = (
+            <TaskCardBlock/>
         );
     }
-}
 
-export const TaskPlug = () => {
-    return(
-        <View style={styles.taskPlug}/>
+    return (
+        <TaskCardProvider
+            task={task}
+            text={text}
+            controllButton={controllButton}
+            prefix={prefix}
+            rightActionBlock={rightActionBlock}
+        >
+            {content}
+        </TaskCardProvider>
     );
 };
-
-const styles = StyleSheet.create({
-    taskPlug: {
-        height: 60,
-        borderRadius: 10,
-        paddingHorizontal: 15,
-        paddingVertical: 10,
-        width: '100%',
-    },
-});
