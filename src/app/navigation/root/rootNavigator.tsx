@@ -1,4 +1,3 @@
-import { useCallback } from 'react';
 import { NavigationBackButton } from '../components/BackButton';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { StackParamList } from '@app/shared/types/navigation';
@@ -12,11 +11,11 @@ import { Colors } from '@app/shared/styles/colorsPalete';
 
 const Stack = createNativeStackNavigator<StackParamList>();
 
-export const PomodoroNavigation = () => {
-
-  const renderBackButton = useCallback(() => {
+const renderBackButton = () => {
     return (<NavigationBackButton />);
-  }, []);
+};
+
+export const PomodoroNavigation = () => {
 
   return (
     <Stack.Navigator

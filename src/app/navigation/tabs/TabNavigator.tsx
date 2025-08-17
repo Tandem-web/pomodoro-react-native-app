@@ -1,5 +1,4 @@
 import { BottomTabBarProps, createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { useCallback } from 'react';
 import TabBar from './TabBar';
 import { Screens } from '@app/shared/consts';
 import { Colors } from '@app/shared/styles/colorsPalete';
@@ -11,8 +10,11 @@ import { TabParamList } from '@app/shared/types/navigation';
 
 const Tab = createBottomTabNavigator<TabParamList>();
 
+const renderTabBar = (props: BottomTabBarProps) => {
+  return ( <TabBar {...props} /> );
+};
+
 export const PomodoroBottomTabs = () => {
-  const renderTabBar = useCallback((props: BottomTabBarProps) => <TabBar {...props} />, []);
 
   return (
     <Tab.Navigator
