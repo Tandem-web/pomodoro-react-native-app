@@ -31,18 +31,26 @@ const AppColors = {
 };
 
 const TaskCardColors = {
-    TaskCardStatus: {
-        'low-priority': {
+    TaskCardPriority: {
+        'Idle': {
+            borderColor: BaseColors.gray600,
+            bgColor: 'rgba(107, 114, 128, 0.5)',
+            textColor: BaseColors.white,
+        },
+        'Low': {
             borderColor: AppColors.success,
             bgColor: 'rgba(51, 138, 104, 0.5)',
+            textColor: AppColors.success,
         },
-        'medium-priority': {
+        'Medium': {
             borderColor: AppColors.warning,
             bgColor: 'rgba(213, 191, 146, 0.5)',
+            textColor: AppColors.warning,
         },
-        'high-priority': {
+        'High': {
             borderColor: AppColors.danger,
             bgColor: 'rgba(187, 104, 126, 0.5)',
+            textColor: AppColors.danger,
         },
     },
 

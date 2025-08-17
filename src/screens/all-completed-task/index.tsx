@@ -1,24 +1,37 @@
+import Section from '@app/features/section';
+import TasksListSection from '@app/features/task-list';
+import { DefaultStyle } from '@app/shared/styles/defaultStyles';
 import {
   StatusBar,
-  SafeAreaView,
 } from 'react-native';
-import TasksListSection from '../../widgets/task-list';
-import { DefaultStyle } from '../../shared/styles/defaultStyles';
+
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const testTasks = new Array(5).fill(1);
 
 function AllCompletedTaskScreen(): React.JSX.Element {
 
   return (
-    <SafeAreaView  style={[DefaultStyle.screen]}>
+    <SafeAreaView  edges={['left', 'right', 'bottom']} style={DefaultStyle.screen}>
         <StatusBar barStyle="light-content"/>
-        <TasksListSection
-          key={'completed-task-section-1'}
-          prefix="completed-task"
-          limit={null}
-          tasks={testTasks}
-          paddBottom={30}
-        />
+        <Section
+          key={'section-nested-all-complete'}
+          style={{ paddingBottom: 30 }}
+        >
+          <TasksListSection
+            key={'completed-task-section-1'}
+            prefix="completed-task"
+            limit={null}
+            tasks={testTasks}
+            rightActionBlock={{
+              enabled: true,
+              buttons: [{
+                type: 'delete',
+              }],
+            }}
+          />
+        </Section>
+
     </SafeAreaView>
   );
 }
