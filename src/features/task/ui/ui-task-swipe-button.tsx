@@ -4,6 +4,7 @@ import { TaskButton, TaskButtonTypes } from '../../../shared/types/task';
 import { Colors } from '@app/shared/styles/colorsPalete';
 import { RefObject, useCallback } from 'react';
 import { SwipeableMethods } from 'react-native-gesture-handler/lib/typescript/components/ReanimatedSwipeable';
+import { noop } from '../../../shared/utilities/noop';
 
 const buttonIcons = {
     'complete': (<Ionicons size={22} color={Colors.TaskCardRightAction[TaskButton.COMPLETE].iconColor} name="checkmark"/>),
@@ -20,7 +21,7 @@ export interface TaskSwipeButtonProps {
 const TaskSwipeButton: React.FC<TaskSwipeButtonProps> = (props) => {
     const {
         type,
-        onPress = () => {},
+        onPress = noop,
         swipeRef,
     } = props;
 

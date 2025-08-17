@@ -22,11 +22,11 @@ export const TaskCard:React.FC<TaskCardProps> = (props) => {
     const {
         task = null,
         text = 'A text was supposed to be here',
+        prefix,
         rightActionBlock = {
             enabled: false,
             buttons: [],
         },
-        prefix,
     } = props;
 
     const swipeableRef = useRef<SwipeableMethods>(null);
@@ -57,17 +57,17 @@ export const TaskCard:React.FC<TaskCardProps> = (props) => {
             >
                 <View style={styles.cardWrap}>
                     {
-                    task === null ? (
-                        <View style={styles.nullTaskWrap}>
-                            <Text style={styles.nullTaskText}>{text}</Text>
-                        </View>
-                    ) : (
-                        <View style={styles.cardInfo}>
-                            <TaskCardStatus status={TaskStatus.UNCOMPLETE} priority={TaskPriority.MEDIUM_PRIORITY}/>
-                            <TaskCardInfo/>
-                            <TaskCardControll type={TaskButton.DELETE}/>
-                        </View>
-                    )
+                        task === null ? (
+                            <View style={styles.nullTaskWrap}>
+                                <Text style={styles.nullTaskText}>{text}</Text>
+                            </View>
+                        ) : (
+                            <View style={styles.cardInfo}>
+                                <TaskCardStatus status={TaskStatus.UNCOMPLETE} priority={TaskPriority.MEDIUM_PRIORITY}/>
+                                <TaskCardInfo/>
+                                <TaskCardControll type={TaskButton.DELETE}/>
+                            </View>
+                        )
                     }
                 </View>
             </ReanimatedSwipeable>

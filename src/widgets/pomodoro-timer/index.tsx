@@ -16,6 +16,7 @@ function PomodoroTimer(): React.JSX.Element {
   return (
     <View style={styles.pomodoroContainer}>
         <TaskCard
+          prefix="pomodoro-timer-task-card"
           task={{}}
           rightActionBlock={{
             enabled: true,
