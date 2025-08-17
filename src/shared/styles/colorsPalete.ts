@@ -33,15 +33,15 @@ const AppColors = {
 const TaskCardColors = {
     TaskCardStatus: {
         'low-priority': {
-            borderColor: '#338A68',
+            borderColor: AppColors.success,
             bgColor: 'rgba(51, 138, 104, 0.5)',
         },
         'medium-priority': {
-            borderColor: '#D5BF92',
+            borderColor: AppColors.warning,
             bgColor: 'rgba(213, 191, 146, 0.5)',
         },
         'high-priority': {
-            borderColor: '#BB687E',
+            borderColor: AppColors.danger,
             bgColor: 'rgba(187, 104, 126, 0.5)',
         },
     },
@@ -50,14 +50,34 @@ const TaskCardColors = {
         'close': {
             borderColor: BaseColors.gray600,
             iconColor: BaseColors.gray600,
+            bgColor: 'rgba(107, 114, 128, 0.5)',
         },
         'play': {
             borderColor: AppColors.primary,
             iconColor: AppColors.primary,
+            bgColor: AppColors.primary50,
         },
         'delete': {
             borderColor: AppColors.danger,
             iconColor: AppColors.danger,
+            bgColor: 'rgba(187, 104, 126, 0.5)',
+        },
+        'complete': {
+            borderColor: AppColors.success,
+            iconColor: AppColors.success,
+            bgColor: 'rgba(51, 138, 104, 0.5)',
+        },
+    },
+    TaskCardRightAction: {
+        'delete': {
+            borderColor: AppColors.danger,
+            iconColor: AppColors.danger,
+            bgColor: 'rgba(187, 104, 126, 0.5)',
+        },
+        'complete': {
+            borderColor: AppColors.success,
+            iconColor: AppColors.success,
+            bgColor: 'rgba(51, 138, 104, 0.5)',
         },
     },
 };

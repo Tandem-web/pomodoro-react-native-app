@@ -1,15 +1,12 @@
 import React, { useState } from 'react';
 import {StyleSheet, View } from 'react-native';
-import Svg, { Circle,  } from 'react-native-svg';
+import Svg, { Circle } from 'react-native-svg';
 import { Colors } from '../../../shared/styles/colorsPalete';
-import { Rect } from 'react-native-safe-area-context';
 
 type ProgressRingProps = {
     strokeColors: [string, string],
     strokeWidth?: [number, number],
 }
-
-
 
 const ProgressRing: React.FC<ProgressRingProps> = (props) =>{
     const {
@@ -23,7 +20,7 @@ const ProgressRing: React.FC<ProgressRingProps> = (props) =>{
     const R = ((parentWidth - strokeWidth[0]) / 2) * 0.8;
     const CIRCLE_LENGTH = 2 * Math.PI * R;
     return (
-        <View 
+        <View
             style={styles.svgWrapper}
             onLayout={(event) => {
                 const {width, height } = event.nativeEvent.layout;
@@ -33,7 +30,7 @@ const ProgressRing: React.FC<ProgressRingProps> = (props) =>{
                 width={Number(parentWidth)}
                 height={Number(parentWidth)}
             >
-                <Circle 
+                <Circle
                     cx={parentWidth / 2}
                     cy={parentWidth / 2}
                     r={R}
@@ -62,4 +59,5 @@ const styles = StyleSheet.create({
         width: '100%',
     },
 });
+
 export default ProgressRing;

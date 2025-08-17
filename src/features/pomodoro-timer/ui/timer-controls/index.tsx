@@ -1,4 +1,4 @@
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet } from 'react-native';
 import ControllButton from './controll-button';
 import { TimerControllButtonType, TimerControllIconType } from '../../../../@types/timer-controlls';
 
