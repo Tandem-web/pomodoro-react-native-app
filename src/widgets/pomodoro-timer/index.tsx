@@ -9,6 +9,7 @@ import {
 import { TaskNameButton } from '@app/shared/types/task';
 import { TaskCard, useGetActiveTask} from '@app/entities/task/intex';
 import TimerControls from '@app/features/timer/timer-controls';
+import TimerCoordinator from '@app/features/timer/timer-coordinator/TimerCoordinator';
 
 
 
@@ -35,6 +36,7 @@ function PomodoroTimer(): React.JSX.Element {
             <TimerText/>
         </View>
         <TimerControls/>
+        <TimerCoordinator/>
     </View>
 
   );

@@ -6,7 +6,6 @@ import { intervalType, NewTask, Task, TasksStore } from './types';
 import { createJSONStorage, persist } from 'zustand/middleware';
 import { zustandMMKVStorage } from '@app/shared/storage/mmkv';
 import { createQueue } from '../utils/createQueue';
-import useTimerStore from '@app/shared/store/timer/model/store';
 
 
 
@@ -17,7 +16,7 @@ interface TasksState{
     completeTask: (taskId: Task['id']) => void;
     deleteTask: (taskId: Task['id']) => void;
     setCurrentTaskId: (taskId: Task['id'] | null) => void;
-    completeInterval: () => void;
+    completeInterval: () => { hasMoreIntervals: boolean, nextIntervalTime: number };
 }
 
 const useTaskStore = create<TasksState>()(
@@ -96,39 +95,49 @@ const useTaskStore = create<TasksState>()(
             completeInterval: () => {
                 const tasks = get().tasks;
                 const activeTaskId = get().activeTaskId;
-                if(activeTaskId){
-                    const activeTask = tasks[activeTaskId];
-                    if(activeTask){
-                        const task_state = {...activeTask.task_state};
-                        const queueIntervals = [...task_state.queueIntervals];
 
-                        let countWorkIntervals = task_state.countWorkIntervals;
-                        if(task_state.queueIntervals[task_state.queueIntervals.length - 1] === intervalType.WORK){
-                            countWorkIntervals += 1;
-                        }
-                        queueIntervals.pop();
-                        console.log('Я жив');
-                        set({
-                            tasks: {
-                                ...tasks,
-                                [activeTaskId]: {
-                                    ...activeTask,
-                                    task_state: {
-                                        ...task_state,
-                                        countWorkIntervals: countWorkIntervals,
-                                        queueIntervals: queueIntervals,
-                                        remainingTime: activeTask.settings.timeSettings.duration[queueIntervals[queueIntervals.length - 1]],
-                                    },
-                                },
-                            },
-                        });
-                        if(queueIntervals.length > 0){
-                            useTimerStore.getState().startTimer();
-                        }else{
-                            get().completeTask(activeTaskId);
-                        }
+                if (activeTaskId && tasks[activeTaskId]) {
+                    const activeTask = tasks[activeTaskId];
+                    const task_state = { ...activeTask.task_state };
+                    const queueIntervals = [...task_state.queueIntervals];
+
+                    let countWorkIntervals = task_state.countWorkIntervals;
+                    if (queueIntervals.length > 0 && queueIntervals[queueIntervals.length - 1] === intervalType.WORK) {
+                        countWorkIntervals += 1;
                     }
+
+                    queueIntervals.pop();
+
+                    const updatedTask = {
+                        ...activeTask,
+                        task_state: {
+                            ...task_state,
+                            countWorkIntervals,
+                            queueIntervals,
+                            remainingTime: queueIntervals.length > 0
+                                ? activeTask.settings.timeSettings.duration[queueIntervals[queueIntervals.length - 1]]
+                                : 0,
+                        },
+                    };
+
+                    set({
+                        tasks: {
+                            ...tasks,
+                            [activeTaskId]: updatedTask,
+                        },
+                    });
+
+                    return {
+                        hasMoreIntervals: queueIntervals.length > 0,
+                        nextIntervalTime: queueIntervals.length > 0
+                            ? activeTask.settings.timeSettings.duration[queueIntervals[queueIntervals.length - 1]]
+                            : 0,
+                    };
                 }
+                if(activeTaskId){
+                    get().completeTask(activeTaskId);
+                }
+                return { hasMoreIntervals: false, nextIntervalTime: 0 };
             },
         }),
         {

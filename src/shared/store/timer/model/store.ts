@@ -2,21 +2,22 @@ import { create } from 'zustand';
 import 'react-native-get-random-values';
 import { createJSONStorage, persist } from 'zustand/middleware';
 import { zustandMMKVStorage } from '@app/shared/storage/mmkv';
-import useTaskStore from '@app/entities/task/model/store';
 import BackgroundTimer from 'react-native-background-timer';
 import { AppState } from 'react-native';
+import { noop } from '@app/shared/utilities/noop';
 
 interface TimerState{
     remainingTime: number | null,
-    isActivated: boolean,
     isRunning: boolean,
     foregroundIntervalId: NodeJS.Timeout | null,
-    startTimer: () => void;
+    startTimer: (initialTime?: number) => void;
     startForegroundTimer: () => void;
     startBackgroundTimer: () => void;
     stopTimer: () => void;
     stopForegroundTimer: () => void;
     stopBackgroundTimer: () => void;
+    onTimerComplete: () => void;
+    setOnTimerComplete: (callback: () => void) => void;
     updateRemainingTime: () => void;
     // pauseTimer: () => void;
     // resetTimer: () => void;
@@ -27,32 +28,32 @@ const useTimerStore = create<TimerState>()(
     persist(
         ( set, get ) => ({
             remainingTime: null,
-            isActivated: false,
             isRunning: false,
             foregroundIntervalId: null,
+            onTimerComplete: noop,
 
-            startTimer: () => {
-                const activeTaskId = useTaskStore.getState().activeTaskId;
-                if(activeTaskId){
-                    const activeTask = useTaskStore.getState().tasks[activeTaskId];
-                    const activeTaskRemainingTime = activeTask.task_state.remainingTime;
-                    if(!get().remainingTime){
-                        set({remainingTime: activeTaskRemainingTime});
-                    }
-                    if(get().remainingTime){
-                        get().startForegroundTimer();
-                        get().startBackgroundTimer();
-                        set({ isRunning: true });
-                    }
+            setOnTimerComplete: (callback) => {
+                set({ onTimerComplete: callback });
+            },
 
+            startTimer: (initialTime?: number) => {
+                if (initialTime !== undefined && get().remainingTime == null) {
+                    set({ remainingTime: initialTime });
+                }
+
+                if (get().remainingTime !== null) {
+                    get().startForegroundTimer();
+                    get().startBackgroundTimer();
+                    set({ isRunning: true });
                 }
             },
+
             startForegroundTimer: () => {
                 const foregroundIntervalId = setInterval(() => {
                     get().updateRemainingTime();
                 }, 200);
 
-                set({ foregroundIntervalId: foregroundIntervalId});
+                set({ foregroundIntervalId });
             },
             startBackgroundTimer: () => {
                 get().stopBackgroundTimer();
@@ -66,7 +67,7 @@ const useTimerStore = create<TimerState>()(
                 get().stopForegroundTimer();
                 get().stopBackgroundTimer();
                 set({ isRunning: false });
-                useTaskStore.getState().completeInterval();
+                get().onTimerComplete();
             },
             stopForegroundTimer: () => {
                 const foregroundIntervalId = get().foregroundIntervalId;
@@ -80,12 +81,11 @@ const useTimerStore = create<TimerState>()(
             },
             updateRemainingTime: () => {
                 const remainingTime = get().remainingTime;
-                if(remainingTime != null){
-                    set({remainingTime: remainingTime - 1});
-                    if(remainingTime === 0){
-                        set({remainingTime: null});
-                        get().stopTimer();
-                    }
+                if (remainingTime !== null && remainingTime > 0) {
+                    set({ remainingTime: remainingTime - 1 });
+                }
+                if (remainingTime === 0) {
+                    get().stopTimer();
                 }
             },
         }),
@@ -93,7 +93,6 @@ const useTimerStore = create<TimerState>()(
             name: 'timer-storage',
             partialize: (state) => ({
                 remaingTime: state.remainingTime,
-                isActivated: state.isActivated,
                 isRunning: state.isRunning,
                 foregroundIntervalId: state.foregroundIntervalId,
             }),
