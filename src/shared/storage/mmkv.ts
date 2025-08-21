@@ -3,6 +3,8 @@ import { StateStorage } from 'zustand/middleware';
 
 export const mmkvStorage = new MMKV();
 
+// mmkvStorage.clearAll();
+
 export const zustandMMKVStorage: StateStorage = {
   setItem: (name: string, value: string) => {
     mmkvStorage.set(name, value);

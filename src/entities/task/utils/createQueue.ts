@@ -4,11 +4,11 @@ export const createQueue = (settings: Task["settings"]): Task["task_state"]["que
     const quenue: Task["task_state"]["queueIntervals"] = [];
     
     for(let i = 0; i < settings.workIntervals; i++){
-        quenue.push(intervalType.WORK);
-        if(i+1 == settings.timeSettings.intervalsToLong){
-            quenue.push(intervalType.LONG_BREAK);
+        quenue.unshift(intervalType.WORK);
+        if(i + 1 === settings.timeSettings.intervalsToLong){
+            quenue.unshift(intervalType.LONG_BREAK);
         }else{
-            quenue.push(intervalType.SHORT_BREAK);
+            quenue.unshift(intervalType.SHORT_BREAK);
         }
 
     }

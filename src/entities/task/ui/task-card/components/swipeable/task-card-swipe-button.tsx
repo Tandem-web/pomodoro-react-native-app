@@ -29,7 +29,6 @@ const TaskSwipeButton: React.FC<TaskSwipeButtonProps> = (props) => {
         onPress();
     }, [onPress, swipeRef]);
 
-    console.log(type);
     return (
         <TouchableOpacity onPress={handleAction}>
             <View style={[styles.rightAction, {

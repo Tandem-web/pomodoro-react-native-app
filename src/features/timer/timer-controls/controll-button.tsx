@@ -21,7 +21,7 @@ const ControllButton: React.FC<ControllButtonProps> = (props) => {
     const {
         onPress = noop,
         type,
-        icon
+        icon,
     } = props;
 
     switch (type) {

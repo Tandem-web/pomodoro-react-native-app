@@ -6,9 +6,9 @@ import {
   StyleSheet,
   View,
 } from 'react-native';
-import TimerControls from './ui/timer-controls';
 import { TaskNameButton } from '@app/shared/types/task';
 import { TaskCard, useGetActiveTask} from '@app/entities/task/intex';
+import TimerControls from '@app/features/timer/timer-controls';
 
 
 

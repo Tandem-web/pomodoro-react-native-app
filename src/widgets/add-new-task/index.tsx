@@ -78,7 +78,6 @@ const AddNewTaskForm: React.FC = () => {
                             shortBreak: timeSettings.shortDuration * 60,
                             longBreak: timeSettings.longDuration * 60,
                             none: Infinity,
-                            
                         },
                         intervalsToLong: timeSettings.intervalsToLong,
                     },
