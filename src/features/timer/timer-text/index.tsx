@@ -1,4 +1,5 @@
 import { FONT_FAMILY } from '@app/shared/font/avenir';
+import { useGetRemaingFormatTime } from '@app/shared/store/timer/model/selectors';
 import { Colors } from '@app/shared/styles/colorsPalete';
 import { View, Text, StyleSheet } from 'react-native';
 
@@ -6,9 +7,12 @@ import { View, Text, StyleSheet } from 'react-native';
 // TODO TimerTextProps interface
 
 const TimerText: React.FC = () =>{
+    const remaingTime = useGetRemaingFormatTime();
     return (
         <View style={styles.timerTextWrapper}>
-            <Text style={styles.timerText}>25:00</Text>
+            {
+                remaingTime && <Text style={styles.timerText}>{remaingTime}</Text>
+            }
         </View>
     );
 };

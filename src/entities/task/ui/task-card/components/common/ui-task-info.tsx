@@ -3,14 +3,14 @@ import { FONT_FAMILY } from '@app/shared/font/avenir';
 import { Colors } from '@app/shared/styles/colorsPalete';
 import { Task } from '@app/entities/task/model/types';
 import { useMemo } from 'react';
-import { formatTime } from '@app/shared/utilities/format-time';
+import { formatTime } from '@app/shared/utilities/card-format-time';
 
 
 interface TaskCardInfoProps {
     title: Task['title'],
-    workDuration: Task['settings']['timeSettings']['workDuration'],
+    workDuration: Task['settings']['timeSettings']['duration']['work'],
     totalWorkIntervals: Task['settings']['workIntervals'],
-    currentWorkInterval: Task['task_state']['currentWorkInterval'],
+    currentWorkInterval: Task['task_state']['countWorkIntervals'],
     totalTime: Task['task_state']['totalTime'],
 }
 

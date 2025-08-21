@@ -77,9 +77,9 @@ const TaskCardContent: React.FC<TaskCardContentProps> = (props) => {
             <TaskCardStatus status={task.status} priority={task.priority}/>
             <TaskCardInfo
                 title={task.title}
-                workDuration={task.settings.timeSettings.workDuration}
+                workDuration={task.settings.timeSettings.duration.work}
                 totalWorkIntervals={task.settings.workIntervals}
-                currentWorkInterval={task.task_state.currentWorkInterval}
+                currentWorkInterval={task.task_state.countWorkIntervals}
                 totalTime={task.task_state.totalTime}
             />
             <TaskCardControll type={controllButton} onPress={() => controllHandler(controllButton)}/>

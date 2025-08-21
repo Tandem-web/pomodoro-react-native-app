@@ -54,9 +54,12 @@ describe("useTaskStore", () => {
                 settings: {
                     workIntervals: 10,
                     timeSettings: {
-                        workDuration: 1 * 60,
-                        shortDuration: 1 * 60,
-                        longDuration: 1 * 60,
+                        duration: {
+                            work: 1 * 60,
+                            shortBreak: 1 * 60,
+                            longBreak: 1 * 60,
+                            none: Infinity
+                        },
                         intervalsToLong: 5,
                     },
                 },
@@ -107,9 +110,12 @@ describe("useTaskStore", () => {
                 settings: {
                     workIntervals: 10,
                     timeSettings: {
-                        workDuration: 1 * 60,
-                        shortDuration: 1 * 60,
-                        longDuration: 1 * 60,
+                        duration: {
+                            work: 1 * 60,
+                            shortBreak: 1 * 60,
+                            longBreak: 1 * 60,
+                            none: Infinity
+                        },
                         intervalsToLong: 5,
                     },
                 },
@@ -153,9 +159,12 @@ describe("useTaskStore", () => {
                 settings: {
                     workIntervals: 10,
                     timeSettings: {
-                        workDuration: 1 * 60,
-                        shortDuration: 1 * 60,
-                        longDuration: 1 * 60,
+                        duration: {
+                            work: 1 * 60,
+                            shortBreak: 1 * 60,
+                            longBreak: 1 * 60,
+                            none: Infinity
+                        },
                         intervalsToLong: 5,
                     },
                 },
@@ -193,9 +202,12 @@ describe("useTaskStore", () => {
                 settings: {
                     workIntervals: 10,
                     timeSettings: {
-                        workDuration: 1 * 60,
-                        shortDuration: 1 * 60,
-                        longDuration: 1 * 60,
+                        duration: {
+                            work: 1 * 60,
+                            shortBreak: 1 * 60,
+                            longBreak: 1 * 60,
+                            none: Infinity
+                        },
                         intervalsToLong: 5,
                     },
                 },
@@ -246,9 +258,12 @@ describe("useTaskStore", () => {
                 settings: {
                     workIntervals: 10,
                     timeSettings: {
-                        workDuration: 1 * 60,
-                        shortDuration: 1 * 60,
-                        longDuration: 1 * 60,
+                        duration: {
+                            work: 1 * 60,
+                            shortBreak: 1 * 60,
+                            longBreak: 1 * 60,
+                            none: Infinity
+                        },
                         intervalsToLong: 5,
                     },
                 },
@@ -260,9 +275,12 @@ describe("useTaskStore", () => {
                 settings: {
                     workIntervals: 10,
                     timeSettings: {
-                        workDuration: 1 * 60,
-                        shortDuration: 1 * 60,
-                        longDuration: 1 * 60,
+                        duration: {
+                            work: 1 * 60,
+                            shortBreak: 1 * 60,
+                            longBreak: 1 * 60,
+                            none: Infinity
+                        },
                         intervalsToLong: 5,
                     },
                 },
@@ -302,9 +320,12 @@ describe("useTaskStore", () => {
                 settings: {
                     workIntervals: 10,
                     timeSettings: {
-                        workDuration: 1 * 60,
-                        shortDuration: 1 * 60,
-                        longDuration: 1 * 60,
+                        duration: {
+                            work: 1 * 60,
+                            shortBreak: 1 * 60,
+                            longBreak: 1 * 60,
+                            none: Infinity
+                        },
                         intervalsToLong: 5,
                     },
                 },
@@ -316,9 +337,12 @@ describe("useTaskStore", () => {
                 settings: {
                     workIntervals: 10,
                     timeSettings: {
-                        workDuration: 1 * 60,
-                        shortDuration: 1 * 60,
-                        longDuration: 1 * 60,
+                        duration: {
+                            work: 1 * 60,
+                            shortBreak: 1 * 60,
+                            longBreak: 1 * 60,
+                            none: Infinity
+                        },
                         intervalsToLong: 5,
                     },
                 },

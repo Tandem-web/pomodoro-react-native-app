@@ -2,19 +2,17 @@ import { TaskStatus} from '@app/shared/types/task';
 import { create } from 'zustand';
 import 'react-native-get-random-values';
 import { v4 as uuidv4 } from 'uuid';
-import { intervalType, Task, TasksStore } from './types';
+import { intervalType, NewTask, Task, TasksStore } from './types';
 import { createJSONStorage, persist } from 'zustand/middleware';
 import { zustandMMKVStorage } from '@app/shared/storage/mmkv';
-
-
-type newTask = Pick<Task, 'title' | 'status' | 'priority' | 'settings'>;
+import { createQueue } from '../utils/createQueue';
 
 
 
 interface TasksState{
     tasks: TasksStore,
     activeTaskId: Task['id'] | null,
-    addNewTask: (task: newTask) => void;
+    addNewTask: (task: NewTask) => void;
     completeTask: (taskId: Task['id']) => void;
     deleteTask: (taskId: Task['id']) => void;
     setCurrentTaskId: (taskId: Task['id'] | null) => void;
@@ -33,9 +31,9 @@ const useTaskStore = create<TasksState>()(
                     createAt: new Date().toISOString(),
                     completeAt: null,
                     task_state: {
-                        currentIntervalType: intervalType.WORK,
-                        currentWorkInterval: 1,
-                        currentIntervalTime: task.settings.timeSettings.workDuration,
+                        queueIntervals: createQueue(task.settings),
+                        remainingTime: task.settings.timeSettings.duration.work,
+                        countWorkIntervals: 1,
                         totalTime: 0,
                     },
                 };

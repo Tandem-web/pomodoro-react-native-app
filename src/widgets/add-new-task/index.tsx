@@ -10,6 +10,7 @@ import { useCallback, useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import { YourTaskScreenNavigationProp } from '@app/shared/types/navigation';
 import { useTaskActions } from '@app/entities/task/intex';
+import { NewTask } from '@app/entities/task/model/types';
 
 interface TimeSettings {
   workIntervals: number;
@@ -65,16 +66,20 @@ const AddNewTaskForm: React.FC = () => {
 
     const onPressHandler = useCallback(() => {
         if(priority != null){
-            const newTask = {
+            const newTask: NewTask= {
                 title: title,
                 status: TaskStatus.UNCOMPLETE,
                 priority: priority,
                 settings: {
                     workIntervals: timeSettings.workIntervals,
                     timeSettings: {
-                        workDuration: timeSettings.workDuration * 60,
-                        shortDuration: timeSettings.shortDuration * 60,
-                        longDuration: timeSettings.longDuration * 60,
+                        duration: {
+                            work: timeSettings.workDuration * 60,
+                            shortBreak: timeSettings.shortDuration * 60,
+                            longBreak: timeSettings.longDuration * 60,
+                            none: Infinity,
+                            
+                        },
                         intervalsToLong: timeSettings.intervalsToLong,
                     },
                 },
