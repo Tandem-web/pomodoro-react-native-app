@@ -17,7 +17,7 @@ const TimerBackgroundShadow: React.FC<TimerBackgroundShadowProps> = (props) => {
   useEffect(() => {
     animation.value = withRepeat(
       withTiming(1, {
-        duration: 3000,
+        duration: 4000,
         easing: Easing.bezier(0.25, 0.1, 0.25, 1),
       }),
       -1,
@@ -33,22 +33,22 @@ const TimerBackgroundShadow: React.FC<TimerBackgroundShadowProps> = (props) => {
     const shadowOpacity = interpolate(
       animation.value,
       [0, 1],
-      [1, 1],
+      [0.8, 1],
     );
     const shadowRadius = interpolate(
       animation.value,
       [0, 1],
-      [30, 50],
+      [50, 100],
     );
     const elevation = interpolate(
       animation.value,
       [0, 1],
-      [20, 50],
+      [10, 50],
     );
     const marginTop = interpolate(
       animation.value,
       [0, 1],
-      [-5, -25],
+      [0, -20],
     );
 
       return {
