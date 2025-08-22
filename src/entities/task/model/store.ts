@@ -134,9 +134,6 @@ const useTaskStore = create<TasksState>()(
                             : 0,
                     };
                 }
-                if(activeTaskId){
-                    get().completeTask(activeTaskId);
-                }
                 return { hasMoreIntervals: false, nextIntervalTime: 0 };
             },
         }),

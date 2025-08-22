@@ -10,19 +10,25 @@ interface TimerState{
     remainingTime: number | null,
     isRunning: boolean,
     foregroundIntervalId: NodeJS.Timeout | null,
+
+    setOnTimerComplete: (callback: () => void) => void;
+    setRemainingTime: (time: number) => void;
+
     startTimer: (initialTime?: number) => void;
+    pauseTimer: () => void;
     startForegroundTimer: () => void;
     startBackgroundTimer: () => void;
     stopTimer: () => void;
     stopForegroundTimer: () => void;
     stopBackgroundTimer: () => void;
     onTimerComplete: () => void;
-    setOnTimerComplete: (callback: () => void) => void;
-    updateRemainingTime: () => void;
-    // pauseTimer: () => void;
-    // resetTimer: () => void;
-    // updateRemainingTime: (time: number) => void;
+    intervalTick: () => void;
+
+    clearAllInterval: () => void;
+    reset: () => void;
 }
+
+const intervalTime = __DEV__ ? 200 : 1000;
 
 const useTimerStore = create<TimerState>()(
     persist(
@@ -32,43 +38,94 @@ const useTimerStore = create<TimerState>()(
             foregroundIntervalId: null,
             onTimerComplete: noop,
 
+            /* -------------------------------------------------------------------------- */
+            /*                      Set callback on interval complete                     */
+            /* -------------------------------------------------------------------------- */
             setOnTimerComplete: (callback) => {
                 set({ onTimerComplete: callback });
             },
 
-            startTimer: (initialTime?: number) => {
-                if (initialTime !== undefined && get().remainingTime == null) {
-                    set({ remainingTime: initialTime });
-                }
-
-                if (get().remainingTime !== null) {
-                    get().startForegroundTimer();
-                    get().startBackgroundTimer();
-                    set({ isRunning: true });
-                }
+            /* -------------------------------------------------------------------------- */
+            /*                             set remaining time                             */
+            /* -------------------------------------------------------------------------- */
+            setRemainingTime: (time: number) => {
+                set({ remainingTime: time });
             },
 
+            /* -------------------------------------------------------------------------- */
+            /*                                  run timer                                 */
+            /* -------------------------------------------------------------------------- */
+            startTimer: () => {
+                const isRunning = get().isRunning,
+                      remainingTime = get().remainingTime,
+                      onTimerComplete = get().onTimerComplete,
+                      clearAllInterval = get().clearAllInterval,
+                      startForegroundTimer = get().startForegroundTimer,
+                      startBackgroundTimer = get().startBackgroundTimer;
+
+                if (isRunning) return;
+
+                if (remainingTime === 0) {
+                    onTimerComplete();
+                    return;
+                }
+                clearAllInterval();
+
+                startForegroundTimer();
+                startBackgroundTimer();
+                set({ isRunning: true });
+            },
+            /* -------------------------------------------------------------------------- */
+            /*                    Pause timer when interval is complete                   */
+            /* -------------------------------------------------------------------------- */
+            stopTimer: () => {
+                const remainingTime = get().remainingTime,
+                      onTimerComplete = get().onTimerComplete,
+                      pauseTimer = get().pauseTimer;
+
+                pauseTimer();
+                if (remainingTime === 0) {
+                    onTimerComplete();
+                }
+            },
+            /* -------------------------------------------------------------------------- */
+            /*                            Pause pomodoro timer                            */
+            /* -------------------------------------------------------------------------- */
+            pauseTimer: () => {
+                const isRunning = get().isRunning,
+                      clearAllInterval = get().clearAllInterval;
+
+                if (!isRunning) return;
+
+                clearAllInterval();
+
+                set({ isRunning: false });
+            },
+
+            /* -------------------------------------------------------------------------- */
+            /*                              Init setInterval                              */
+            /* -------------------------------------------------------------------------- */
             startForegroundTimer: () => {
+                const intervalTick = get().intervalTick;
+
                 const foregroundIntervalId = setInterval(() => {
-                    get().updateRemainingTime();
-                }, 200);
+                    intervalTick();
+                }, intervalTime);
 
                 set({ foregroundIntervalId });
             },
             startBackgroundTimer: () => {
+                const intervalTick = get().intervalTick;
                 get().stopBackgroundTimer();
                 BackgroundTimer.runBackgroundTimer(() => {
                     if(AppState.currentState === 'background'){
-                        get().updateRemainingTime();
+                        intervalTick();
                     }
-                }, 200);
+                }, intervalTime);
             },
-            stopTimer: () => {
-                get().stopForegroundTimer();
-                get().stopBackgroundTimer();
-                set({ isRunning: false });
-                get().onTimerComplete();
-            },
+            /* -------------------------------------------------------------------------- */
+            /*                              Kill setInterval                              */
+            /* -------------------------------------------------------------------------- */
             stopForegroundTimer: () => {
                 const foregroundIntervalId = get().foregroundIntervalId;
                 if (foregroundIntervalId) {
@@ -79,14 +136,38 @@ const useTimerStore = create<TimerState>()(
             stopBackgroundTimer: () => {
                 BackgroundTimer.stopBackgroundTimer();
             },
-            updateRemainingTime: () => {
+
+            /* -------------------------------------------------------------------------- */
+            /*                         Functional on interval tick                        */
+            /* -------------------------------------------------------------------------- */
+            intervalTick: () => {
                 const remainingTime = get().remainingTime;
                 if (remainingTime !== null && remainingTime > 0) {
-                    set({ remainingTime: remainingTime - 1 });
+                    get().setRemainingTime(remainingTime - 1);
                 }
                 if (remainingTime === 0) {
                     get().stopTimer();
                 }
+            },
+            /* -------------------------------------------------------------------------- */
+            /*                  Clear Background and foreground Intervals                 */
+            /* -------------------------------------------------------------------------- */
+            clearAllInterval: () => {
+                const stopForegroundTimer = get().stopForegroundTimer,
+                      stopBackgroundTimer = get().stopBackgroundTimer;
+                
+                stopForegroundTimer();
+                stopBackgroundTimer();
+            },
+
+            /* -------------------------------------------------------------------------- */
+            /*                              Reset Timer Store                             */
+            /* -------------------------------------------------------------------------- */
+            reset: () => {
+                const clearAllInterval = get().clearAllInterval;
+
+                set(useTimerStore.getInitialState())
+                clearAllInterval()
             },
         }),
         {

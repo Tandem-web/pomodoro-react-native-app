@@ -3,6 +3,7 @@ import React, { useCallback, useMemo, useState } from 'react';
 import {LayoutChangeEvent, StyleSheet, View } from 'react-native';
 import Animated, { useAnimatedProps, useSharedValue, withTiming } from 'react-native-reanimated';
 import Svg, { Circle } from 'react-native-svg';
+import TimerBackgroundShadow from '../timer-background-shadow';
 
 type ProgressRingProps = {
     strokeColors: [string, string],
@@ -45,7 +46,6 @@ const ProgressRing: React.FC<ProgressRingProps> = (props) =>{
     const animatedProps = useAnimatedProps(() => ({
         strokeDashoffset: CIRCLE_LENGTH * (1 - progress.value),
     }));
-
     return (
         <View
             style={styles.svgWrapper}
@@ -55,6 +55,7 @@ const ProgressRing: React.FC<ProgressRingProps> = (props) =>{
             <Svg
                 width={Number(parentWidth)}
                 height={Number(parentWidth)}
+                style={{zIndex: 10}}
             >
                 <Circle
                     cx={cXcY}
@@ -77,6 +78,10 @@ const ProgressRing: React.FC<ProgressRingProps> = (props) =>{
                     strokeLinecap={'round'}
                 />
             </Svg>
+             <TimerBackgroundShadow
+                width={Number(parentWidth) * 0.8}
+                height={Number(parentWidth) * 0.8}
+             />
         </View>
     );
 };
@@ -84,6 +89,9 @@ const ProgressRing: React.FC<ProgressRingProps> = (props) =>{
 const styles = StyleSheet.create({
     svgWrapper: {
         width: '100%',
+        zIndex: 10,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
 });
 

@@ -2,7 +2,7 @@
 import { TimerFormatTime } from '../utils/TimerFormatTime';
 import useTimerStore from './store';
 
-export const useGetRemaingTime = (format: boolean = false) => {
+export const useGetRemainingTime = (format: boolean = false) => {
     const remainingTime = useTimerStore(state => state.remainingTime);
 
     if(!remainingTime){
